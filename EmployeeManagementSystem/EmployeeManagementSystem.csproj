@@ -6,4 +6,65 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Resources\About.png" />
+    <None Remove="Resources\Add.png" />
+    <None Remove="Resources\Department.png" />
+    <None Remove="Resources\Edit.png" />
+    <None Remove="Resources\Employee.png" />
+    <None Remove="Resources\Login.png" />
+    <None Remove="Resources\Quit.png" />
+    <None Remove="Resources\Remove.png" />
+    <None Remove="Resources\Settings.png" />
+    <None Remove="Resources\User.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MaterialDesignThemes" Version="3.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="UserControls\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\About.png" />
+    <Resource Include="Resources\Add.png" />
+    <Resource Include="Resources\Department.png" />
+    <Resource Include="Resources\Edit.png" />
+    <Resource Include="Resources\Employee.png" />
+    <Resource Include="Resources\Login.png" />
+    <Resource Include="Resources\Quit.png" />
+    <Resource Include="Resources\Remove.png" />
+    <Resource Include="Resources\Settings.png" />
+    <Resource Include="Resources\User.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
 </Project>
