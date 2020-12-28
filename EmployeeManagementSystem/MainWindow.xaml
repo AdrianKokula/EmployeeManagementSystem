@@ -8,24 +8,29 @@
 		Title="MainWindow" Height="720" Width="1280" WindowStartupLocation="CenterScreen">
 	<Grid>
 
-		<Grid Background="#367DD9" HorizontalAlignment="Left">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="auto" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+		
+		<Grid Grid.Column="0" Background="#367DD9" HorizontalAlignment="Left">
 
 			<StackPanel>
-				<Button Padding="7" FontSize="20" Background="Transparent" Cursor="Hand">
+				<Button Padding="7" FontSize="20" Background="Transparent" Cursor="Hand" Name="BtnEmployees" Click="BtnEmployees_Click">
 					<StackPanel Orientation="Horizontal">
 						<Image Source="/Resources/Employee.png" Height="32"/>
 						<TextBlock Text="Employees"/>
 					</StackPanel>
 				</Button>
 
-				<Button Padding="7" FontSize="20" Background="Transparent" Cursor="Hand">
+				<Button Padding="7" FontSize="20" Background="Transparent" Cursor="Hand" Name="BtnDepartments" Click="BtnDepartments_Click">
 					<StackPanel Orientation="Horizontal">
 						<Image Source="/Resources/Department.png" Height="32"/>
 						<TextBlock Text="Departments"/>
 					</StackPanel>
 				</Button>
 
-				<Button Padding="7" FontSize="20" Background="Transparent" Cursor="Hand">
+				<Button Padding="7" FontSize="20" Background="Transparent" Cursor="Hand" Name="BtnUsers" Click="BtnUsers_Click">
 					<StackPanel Orientation="Horizontal">
 						<Image Source="/Resources/Login.png" Height="32"/>
 						<TextBlock Text="Users"/>
@@ -36,19 +41,21 @@
 
 			<StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Height="50" HorizontalAlignment="Center">
 
-				<Button Width="40" Height="40" Cursor="Hand" Margin="2" Padding="5">
+				<Button Width="40" Height="40" Cursor="Hand" Margin="2" Padding="5" Name="BtnSettings" Click="BtnSettings_Click">
 					<Image Source="/Resources/Settings.png" />
 				</Button>
-				<Button Width="40" Height="40" Cursor="Hand" Margin="2" Padding="5">
+				<Button Width="40" Height="40" Cursor="Hand" Margin="2" Padding="5" Name="BtnAbout" Click="BtnAbout_Click">
 					<Image Source="/Resources/About.png" />
 				</Button>
-				<Button Width="40" Height="40" Cursor="Hand" Margin="2" Padding="5">
+				<Button Width="40" Height="40" Cursor="Hand" Margin="2" Padding="5" Name="BtnExit" Click="BtnExit_Click">
 					<Image Source="/Resources/Quit.png" />
 				</Button>
 				
 			</StackPanel>
 
 		</Grid>
-		
+
+		<Frame Grid.Column="1" Name="FrmMain" NavigationUIVisibility="Hidden"/>
+
 	</Grid>
 </Window>

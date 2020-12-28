@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using EmployeeManagementSystem.Classes;
+using EmployeeManagementSystem.Pages;
 
 namespace EmployeeManagementSystem {
 
@@ -29,18 +30,46 @@ namespace EmployeeManagementSystem {
 
 			InitializeComponent();
 
-			if(String.IsNullOrWhiteSpace(Properties.Settings.Default.ConnectionString)) {
-
+			if(string.IsNullOrWhiteSpace(Properties.Settings.Default.ConnectionString)) {
+				FrmMain.Content = new Settings();
 				return;
 			}
 
 			database = new Database(Properties.Settings.Default.ConnectionString);
 			if(!database.TestConnection()) {
-
+				FrmMain.Content = new Settings();
 				return;
 			}
 
 
+		}
+
+		#endregion
+
+		#region "handlers"
+
+		private void BtnEmployees_Click(object sender, RoutedEventArgs e) {
+			FrmMain.Content = new Employees();
+		}
+
+		private void BtnDepartments_Click(object sender, RoutedEventArgs e) {
+			FrmMain.Content = new Departments();
+		}
+
+		private void BtnUsers_Click(object sender, RoutedEventArgs e) {
+			FrmMain.Content = new Users();
+		}
+
+		private void BtnSettings_Click(object sender, RoutedEventArgs e) {
+			FrmMain.Content = new Settings();
+		}
+
+		private void BtnAbout_Click(object sender, RoutedEventArgs e) {
+			FrmMain.Content = new About();
+		}
+
+		private void BtnExit_Click(object sender, RoutedEventArgs e) {
+			Application.Current.Shutdown();
 		}
 
 		#endregion
@@ -50,8 +79,6 @@ namespace EmployeeManagementSystem {
 
 
 		#endregion
-
-
 
 	}
 }
