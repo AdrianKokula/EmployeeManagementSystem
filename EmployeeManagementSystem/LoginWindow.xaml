@@ -1,0 +1,39 @@
+﻿<!-- Copyright (c) 2020 Adrián Kokuľa - adriankokula.eu; License: The MIT License (MIT) -->
+
+<Window x:Class="EmployeeManagementSystem.Login"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EmployeeManagementSystem"
+        mc:Ignorable="d" FontSize="16" WindowStartupLocation="CenterScreen"
+        Title="EMS - Login" Height="525" Width="400">
+	<Grid Background="ForestGreen">
+
+		<StackPanel>
+
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10, 30, 10, 10">
+				<Image Source="Resources/Logo.png" MaxHeight="64" VerticalAlignment="Center"/>
+				<TextBlock Text="EMS" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" VerticalAlignment="Center"/>
+			</StackPanel>
+			
+			<TextBlock Text="Employee management system" HorizontalAlignment="Center" Margin="10, 0, 10, 1" FontSize="20"/>
+
+			<!-- Email input -->
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+				<Image Source="Resources/Email.png" Margin="5"/>
+				<TextBox MinWidth="175" VerticalAlignment="Center" Name="TbEmail"/>
+			</StackPanel>
+
+			<!-- Password input -->
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+				<Image Source="Resources/Password.png" Margin="5"/>
+				<PasswordBox VerticalAlignment="Center" PasswordChar="*" MinWidth="175" Name="PbPassword"/>
+			</StackPanel>
+
+			<Button Content="Login" Name="BtnLogin" Click="BtnLogin_Click"/>
+
+		</StackPanel>
+		
+	</Grid>
+</Window>

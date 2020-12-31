@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Copyright (c) 2020 Adrián Kokuľa - adriankokula.eu; License: The MIT License (MIT)
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,15 +31,17 @@ namespace EmployeeManagementSystem {
 		public MainWindow() {
 
 			InitializeComponent();
-
+			
 			if(string.IsNullOrWhiteSpace(Properties.Settings.Default.ConnectionString)) {
-				FrmMain.Content = new Settings();
+				SettingsWindow settingsWindow = new SettingsWindow();
+				settingsWindow.ShowDialog();
 				return;
 			}
 
 			database = new Database(Properties.Settings.Default.ConnectionString);
 			if(!database.TestConnection()) {
-				FrmMain.Content = new Settings();
+				SettingsWindow settingsWindow = new SettingsWindow();
+				settingsWindow.ShowDialog();
 				return;
 			}
 
@@ -61,7 +65,8 @@ namespace EmployeeManagementSystem {
 		}
 
 		private void BtnSettings_Click(object sender, RoutedEventArgs e) {
-			FrmMain.Content = new Settings();
+			SettingsWindow settingsWindow = new SettingsWindow();
+			settingsWindow.ShowDialog();
 		}
 
 		private void BtnAbout_Click(object sender, RoutedEventArgs e) {
