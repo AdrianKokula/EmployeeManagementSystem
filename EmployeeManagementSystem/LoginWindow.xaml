@@ -10,7 +10,13 @@
         Title="EMS - Login" Height="525" Width="400">
 	<Grid Background="ForestGreen">
 
-		<StackPanel>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="30" />
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="30" />
+		</Grid.ColumnDefinitions>
+		
+		<StackPanel Grid.Column="1">
 
 			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10, 30, 10, 10">
 				<Image Source="Resources/Logo.png" MaxHeight="64" VerticalAlignment="Center"/>

@@ -28,23 +28,10 @@ namespace EmployeeManagementSystem {
 
 		#region "constructors"
 
-		public MainWindow() {
+		public MainWindow(Database database) {
 
 			InitializeComponent();
-			
-			if(string.IsNullOrWhiteSpace(Properties.Settings.Default.ConnectionString)) {
-				SettingsWindow settingsWindow = new SettingsWindow();
-				settingsWindow.ShowDialog();
-				return;
-			}
-
-			database = new Database(Properties.Settings.Default.ConnectionString);
-			if(!database.TestConnection()) {
-				SettingsWindow settingsWindow = new SettingsWindow();
-				settingsWindow.ShowDialog();
-				return;
-			}
-
+			this.database = database;
 
 		}
 
@@ -65,7 +52,7 @@ namespace EmployeeManagementSystem {
 		}
 
 		private void BtnSettings_Click(object sender, RoutedEventArgs e) {
-			SettingsWindow settingsWindow = new SettingsWindow();
+			SettingsWindow settingsWindow = new SettingsWindow(database);
 			settingsWindow.ShowDialog();
 		}
 

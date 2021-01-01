@@ -9,6 +9,39 @@
         mc:Ignorable="d" FontSize="16" WindowStartupLocation="CenterScreen"
         Title="EMS - Settings" Height="450" Width="800">
     <Grid>
-        
+
+		<StackPanel Orientation="Vertical">
+
+			<TextBlock Text="Settings" HorizontalAlignment="Center"/>
+
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+				<TextBlock Text="Server name: "/>
+				<TextBox Width="200" Name="TbServerName"/>
+			</StackPanel>
+
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+				<TextBlock Text="Database: "/>
+				<TextBox Width="200" Name="TbDatabaseName"/>
+			</StackPanel>
+
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+				<TextBlock Text="Windows authentification: "/>
+				<CheckBox VerticalAlignment="Center" Name="CbWindowsAuth"/>
+			</StackPanel>
+
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+				<TextBlock Text="User name: "/>
+				<TextBox Width="200" Name="TbDbUserName"/>
+			</StackPanel>
+
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+				<TextBlock Text="User password: "/>
+				<TextBox Width="200" Name="TbDbUserPassword"/>
+			</StackPanel>
+			
+			<Button Content="Save" Name="BtnSaveSettings" Click="BtnSaveSettings_Click"/>
+
+		</StackPanel>
+		
     </Grid>
 </Window>

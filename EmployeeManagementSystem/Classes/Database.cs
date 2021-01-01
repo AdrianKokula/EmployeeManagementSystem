@@ -10,7 +10,7 @@ using System.Data;
 
 namespace EmployeeManagementSystem.Classes {
 
-	class Database {
+	public class Database {
 
 		public string ConnectionString { get; set; }
 
@@ -18,10 +18,10 @@ namespace EmployeeManagementSystem.Classes {
 			this.ConnectionString = connectionString;
 		}
 
-        /// <summary>
-        /// Test if given ConnectionString is valid for connection
-        /// </summary>
-        /// <returns>true - all good</returns>
+		/// <summary>
+		/// Test if given ConnectionString is valid for connection
+		/// </summary>
+		/// <returns>true - all good</returns>
 		public bool TestConnection() {
 
             using(SqlConnection sqlConnection = new SqlConnection(this.ConnectionString)) {
