@@ -11,6 +11,25 @@
       Title="Users">
 
     <Grid>
-		<TextBlock FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Users" />
+		
+		<Grid.RowDefinitions>
+			<RowDefinition Height="auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+
+		<TextBlock Grid.Row="0" FontSize="20" HorizontalAlignment="Center" Text="Users" />
+
+		<ListView Grid.Row="1" Name="LvUsers">
+
+			<ListView.View>
+				<GridView>
+					<GridViewColumn Header="ID" DisplayMemberBinding="{Binding ID}" />
+					<GridViewColumn Header="Department name" DisplayMemberBinding="{Binding Name}" />
+					<GridViewColumn Header="State" DisplayMemberBinding="{Binding Email}" />
+				</GridView>
+			</ListView.View>
+
+		</ListView>
+		
 	</Grid>
 </Page>

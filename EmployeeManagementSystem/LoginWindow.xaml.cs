@@ -37,6 +37,11 @@ namespace EmployeeManagementSystem {
 				settingsWindow.ShowDialog();
 			}
 
+			// only for dev
+			TbEmail.Text = "kokula.adrian45@gmail.com";
+			PbPassword.Password = "heslo";
+			Login();
+
 		}
 
 		#endregion

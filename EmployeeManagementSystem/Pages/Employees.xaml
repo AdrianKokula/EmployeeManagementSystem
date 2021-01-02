@@ -11,6 +11,28 @@
       Title="Employees">
 
     <Grid>
-		<TextBlock FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Employees" />
+
+		<Grid.RowDefinitions>
+			<RowDefinition Height="auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+		
+		<TextBlock Grid.Row="0" FontSize="20" HorizontalAlignment="Center" Text="Employees" />
+
+		<ListView Grid.Row="1" Name="LvEmployees">
+
+			<ListView.View>
+				<GridView>
+					<GridViewColumn Header="ID" DisplayMemberBinding="{Binding ID}" />
+					<GridViewColumn Header="First name" DisplayMemberBinding="{Binding FirstName}" />
+					<GridViewColumn Header="Last name" DisplayMemberBinding="{Binding LastName}" />
+					<GridViewColumn Header="Department" DisplayMemberBinding="{Binding Department}" />
+					<GridViewColumn Header="Date of birth" DisplayMemberBinding="{Binding DateOfBirth}" />
+					<GridViewColumn Header="Residence" DisplayMemberBinding="{Binding Residence}" />
+				</GridView>
+			</ListView.View>
+			
+		</ListView>
+
 	</Grid>
 </Page>

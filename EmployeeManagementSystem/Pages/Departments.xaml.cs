@@ -15,6 +15,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using EmployeeManagementSystem.Classes;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace EmployeeManagementSystem.Pages {
 	/// <summary>
@@ -24,11 +26,40 @@ namespace EmployeeManagementSystem.Pages {
 
 		private readonly Database database;
 
+		#region	"constructors"
+
 		public Departments(Database database) {
 
 			InitializeComponent();
 			this.database = database;
 
+			LoadData();
+
 		}
+
+		#endregion
+
+		#region "methods"
+
+		#region "private"
+
+		private void LoadData() {
+
+			string query = @"SELECT * FROM dbo.DepartmentView;";
+			SqlCommand sqlCommand = new SqlCommand(query);
+
+			DataTable dataTableEmployees = new DataTable();
+			string queryResult = database.FillDataTable(ref dataTableEmployees, sqlCommand);
+
+			if (!queryResult.Equals("OK")) return;
+
+			LvDepartments.ItemsSource = dataTableEmployees.DefaultView;
+
+		}
+
+		#endregion
+
+		#endregion
+
 	}
 }

@@ -14,9 +14,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data;
 using EmployeeManagementSystem.Classes;
+using System.Data.SqlClient;
 
 namespace EmployeeManagementSystem.Pages {
+
 	/// <summary>
 	/// Interaction logic for Employees.xaml
 	/// </summary>
@@ -24,11 +27,40 @@ namespace EmployeeManagementSystem.Pages {
 
 		private readonly Database database;
 
+		#region "constructors"
+
 		public Employees(Database database) {
 
 			InitializeComponent();
 			this.database = database;
 
+			LoadData();
+
 		}
+
+		#endregion
+
+		#region "methods"
+
+		#region "private"
+
+		private void LoadData() {
+
+			string query = @"SELECT * FROM dbo.EmployeeView;";
+			SqlCommand sqlCommand = new SqlCommand(query);
+
+			DataTable dataTableEmployees = new DataTable();
+			string queryResult = database.FillDataTable(ref dataTableEmployees, sqlCommand);
+
+			if (!queryResult.Equals("OK")) return;
+
+			LvEmployees.ItemsSource = dataTableEmployees.DefaultView;
+
+		}
+
+		#endregion
+
+		#endregion
+
 	}
 }
