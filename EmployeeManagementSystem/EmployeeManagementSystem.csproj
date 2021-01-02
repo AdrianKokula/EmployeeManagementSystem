@@ -40,10 +40,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\.editorconfig" Link=".editorconfig" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="Resources\About.png" />
     <Resource Include="Resources\Add.png" />
     <Resource Include="Resources\Department.png" />

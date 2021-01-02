@@ -32,6 +32,8 @@ namespace EmployeeManagementSystem {
 			InitializeComponent();
 			this.database = database;
 
+			InitControls();
+
 		}
 
 		#endregion
@@ -63,6 +65,29 @@ namespace EmployeeManagementSystem {
 			Close();
 
 		}
+
+		#endregion
+
+		#region "methods"
+
+		#region "private"
+
+		/// <summary>
+		/// Set values to window controls
+		/// </summary>
+		private void InitControls() {
+
+			SqlConnectionStringBuilder connectionStringBuilder = new SqlConnectionStringBuilder(Properties.Settings.Default.ConnectionString);
+
+			TbServerName.Text = connectionStringBuilder.DataSource;
+			TbDatabaseName.Text = connectionStringBuilder.InitialCatalog;
+			TbDbUserName.Text = connectionStringBuilder.UserID;
+			TbDbUserPassword.Text = connectionStringBuilder.Password;
+			CbWindowsAuth.IsChecked = connectionStringBuilder.IntegratedSecurity;
+
+		}
+
+		#endregion
 
 		#endregion
 

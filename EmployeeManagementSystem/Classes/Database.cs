@@ -42,13 +42,14 @@ namespace EmployeeManagementSystem.Classes {
         /// </summary>
         /// <param name="sqlComand"></param>
         /// <returns>true if all good</returns>
-		public bool NonQuery(SqlCommand sqlComand) {
+		public bool NonQuery(SqlCommand sqlCommand) {
 
             using (SqlConnection sqlConnection = new SqlConnection(this.ConnectionString)) {
 
                 try {
                     sqlConnection.Open();
-                    sqlComand.ExecuteNonQuery();
+                    sqlCommand.Connection = sqlConnection;
+                    sqlCommand.ExecuteNonQuery();
                 } catch (Exception) {
                     return false;
                 }
@@ -71,8 +72,9 @@ namespace EmployeeManagementSystem.Classes {
                 try {
 
                     sqlConnection.Open();
+                    sqlCommand.Connection = sqlConnection;
 
-					using SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCommand);
+                    using SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCommand);
 					dataAdapter.Fill(dataTable);
 
 				} catch (Exception ex) {
@@ -98,6 +100,7 @@ namespace EmployeeManagementSystem.Classes {
                 try {
 
                     sqlConnection.Open();
+                    sqlCommand.Connection = sqlConnection;
                     obj = sqlCommand.ExecuteScalar();
                     
                 } catch (Exception) {
