@@ -14,14 +14,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using EmployeeManagementSystem.Classes;
 
 namespace EmployeeManagementSystem.Pages {
 	/// <summary>
 	/// Interaction logic for Users.xaml
 	/// </summary>
 	public partial class Users : Page {
-		public Users() {
+
+		private readonly Database database;
+
+		public Users(Database database) {
+
 			InitializeComponent();
+			this.database = database;
+
 		}
 	}
 }

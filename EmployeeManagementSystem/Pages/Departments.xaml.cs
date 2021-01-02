@@ -14,14 +14,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using EmployeeManagementSystem.Classes;
 
 namespace EmployeeManagementSystem.Pages {
 	/// <summary>
 	/// Interaction logic for Departments.xaml
 	/// </summary>
 	public partial class Departments : Page {
-		public Departments() {
+
+		private readonly Database database;
+
+		public Departments(Database database) {
+
 			InitializeComponent();
+			this.database = database;
+
 		}
 	}
 }

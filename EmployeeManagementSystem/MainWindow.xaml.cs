@@ -33,6 +33,8 @@ namespace EmployeeManagementSystem {
 			InitializeComponent();
 			this.database = database;
 
+			FrmMain.Content = new Employees(database);
+
 		}
 
 		#endregion
@@ -40,15 +42,15 @@ namespace EmployeeManagementSystem {
 		#region "handlers"
 
 		private void BtnEmployees_Click(object sender, RoutedEventArgs e) {
-			FrmMain.Content = new Employees();
+			FrmMain.Content = new Employees(database);
 		}
 
 		private void BtnDepartments_Click(object sender, RoutedEventArgs e) {
-			FrmMain.Content = new Departments();
+			FrmMain.Content = new Departments(database);
 		}
 
 		private void BtnUsers_Click(object sender, RoutedEventArgs e) {
-			FrmMain.Content = new Users();
+			FrmMain.Content = new Users(database);
 		}
 
 		private void BtnSettings_Click(object sender, RoutedEventArgs e) {
@@ -57,7 +59,7 @@ namespace EmployeeManagementSystem {
 		}
 
 		private void BtnAbout_Click(object sender, RoutedEventArgs e) {
-			FrmMain.Content = new About();
+			FrmMain.Content = new About(database);
 		}
 
 		private void BtnExit_Click(object sender, RoutedEventArgs e) {
