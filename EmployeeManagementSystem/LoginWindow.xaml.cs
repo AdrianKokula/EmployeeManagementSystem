@@ -95,7 +95,7 @@ SELECT [dbo].[GetUsernameFromCredentials](@email, @password)";
 
 		private void ShowMainWindow(string userName) {
 
-			MainWindow mainWindow = new MainWindow(database);
+			MainWindow mainWindow = new MainWindow(database, userName);
 			mainWindow.Show();
 			Close();
 

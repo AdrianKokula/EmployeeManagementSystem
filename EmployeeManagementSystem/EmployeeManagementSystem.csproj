@@ -16,6 +16,7 @@
   <ItemGroup>
     <None Remove="Resources\About.png" />
     <None Remove="Resources\Add.png" />
+    <None Remove="Resources\CloseWindow.png" />
     <None Remove="Resources\Department.png" />
     <None Remove="Resources\Edit.png" />
     <None Remove="Resources\Email.png" />
@@ -42,6 +43,7 @@
   <ItemGroup>
     <Resource Include="Resources\About.png" />
     <Resource Include="Resources\Add.png" />
+    <Resource Include="Resources\CloseWindow.png" />
     <Resource Include="Resources\Department.png" />
     <Resource Include="Resources\Edit.png" />
     <Resource Include="Resources\Email.png" />

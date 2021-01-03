@@ -14,9 +14,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using EmployeeManagementSystem.Classes;
 using System.Data;
 using System.Data.SqlClient;
+
+using EmployeeManagementSystem.Classes;
+using EmployeeManagementSystem.Windows;
 
 namespace EmployeeManagementSystem.Pages {
 	/// <summary>
@@ -34,6 +36,20 @@ namespace EmployeeManagementSystem.Pages {
 			this.database = database;
 
 			LoadData();
+
+		}
+
+		#endregion
+
+		#region "handlers"
+
+		private void BtnAdd_Click(object sender, RoutedEventArgs e) {
+
+			EditDepartmentWindow departmentWindow = new EditDepartmentWindow(this.database) {
+				Owner = Window.GetWindow(this)
+			};
+
+			departmentWindow.ShowDialog();
 
 		}
 

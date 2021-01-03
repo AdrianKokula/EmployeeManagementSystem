@@ -16,8 +16,22 @@
 			<RowDefinition Height="auto" />
 			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
-		
-		<TextBlock Grid.Row="0" FontSize="20" HorizontalAlignment="Center" Text="Employees" />
+
+		<Grid Grid.Row="0" Margin="3">
+
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="32" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="32" />
+			</Grid.ColumnDefinitions>
+			
+			<TextBlock Grid.Column="1" FontSize="20" Text="Employees" HorizontalAlignment="Center"/>
+			
+			<Button Grid.Column="2" Name="BtnAdd" HorizontalAlignment="Right" Padding="0" DockPanel.Dock="Right" Cursor="Hand" Click="BtnAdd_Click">
+				<Image Source="../Resources/Add.png" MaxHeight="32" MaxWidth="32" />
+			</Button>
+			
+		</Grid>
 
 		<ListView Grid.Row="1" Name="LvEmployees">
 

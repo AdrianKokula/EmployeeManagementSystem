@@ -25,13 +25,15 @@ namespace EmployeeManagementSystem {
 	public partial class MainWindow : Window {
 
 		private readonly Database database;
+		private readonly string loggedUser;
 
 		#region "constructors"
 
-		public MainWindow(Database database) {
+		public MainWindow(Database database, string loggedUser) {
 
 			InitializeComponent();
 			this.database = database;
+			this.loggedUser = loggedUser;
 
 			FrmMain.Content = new Employees(database);
 
@@ -68,7 +70,7 @@ namespace EmployeeManagementSystem {
 
 		#endregion
 
-		#region "private methods"
+		#region "methods"
 
 
 

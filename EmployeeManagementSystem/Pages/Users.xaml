@@ -17,15 +17,29 @@
 			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
 
-		<TextBlock Grid.Row="0" FontSize="20" HorizontalAlignment="Center" Text="Users" />
+		<Grid Grid.Row="0" Margin="3">
+
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="32" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="32" />
+			</Grid.ColumnDefinitions>
+
+			<TextBlock Grid.Column="1" FontSize="20" Text="Users" HorizontalAlignment="Center"/>
+
+			<Button Grid.Column="2" Name="BtnAdd" HorizontalAlignment="Right" Padding="0" DockPanel.Dock="Right" Cursor="Hand" Click="BtnAdd_Click">
+				<Image Source="../Resources/Add.png" MaxHeight="32" MaxWidth="32" />
+			</Button>
+			
+		</Grid>
 
 		<ListView Grid.Row="1" Name="LvUsers">
 
 			<ListView.View>
 				<GridView>
 					<GridViewColumn Header="ID" DisplayMemberBinding="{Binding ID}" />
-					<GridViewColumn Header="Department name" DisplayMemberBinding="{Binding Name}" />
-					<GridViewColumn Header="State" DisplayMemberBinding="{Binding Email}" />
+					<GridViewColumn Header="User name" DisplayMemberBinding="{Binding Name}" />
+					<GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}" />
 				</GridView>
 			</ListView.View>
 
