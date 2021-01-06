@@ -41,6 +41,10 @@ namespace EmployeeManagementSystem.Windows {
 		#endregion
 
 		#region "handlers"
+		
+		private void BtnSubmit_Click(object sender, RoutedEventArgs e) {
+
+		}
 
 		private void BtnClose_Click(object sender, RoutedEventArgs e) {
 			Close();

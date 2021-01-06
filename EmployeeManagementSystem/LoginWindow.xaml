@@ -34,7 +34,7 @@
 			<!-- Password input -->
 			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 				<Image Source="Resources/Password.png" Margin="5"/>
-				<PasswordBox VerticalAlignment="Center" PasswordChar="*" MinWidth="175" Name="PbPassword"/>
+				<PasswordBox VerticalAlignment="Center" MinWidth="175" Name="PbPassword"/>
 			</StackPanel>
 
 			<Button Content="Login" Name="BtnLogin" Click="BtnLogin_Click"/>

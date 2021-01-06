@@ -15,10 +15,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data;
+
 using System.Data.SqlClient;
 
 using EmployeeManagementSystem.Classes;
 using EmployeeManagementSystem.Windows;
+using EmployeeManagementSystem.UserControls;
 
 namespace EmployeeManagementSystem.Pages {
 
@@ -28,6 +30,7 @@ namespace EmployeeManagementSystem.Pages {
 	public partial class Employees : Page {
 
 		private readonly Database database;
+		private EditEmployee editEmployee;
 
 		#region "constructors"
 
@@ -43,6 +46,18 @@ namespace EmployeeManagementSystem.Pages {
 		#endregion
 
 		#region "handlers"
+
+		private void LvEmployees_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+
+			// first selected row
+			DataRowView dataRow = (DataRowView)e.AddedItems[0];
+			int employeeID = (int)dataRow["ID"];
+
+			editEmployee = new EditEmployee(database, employeeID);
+			Grid.SetRow(editEmployee, 2);
+			GridMain.Children.Add(editEmployee);
+
+		}
 
 		private void BtnAdd_Click(object sender, RoutedEventArgs e) {
 
@@ -73,6 +88,7 @@ namespace EmployeeManagementSystem.Pages {
 			LvEmployees.ItemsSource = dataTableEmployees.DefaultView;
 
 		}
+
 
 		#endregion
 

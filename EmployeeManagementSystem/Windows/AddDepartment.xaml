@@ -49,7 +49,7 @@
 				<TextBox Name="TbPostalCode" Width="200"/>
 			</StackPanel>
 
-			<Button Name="BtnSubmit" Content="Submit"/>
+			<Button Name="BtnSubmit" Content="Submit" Click="BtnSubmit_Click"/>
 
 		</StackPanel>
 		

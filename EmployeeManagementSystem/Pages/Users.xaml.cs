@@ -19,6 +19,7 @@ using System.Data.SqlClient;
 
 using EmployeeManagementSystem.Classes;
 using EmployeeManagementSystem.Windows;
+using EmployeeManagementSystem.UserControls;
 
 namespace EmployeeManagementSystem.Pages {
 	/// <summary>
@@ -27,6 +28,7 @@ namespace EmployeeManagementSystem.Pages {
 	public partial class Users : Page {
 
 		private readonly Database database;
+		private EditUser editUser;
 
 		#region	"constructors"
 
@@ -50,6 +52,18 @@ namespace EmployeeManagementSystem.Pages {
 			};
 
 			userWindow.ShowDialog();
+
+		}
+
+		private void LvUsers_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+
+			// first selected row
+			DataRowView dataRow = (DataRowView)e.AddedItems[0];
+			int userID = (int)dataRow["ID"];
+
+			editUser = new EditUser(database, userID);
+			Grid.SetRow(editUser, 2);
+			GridMain.Children.Add(editUser);
 
 		}
 

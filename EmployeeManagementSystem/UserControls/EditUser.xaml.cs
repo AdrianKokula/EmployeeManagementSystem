@@ -12,29 +12,31 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
+
 using EmployeeManagementSystem.Classes;
 
-namespace EmployeeManagementSystem.Windows {
+namespace EmployeeManagementSystem.UserControls {
 
 	/// <summary>
-	/// Interaction logic for AddUser.xaml
+	/// Interaction logic for EditUser.xaml
 	/// </summary>
-	public partial class AddUser : Window {
+	public partial class EditUser : UserControl {
 
 		private readonly Database database;
-
-		private int userID;
+		private readonly int userID;
 
 		#region "constructors"
 
-		public AddUser(Database database) : this(database, 0) {}
-
-		public AddUser(Database database, int userID) {
+		public EditUser(Database database, int userID) {
 
 			InitializeComponent();
+
 			this.database = database;
 			this.userID = userID;
+
+			Load();
 
 		}
 
@@ -44,12 +46,6 @@ namespace EmployeeManagementSystem.Windows {
 
 		private void BtnSubmit_Click(object sender, RoutedEventArgs e) {
 
-			CreateUser();
-
-		}
-
-		private void BtnClose_Click(object sender, RoutedEventArgs e) {
-			Close();
 		}
 
 		#endregion
@@ -58,27 +54,13 @@ namespace EmployeeManagementSystem.Windows {
 
 		#region "private"
 
-		private bool ValidateFields() {
-
-			if (string.IsNullOrWhiteSpace(TbName.Text)) return false;
-			if (string.IsNullOrWhiteSpace(TbEmail.Text)) return false;
-			if (string.IsNullOrWhiteSpace(PbPassword.Password)) return false;
-
-			return true;
-		}
-
-		private void CreateUser() {
-
-			if (!ValidateFields()) return;
-
-
+		private void Load() {
 
 		}
 
 		#endregion
 
 		#endregion
-
 
 	}
 }

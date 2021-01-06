@@ -10,11 +10,12 @@
       d:DesignHeight="450" d:DesignWidth="800" Background="White"
       Title="Departments">
 
-    <Grid>
+    <Grid Name="GridMain">
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="auto" />
 			<RowDefinition Height="*" />
+			<RowDefinition Height="auto" />
 		</Grid.RowDefinitions>
 
 		<Grid Grid.Row="0" Margin="3">
@@ -33,7 +34,7 @@
 			
 		</Grid>
 
-		<ListView Grid.Row="1" Name="LvDepartments">
+		<ListView Grid.Row="1" Name="LvDepartments" SelectionChanged="LvDepartments_SelectionChanged">
 
 			<ListView.View>
 				<GridView>

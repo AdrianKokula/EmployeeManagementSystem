@@ -37,10 +37,10 @@
 
 			<StackPanel Orientation="Horizontal">
 				<TextBlock Text="Password: "/>
-				<TextBox Name="TbPassword" Width="200"/>
+				<PasswordBox Name="PbPassword" Width="200"/>
 			</StackPanel>
 
-			<Button Name="BtnSubmit" Content="Submit"/>
+			<Button Name="BtnSubmit" Content="Submit" Click="BtnSubmit_Click"/>
 
 		</StackPanel>
 
