@@ -20,7 +20,7 @@ namespace EmployeeManagementSystem.Windows {
 	/// <summary>
 	/// Interaction logic for EditDepartmentWindow.xaml
 	/// </summary>
-	public partial class EditDepartmentWindow : Window {
+	public partial class AddDepartment : Window {
 
 		private readonly Database database;
 
@@ -28,9 +28,9 @@ namespace EmployeeManagementSystem.Windows {
 
 		#region "constructors"
 
-		public EditDepartmentWindow(Database database) : this(database, 0) { }
+		public AddDepartment(Database database) : this(database, 0) { }
 
-		public EditDepartmentWindow(Database database, int userID) {
+		public AddDepartment(Database database, int userID) {
 
 			InitializeComponent();
 			this.database = database;

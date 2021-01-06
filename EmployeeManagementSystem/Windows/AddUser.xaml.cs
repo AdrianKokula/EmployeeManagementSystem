@@ -16,10 +16,11 @@ using System.Windows.Shapes;
 using EmployeeManagementSystem.Classes;
 
 namespace EmployeeManagementSystem.Windows {
+
 	/// <summary>
-	/// Interaction logic for EditUserWindow.xaml
+	/// Interaction logic for AddUser.xaml
 	/// </summary>
-	public partial class EditUserWindow : Window {
+	public partial class AddUser : Window {
 
 		private readonly Database database;
 
@@ -27,9 +28,9 @@ namespace EmployeeManagementSystem.Windows {
 
 		#region "constructors"
 
-		public EditUserWindow(Database database) : this(database, 0) {}
+		public AddUser(Database database) : this(database, 0) {}
 
-		public EditUserWindow(Database database, int userID) {
+		public AddUser(Database database, int userID) {
 
 			InitializeComponent();
 			this.database = database;

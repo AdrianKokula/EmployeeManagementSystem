@@ -46,7 +46,7 @@ namespace EmployeeManagementSystem.Pages {
 
 		private void BtnAdd_Click(object sender, RoutedEventArgs e) {
 
-			EditEmployeeWindow employeeWindow = new EditEmployeeWindow(this.database) {
+			AddEmployee employeeWindow = new AddEmployee(this.database) {
 				Owner = Window.GetWindow(this)
 			};
 
