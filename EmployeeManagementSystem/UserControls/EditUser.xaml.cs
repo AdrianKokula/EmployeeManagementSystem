@@ -14,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data;
+using System.Data.SqlClient;
 
 using EmployeeManagementSystem.Classes;
 
@@ -55,6 +57,28 @@ namespace EmployeeManagementSystem.UserControls {
 		#region "private"
 
 		private void Load() {
+
+			string query =
+@"DECLARE @UserID int = @pUserID;
+
+SELECT [Name], Email, [Password]
+	FROM dbo.Users
+	WHERE ID = @UserID;";
+
+			SqlCommand sqlCommand = new SqlCommand(query);
+			sqlCommand.Parameters.Add("@pUserID", SqlDbType.Int).Value = this.userID;
+
+			DataTable dataTableUser = new DataTable();
+
+			string result = database.FillDataTable(ref dataTableUser, sqlCommand);
+
+			if (!result.Equals("OK")) return;
+			if (dataTableUser.Rows.Count <= 0) return;
+
+			DataRow row = dataTableUser.Rows[0];
+			TbName.Text = Tools.StringFromObject(row["Name"]);
+			TbEmail.Text = Tools.StringFromObject(row["Email"]);
+			PbPassword.Password = Tools.StringFromObject(row["Password"]);
 
 		}
 

@@ -24,6 +24,15 @@ namespace EmployeeManagementSystem.Classes {
 
 		}
 
+		public static DateTime? DateTimeFromObject(object obj) {
+
+			if (obj == DBNull.Value) return null;
+			if (!DateTime.TryParse(obj.ToString(), out DateTime result)) return null;
+
+			return result;
+
+		}
+
 	}
 
 }

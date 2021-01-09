@@ -19,7 +19,10 @@
 
 			<StackPanel Orientation="Horizontal">
 				<TextBlock Text="State: "/>
-				<ComboBox Name="CbState" Width="200"/>
+				<ComboBox Name="CbState"
+						  DisplayMemberPath="State"
+						  SelectedValuePath="ID"
+						  Width="200"/>
 			</StackPanel>
 
 			<StackPanel Orientation="Horizontal">

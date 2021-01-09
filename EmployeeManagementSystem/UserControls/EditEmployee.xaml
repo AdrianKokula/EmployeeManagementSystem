@@ -24,7 +24,10 @@
 
 			<StackPanel Orientation="Horizontal">
 				<TextBlock Text="Department: "/>
-				<ComboBox Name="CbDepartment" Width="200"/>
+				<ComboBox Name="CbDepartment"
+						  DisplayMemberPath="Department"
+						  SelectedValuePath="ID"
+						  Width="200"/>
 			</StackPanel>
 
 			<StackPanel Orientation="Horizontal">
