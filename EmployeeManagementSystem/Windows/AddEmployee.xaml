@@ -1,14 +1,14 @@
 ﻿<!-- Copyright (c) 2020 Adrián Kokuľa - adriankokula.eu; License: The MIT License (MIT) -->
 	
 <Window x:Class="EmployeeManagementSystem.Windows.AddEmployee"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:EmployeeManagementSystem.Windows"
-        mc:Ignorable="d" FontSize="16" WindowStartupLocation="CenterOwner"
-        Title="EditEmployeeWindow" Height="450" Width="535" WindowStyle="None">
-    <Grid>
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:local="clr-namespace:EmployeeManagementSystem.Windows"
+		mc:Ignorable="d" FontSize="16" WindowStartupLocation="CenterOwner"
+		Title="EditEmployeeWindow" Height="450" Width="535" WindowStyle="None">
+	<Grid>
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="auto" />
@@ -36,7 +36,10 @@
 
 			<StackPanel Orientation="Horizontal">
 				<TextBlock Text="Department: "/>
-				<ComboBox Name="CbDepartment" Width="200"/>
+				<ComboBox Name="CbDepartment"
+						  DisplayMemberPath="Department"
+						  SelectedValuePath="ID" 
+						  Width="200"/>
 			</StackPanel>
 
 			<StackPanel Orientation="Horizontal">

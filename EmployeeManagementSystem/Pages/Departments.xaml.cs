@@ -22,20 +22,25 @@ using EmployeeManagementSystem.Windows;
 using EmployeeManagementSystem.UserControls;
 
 namespace EmployeeManagementSystem.Pages {
+
 	/// <summary>
 	/// Interaction logic for Departments.xaml
 	/// </summary>
 	public partial class Departments : Page {
 
 		private readonly Database database;
+		private readonly string loggedUser;
+
 		private EditDepartment editDepartment;
 
 		#region	"constructors"
 
-		public Departments(Database database) {
+		public Departments(Database database, string loggedUser) {
 
 			InitializeComponent();
+
 			this.database = database;
+			this.loggedUser = loggedUser;
 
 			LoadData();
 
@@ -47,11 +52,12 @@ namespace EmployeeManagementSystem.Pages {
 
 		private void BtnAdd_Click(object sender, RoutedEventArgs e) {
 
-			AddDepartment departmentWindow = new AddDepartment(this.database) {
+			AddDepartment departmentWindow = new AddDepartment(this.database, this.loggedUser) {
 				Owner = Window.GetWindow(this)
 			};
 
 			departmentWindow.ShowDialog();
+			LoadData();
 
 		}
 

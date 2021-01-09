@@ -13,6 +13,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Data.SqlClient;
+
 using EmployeeManagementSystem.Classes;
 
 namespace EmployeeManagementSystem.Windows {
@@ -23,18 +25,15 @@ namespace EmployeeManagementSystem.Windows {
 	public partial class AddUser : Window {
 
 		private readonly Database database;
-
-		private int userID;
+		private readonly string loggedUser;
 
 		#region "constructors"
 
-		public AddUser(Database database) : this(database, 0) {}
-
-		public AddUser(Database database, int userID) {
+		public AddUser(Database database, string loggedUser) {
 
 			InitializeComponent();
 			this.database = database;
-			this.userID = userID;
+			this.loggedUser = loggedUser;
 
 		}
 
@@ -43,9 +42,7 @@ namespace EmployeeManagementSystem.Windows {
 		#region "handlers"
 
 		private void BtnSubmit_Click(object sender, RoutedEventArgs e) {
-
 			CreateUser();
-
 		}
 
 		private void BtnClose_Click(object sender, RoutedEventArgs e) {
@@ -71,7 +68,27 @@ namespace EmployeeManagementSystem.Windows {
 
 			if (!ValidateFields()) return;
 
+			string query =
+@"DECLARE @UserName nvarchar(128) = @pUserName;
+DECLARE @Email nvarchar(128) = @pEmail;
+DECLARE @Password nvarchar(128) = @pPassword;
+DECLARE @LoggedUser nvarchar(128) = @pLoggedUser;
+DECLARE @Result nvarchar(MAX);
 
+EXEC dbo.CreateUser @UserName, @Email, @Password, @LoggedUser, @Result OUTPUT
+
+SELECT @Result;";
+
+			SqlCommand sqlCommand = new SqlCommand(query);
+			sqlCommand.Parameters.Add("@pUserName", System.Data.SqlDbType.NVarChar).Value = TbName.Text;
+			sqlCommand.Parameters.Add("@pEmail", System.Data.SqlDbType.NVarChar).Value = TbEmail.Text;
+			sqlCommand.Parameters.Add("@pPassword", System.Data.SqlDbType.NVarChar).Value = PbPassword.Password;
+			sqlCommand.Parameters.Add("@pLoggedUser", System.Data.SqlDbType.NVarChar).Value = this.loggedUser;
+
+			string result = Tools.StringFromObject(database.Scalar(sqlCommand));
+			if (!result.Equals("OK")) return;
+
+			Close();
 
 		}
 

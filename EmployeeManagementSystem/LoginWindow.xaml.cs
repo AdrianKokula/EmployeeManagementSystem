@@ -79,7 +79,7 @@ namespace EmployeeManagementSystem {
 		private string CheckUser(string email, string password) {
 
 			string query =
-@"DECLARE @email nvarchar(255) = @pEmail;
+@"DECLARE @email nvarchar(128) = @pEmail;
 DECLARE @password nvarchar(255) = @pPassword;
 
 SELECT [dbo].[GetUsernameFromCredentials](@email, @password)";
@@ -88,7 +88,7 @@ SELECT [dbo].[GetUsernameFromCredentials](@email, @password)";
 			sqlCommand.Parameters.Add("@pEmail", System.Data.SqlDbType.NVarChar).Value = email;
 			sqlCommand.Parameters.Add("@pPassword", System.Data.SqlDbType.NVarChar).Value = password;
 
-			string userName = DbTools.StringFromSqlScalar(database.Scalar(sqlCommand));
+			string userName = Tools.StringFromObject(database.Scalar(sqlCommand));
 
 			return userName;
 		}

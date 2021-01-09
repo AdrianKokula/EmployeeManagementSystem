@@ -23,18 +23,15 @@ namespace EmployeeManagementSystem.Windows {
 	public partial class AddDepartment : Window {
 
 		private readonly Database database;
-
-		private int departmentID;
+		private readonly string loggedUser;
 
 		#region "constructors"
 
-		public AddDepartment(Database database) : this(database, 0) { }
-
-		public AddDepartment(Database database, int userID) {
+		public AddDepartment(Database database, string loggedUser) {
 
 			InitializeComponent();
 			this.database = database;
-			this.departmentID = userID;
+			this.loggedUser = loggedUser;
 
 		}
 
@@ -54,7 +51,11 @@ namespace EmployeeManagementSystem.Windows {
 
 		#region "methods"
 
+		#region "private"
 
+
+
+		#endregion
 
 		#endregion
 

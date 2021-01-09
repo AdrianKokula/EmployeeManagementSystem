@@ -25,6 +25,7 @@ namespace EmployeeManagementSystem {
 	public partial class MainWindow : Window {
 
 		private readonly Database database;
+
 		private readonly string loggedUser;
 
 		#region "constructors"
@@ -35,7 +36,7 @@ namespace EmployeeManagementSystem {
 			this.database = database;
 			this.loggedUser = loggedUser;
 
-			FrmMain.Content = new Employees(database);
+			FrmMain.Content = new Employees(database, loggedUser);
 
 		}
 
@@ -44,15 +45,15 @@ namespace EmployeeManagementSystem {
 		#region "handlers"
 
 		private void BtnEmployees_Click(object sender, RoutedEventArgs e) {
-			FrmMain.Content = new Employees(database);
+			FrmMain.Content = new Employees(database, loggedUser);
 		}
 
 		private void BtnDepartments_Click(object sender, RoutedEventArgs e) {
-			FrmMain.Content = new Departments(database);
+			FrmMain.Content = new Departments(database, loggedUser);
 		}
 
 		private void BtnUsers_Click(object sender, RoutedEventArgs e) {
-			FrmMain.Content = new Users(database);
+			FrmMain.Content = new Users(database, loggedUser);
 		}
 
 		private void BtnSettings_Click(object sender, RoutedEventArgs e) {
@@ -72,8 +73,7 @@ namespace EmployeeManagementSystem {
 
 		#region "methods"
 
-
-
+	
 		#endregion
 
 	}

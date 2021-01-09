@@ -13,6 +13,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Data.SqlClient;
+using System.Data;
+
 using EmployeeManagementSystem.Classes;
 
 namespace EmployeeManagementSystem.Windows {
@@ -23,18 +26,17 @@ namespace EmployeeManagementSystem.Windows {
 	public partial class AddEmployee : Window {
 
 		private readonly Database database;
-
-		private int employeeID;
+		private readonly string loggedUser;
 
 		#region "constructors"
 
-		public AddEmployee(Database database) : this(database, 0) {}
-
-		public AddEmployee(Database database, int employeeID) {
+		public AddEmployee(Database database, string loggedUser) {
 
 			InitializeComponent();
 			this.database = database;
-			this.employeeID = employeeID;
+			this.loggedUser = loggedUser;
+
+			LoadData();
 
 		}
 
@@ -43,7 +45,7 @@ namespace EmployeeManagementSystem.Windows {
 		#region "handlers"
 		
 		private void BtnSubmit_Click(object sender, RoutedEventArgs e) {
-
+			CreateEmployee();
 		}
 
 		private void BtnClose_Click(object sender, RoutedEventArgs e) {
@@ -54,7 +56,44 @@ namespace EmployeeManagementSystem.Windows {
 
 		#region "methods"
 
+		#region "private"
 
+		private void LoadData() {
+
+			string query =
+@"SELECT ID, CONCAT_WS(' ', DepartmentName + ' -', [State], City, PostalCode) AS Department
+	FROM dbo.DepartmentView;";
+
+			SqlCommand sqlCommand = new SqlCommand(query);
+			DataTable dataTableDepartments = new DataTable();
+
+			string result = database.FillDataTable(ref dataTableDepartments, sqlCommand);
+			if (!result.Equals("OK")) return;
+
+			CbDepartment.ItemsSource = dataTableDepartments.AsDataView();
+			
+		}
+
+		private bool ValidateFields() {
+
+			if (string.IsNullOrWhiteSpace(TbFirstName.Text)) return false;
+			if (string.IsNullOrWhiteSpace(TbLastName.Text)) return false;
+			if (string.IsNullOrWhiteSpace(TbResidence.Text)) return false;
+
+			if (Tools.IntFromObject(CbDepartment.SelectedValue) <= 0) return false;
+
+			return true;
+		}
+
+		private void CreateEmployee() {
+
+			if (!ValidateFields()) return;
+
+			
+
+		}
+
+		#endregion
 
 		#endregion
 

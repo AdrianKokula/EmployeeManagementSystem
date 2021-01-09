@@ -30,14 +30,18 @@ namespace EmployeeManagementSystem.Pages {
 	public partial class Employees : Page {
 
 		private readonly Database database;
+		private readonly string loggedUser;
+
 		private EditEmployee editEmployee;
 
 		#region "constructors"
 
-		public Employees(Database database) {
+		public Employees(Database database, string loggedUser) {
 
 			InitializeComponent();
+
 			this.database = database;
+			this.loggedUser = loggedUser;
 
 			LoadData();
 
@@ -61,11 +65,12 @@ namespace EmployeeManagementSystem.Pages {
 
 		private void BtnAdd_Click(object sender, RoutedEventArgs e) {
 
-			AddEmployee employeeWindow = new AddEmployee(this.database) {
+			AddEmployee employeeWindow = new AddEmployee(this.database, this.loggedUser) {
 				Owner = Window.GetWindow(this)
 			};
 
 			employeeWindow.ShowDialog();
+			LoadData();
 
 		}
 
@@ -88,7 +93,6 @@ namespace EmployeeManagementSystem.Pages {
 			LvEmployees.ItemsSource = dataTableEmployees.DefaultView;
 
 		}
-
 
 		#endregion
 
