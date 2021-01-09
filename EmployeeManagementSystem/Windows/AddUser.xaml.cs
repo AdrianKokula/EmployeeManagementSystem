@@ -89,7 +89,6 @@ SELECT @Result;";
 			if (!result.Equals("OK")) return;
 
 			Close();
-
 		}
 
 		#endregion

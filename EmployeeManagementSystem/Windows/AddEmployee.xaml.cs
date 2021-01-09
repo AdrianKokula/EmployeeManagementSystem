@@ -82,6 +82,8 @@ namespace EmployeeManagementSystem.Windows {
 
 			if (Tools.IntFromObject(CbDepartment.SelectedValue) <= 0) return false;
 
+			if (!DpDateOfBirth.SelectedDate.HasValue) return false;
+
 			return true;
 		}
 
@@ -89,8 +91,32 @@ namespace EmployeeManagementSystem.Windows {
 
 			if (!ValidateFields()) return;
 
-			
+			string query =
+@"DECLARE @FirstName nvarchar(128) = @pFirstName;
+DECLARE @LastName nvarchar(128) = @pLastName;
+DECLARE @DepartmentID int = @pDepartmentID;
+DECLARE @DateOfBirth date = @pDateOfBirth;
+DECLARE @PermanentResidence nvarchar(255) = @pPermanentResidence;
+DECLARE @LoggedUser nvarchar(128) = @pLoggedUser;
 
+DECLARE @Result nvarchar(MAX);
+
+EXEC dbo.CreateEmployee @FirstName, @LastName, @DepartmentID, @DateOfBirth, @PermanentResidence, @LoggedUser, @Result OUTPUT
+
+SELECT @Result;";
+
+			SqlCommand sqlCommand = new SqlCommand(query);
+			sqlCommand.Parameters.Add("@pFirstName", SqlDbType.NVarChar).Value = TbFirstName.Text;
+			sqlCommand.Parameters.Add("@pLastName", SqlDbType.NVarChar).Value = TbLastName.Text;
+			sqlCommand.Parameters.Add("@pDepartmentID", SqlDbType.Int).Value = Tools.IntFromObject(CbDepartment.SelectedValue);
+			sqlCommand.Parameters.Add("@pDateOfBirth", SqlDbType.Date).Value = DpDateOfBirth.SelectedDate.Value;
+			sqlCommand.Parameters.Add("@pPermanentResidence", SqlDbType.NVarChar).Value = TbResidence.Text;
+			sqlCommand.Parameters.Add("@pLoggedUser", SqlDbType.NVarChar).Value = this.loggedUser;
+
+			string result = Tools.StringFromObject(database.Scalar(sqlCommand));
+			if (!result.Equals("OK")) return;
+
+			Close();
 		}
 
 		#endregion
