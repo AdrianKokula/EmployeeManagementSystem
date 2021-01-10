@@ -75,7 +75,7 @@ DECLARE @Password nvarchar(128) = @pPassword;
 DECLARE @LoggedUser nvarchar(128) = @pLoggedUser;
 DECLARE @Result nvarchar(MAX);
 
-EXEC dbo.CreateUser @UserName, @Email, @Password, @LoggedUser, @Result OUTPUT
+EXEC dbo.CreateUser @UserName, @Email, @Password, @LoggedUser, @Result OUTPUT;
 
 SELECT @Result;";
 

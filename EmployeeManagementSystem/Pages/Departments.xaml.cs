@@ -67,7 +67,7 @@ namespace EmployeeManagementSystem.Pages {
 			DataRowView dataRow = (DataRowView)e.AddedItems[0];
 			int employeeID = (int)dataRow["ID"];
 
-			editDepartment = new EditDepartment(database, employeeID);
+			editDepartment = new EditDepartment(database, loggedUser, employeeID);
 			Grid.SetRow(editDepartment, 2);
 			GridMain.Children.Add(editDepartment);
 

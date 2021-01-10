@@ -27,15 +27,17 @@ namespace EmployeeManagementSystem.UserControls {
 	public partial class EditUser : UserControl {
 
 		private readonly Database database;
+		private readonly string loggedUser;
 		private readonly int userID;
 
 		#region "constructors"
 
-		public EditUser(Database database, int userID) {
+		public EditUser(Database database, string loggedUser, int userID) {
 
 			InitializeComponent();
 
 			this.database = database;
+			this.loggedUser = loggedUser;
 			this.userID = userID;
 
 			Load();
@@ -47,7 +49,7 @@ namespace EmployeeManagementSystem.UserControls {
 		#region "handlers"
 
 		private void BtnSubmit_Click(object sender, RoutedEventArgs e) {
-
+			UpdateUser();
 		}
 
 		#endregion
@@ -79,6 +81,43 @@ SELECT [Name], Email, [Password]
 			TbName.Text = Tools.StringFromObject(row["Name"]);
 			TbEmail.Text = Tools.StringFromObject(row["Email"]);
 			PbPassword.Password = Tools.StringFromObject(row["Password"]);
+
+		}
+
+		private bool ValidateFields() {
+
+			if (string.IsNullOrWhiteSpace(TbName.Text)) return false;
+			if (string.IsNullOrWhiteSpace(TbEmail.Text)) return false;
+			if (string.IsNullOrWhiteSpace(PbPassword.Password)) return false;
+
+			return true;
+		}
+
+		private void UpdateUser() {
+
+			if (!ValidateFields()) return;
+
+			string query =
+@"DECLARE @ID int = @pID;
+DECLARE @UserName nvarchar(128) = @pUserName;
+DECLARE @Email nvarchar(128) = @pEmail;
+DECLARE @Password nvarchar(128) = @pPassword;
+DECLARE @LoggedUser nvarchar(128) = @pLoggedUser;
+DECLARE @Result nvarchar(MAX);
+
+EXEC dbo.UpdateUser @ID, @UserName, @Email, @Password, @LoggedUser, @Result OUTPUT;
+
+SELECT @Result;";
+
+			SqlCommand sqlCommand = new SqlCommand(query);
+			sqlCommand.Parameters.Add("@pID", SqlDbType.Int).Value = this.userID;
+			sqlCommand.Parameters.Add("@pUserName", System.Data.SqlDbType.NVarChar).Value = TbName.Text;
+			sqlCommand.Parameters.Add("@pEmail", System.Data.SqlDbType.NVarChar).Value = TbEmail.Text;
+			sqlCommand.Parameters.Add("@pPassword", System.Data.SqlDbType.NVarChar).Value = PbPassword.Password;
+			sqlCommand.Parameters.Add("@pLoggedUser", System.Data.SqlDbType.NVarChar).Value = this.loggedUser;
+
+			string result = Tools.StringFromObject(database.Scalar(sqlCommand));
+			if (!result.Equals("OK")) return;
 
 		}
 

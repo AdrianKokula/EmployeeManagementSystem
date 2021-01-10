@@ -27,15 +27,17 @@ namespace EmployeeManagementSystem.UserControls {
 	public partial class EditDepartment : UserControl {
 
 		private readonly Database database;
+		private readonly string loggedUser;
 		private readonly int departmentID;
 
 		#region "constructors"
 
-		public EditDepartment(Database database, int departmentID) {
+		public EditDepartment(Database database, string loggedUser, int departmentID) {
 
 			InitializeComponent();
 
 			this.database = database;
+			this.loggedUser = loggedUser;
 			this.departmentID = departmentID;
 
 			Load();
@@ -47,7 +49,7 @@ namespace EmployeeManagementSystem.UserControls {
 		#region "handlers"
 
 		private void BtnSubmit_Click(object sender, RoutedEventArgs e) {
-
+			UpdateDepartment();
 		}
 
 		#endregion
@@ -94,6 +96,50 @@ SELECT [Name], StateID, City, Street, PostalCode
 			TbCity.Text = Tools.StringFromObject(row["City"]);
 			TbStreet.Text = Tools.StringFromObject(row["Street"]);
 			TbPostalCode.Text = Tools.StringFromObject(row["PostalCode"]);
+
+		}
+
+		private bool ValidateFields() {
+
+			if (string.IsNullOrWhiteSpace(TbName.Text)) return false;
+			if (string.IsNullOrWhiteSpace(TbCity.Text)) return false;
+			if (string.IsNullOrWhiteSpace(TbStreet.Text)) return false;
+			if (string.IsNullOrWhiteSpace(TbPostalCode.Text)) return false;
+
+			if (Tools.IntFromObject(CbState.SelectedValue) <= 0) return false;
+
+			return true;
+		}
+
+		private void UpdateDepartment() {
+
+			if (!ValidateFields()) return;
+
+			string query =
+@"DECLARE @ID int = @pID;
+DECLARE @DepartmentName nvarchar(128) = @pDepartmentName;
+DECLARE @StateID int = @pStateID;
+DECLARE @City nvarchar(128) = @pCity;
+DECLARE @Street nvarchar(128) = @pStreet;
+DECLARE @PostalCode nvarchar(20) = @pPostalCode;
+DECLARE @LoggedUser nvarchar(128) = @pLoggedUser;
+DECLARE @Result nvarchar(MAX);
+
+EXEC dbo.UpdateDepartment @ID, @DepartmentName, @StateID, @City, @Street, @PostalCode, @LoggedUser, @Result OUTPUT;
+
+SELECT @Result";
+
+			SqlCommand sqlCommand = new SqlCommand(query);
+			sqlCommand.Parameters.Add("@pID", SqlDbType.Int).Value = this.departmentID;
+			sqlCommand.Parameters.Add("@pDepartmentName", SqlDbType.NVarChar).Value = TbName.Text;
+			sqlCommand.Parameters.Add("@pStateID", SqlDbType.Int).Value = Tools.IntFromObject(CbState.SelectedValue);
+			sqlCommand.Parameters.Add("@pCity", SqlDbType.NVarChar).Value = TbCity.Text;
+			sqlCommand.Parameters.Add("@pStreet", SqlDbType.NVarChar).Value = TbStreet.Text;
+			sqlCommand.Parameters.Add("@pPostalCode", SqlDbType.NVarChar).Value = TbPostalCode.Text;
+			sqlCommand.Parameters.Add("@pLoggedUser", SqlDbType.NVarChar).Value = this.loggedUser;
+
+			string result = Tools.StringFromObject(database.Scalar(sqlCommand));
+			if (!result.Equals("OK")) return;
 
 		}
 
