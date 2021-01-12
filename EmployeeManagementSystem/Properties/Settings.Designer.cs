@@ -34,5 +34,17 @@ namespace EmployeeManagementSystem.Properties {
                 this["ConnectionString"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LoginEmail {
+            get {
+                return ((string)(this["LoginEmail"]));
+            }
+            set {
+                this["LoginEmail"] = value;
+            }
+        }
     }
 }

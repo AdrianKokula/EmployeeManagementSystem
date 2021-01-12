@@ -37,10 +37,7 @@ namespace EmployeeManagementSystem {
 				settingsWindow.ShowDialog();
 			}
 
-			// only for dev
-			TbEmail.Text = "kokula.adrian45@gmail.com";
-			PbPassword.Password = "heslo";
-			Login();
+			TbEmail.Text = Properties.Settings.Default.LoginEmail;
 
 		}
 
@@ -65,6 +62,14 @@ namespace EmployeeManagementSystem {
 			string userName = CheckUser(email, password);
 
 			if (string.IsNullOrWhiteSpace(userName)) return;
+
+			if (CbRememberMail.IsChecked == true) {
+				Properties.Settings.Default.LoginEmail = email;
+			} else {
+				Properties.Settings.Default.LoginEmail = String.Empty;
+			}
+
+			Properties.Settings.Default.Save();
 
 			ShowMainWindow(userName);
 
