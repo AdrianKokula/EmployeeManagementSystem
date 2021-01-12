@@ -21,6 +21,7 @@
     <None Remove="Resources\Edit.png" />
     <None Remove="Resources\Email.png" />
     <None Remove="Resources\Employee.png" />
+    <None Remove="Resources\Exit.png" />
     <None Remove="Resources\Login.png" />
     <None Remove="Resources\Logo.ico" />
     <None Remove="Resources\Logo.png" />
@@ -44,6 +45,7 @@
     <Resource Include="Resources\Edit.png" />
     <Resource Include="Resources\Email.png" />
     <Resource Include="Resources\Employee.png" />
+    <Resource Include="Resources\Exit.png" />
     <Resource Include="Resources\Login.png" />
     <Resource Include="Resources\Logo.ico" />
     <Resource Include="Resources\Logo.png" />

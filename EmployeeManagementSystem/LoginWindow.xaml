@@ -7,7 +7,7 @@
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:local="clr-namespace:EmployeeManagementSystem"
 		mc:Ignorable="d" FontSize="20" FontFamily="Bahnschrift Light" WindowStartupLocation="CenterScreen" Foreground="White"
-		Title="EMS - Login" Height="600" Width="450" ResizeMode="NoResize">
+		Title="EMS - Login" Height="600" Width="450" ResizeMode="NoResize" WindowStyle="None" MouseDown="Window_MouseDown" MouseUp="Window_MouseUp">
 	<Grid Background="#013243">
 
 		<Grid.RowDefinitions>
@@ -15,20 +15,25 @@
 			<RowDefinition Height="auto"/>
 			<RowDefinition Height="auto"/>
 			<RowDefinition Height="auto"/>
+			<RowDefinition Height="auto"/>
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
-		
-		<Image Grid.Row="0" Source="Resources/Logo.ico" MaxHeight="64" Margin="0 30 0 0"/>
 
-		<TextBlock Grid.Row="1" Text="Sing in" HorizontalAlignment="Center" FontSize="36" Margin="0 10"/>
+		<Button Background="Transparent" HorizontalAlignment="Right" Margin="3" BorderThickness="0" Cursor="Hand" Name="BtnClose" Click="BtnClose_Click">
+			<Image Source="Resources/Exit.png" MaxHeight="16"/>
+		</Button>
 
-		<TextBlock Grid.Row="2" Text="Sign in and start managing your company!" HorizontalAlignment="Center" FontSize="16" Margin="0 5"/>
+		<Image Grid.Row="1" Source="Resources/Logo.ico" MaxHeight="64" Margin="0 15 0 0"/>
 
-		<StackPanel Grid.Row="3" Margin="40 20">
+		<TextBlock Grid.Row="2" Text="Sing in" HorizontalAlignment="Center" FontSize="36" Margin="0 10"/>
+
+		<TextBlock Grid.Row="3" Text="Sign in and start managing your company!" HorizontalAlignment="Center" FontSize="16" Margin="0 5"/>
+
+		<StackPanel Grid.Row="4" Margin="40 20">
 
 			<!-- Password input -->
 			<DockPanel HorizontalAlignment="Stretch" LastChildFill="True" Margin="0 15">
-				<Image Source="Resources/Email.png" Margin="10 5" MaxHeight="24"/>
+				<Image Source="Resources/Email.png" Margin="10 5" MaxHeight="26"/>
 
 				<TextBox Width="auto" VerticalAlignment="Center" Name="TbEmail" Padding="10 9" Background="#1C4857" BorderThickness="0" Foreground="White" FontSize="16">
 					<TextBox.Resources>
@@ -42,7 +47,7 @@
 
 			<!-- Password input -->
 			<DockPanel HorizontalAlignment="Stretch" LastChildFill="True" Margin="0 15 0 25">
-				<Image Source="Resources/Password.png" Margin="10 5" MaxHeight="24"/>
+				<Image Source="Resources/Password.png" Margin="10 5" MaxHeight="26"/>
 
 				<PasswordBox VerticalAlignment="Center" Name="PbPassword" Background="#1C4857" BorderThickness="0" Foreground="White" FontSize="16" Padding="10 9">
 					<PasswordBox.Resources>
@@ -73,7 +78,7 @@
 
 		</StackPanel>
 
-		<StackPanel Grid.Row="4" VerticalAlignment="Bottom" Margin="10">
+		<StackPanel Grid.Row="5" VerticalAlignment="Bottom" Margin="10">
 			<TextBlock Text="License: The MIT License (MIT)" FontSize="14" HorizontalAlignment="Center"/>
 			<TextBlock Text="Copyright (c) 2021 Adrián Kokuľa - adriankokula.eu" FontSize="14" HorizontalAlignment="Center"/>
 		</StackPanel>
