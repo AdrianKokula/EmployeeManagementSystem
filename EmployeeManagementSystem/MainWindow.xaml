@@ -7,43 +7,68 @@
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:local="clr-namespace:EmployeeManagementSystem"
 		mc:Ignorable="d" FontSize="20" FontFamily="Bahnschrift Light" WindowStartupLocation="CenterScreen" Foreground="White"
-		Title="EMS - Employee Management System" Height="720" Width="1280">
+		Title="EMS - Employee Management System" Height="720" Width="1280" WindowStyle="None" ResizeMode="NoResize">
 	<Grid>
+
+		<Grid.Background>
+			<LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+				<LinearGradientBrush.GradientStops>
+					<GradientStop Offset="0.2" Color="#013243" />
+					<GradientStop Offset="1" Color="#1C4C5C" />
+				</LinearGradientBrush.GradientStops>
+			</LinearGradientBrush>
+		</Grid.Background>
 
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="auto" />
 			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
 
-		<Grid Grid.Column="0" Background="#013243" HorizontalAlignment="Left">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+		
+		<!--CloseButton-->
+		<Button Grid.Column="1" Grid.Row="0" Background="Transparent" HorizontalAlignment="Right" Margin="3" BorderThickness="0" Cursor="Hand" Name="BtnClose" Click="BtnClose_Click">
+			<Image Source="Resources/Exit.png" MaxHeight="16"/>
+		</Button>
+		
+		<!--Navigation-->
+		<Grid Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Left" Background="#FF6C40">
 
-			<StackPanel Margin="0 30 0 0" VerticalAlignment="Center">
-				<Button Padding="7" Margin="10 5" Background="Transparent" Cursor="Hand" Name="BtnEmployees" Click="BtnEmployees_Click" BorderThickness="0" Foreground="White">
-				
+			<!--Main items-->
+			<StackPanel Margin="15 20">
+
+				<Button Padding="7" Background="Transparent" Cursor="Hand" Name="BtnEmployees" Click="BtnEmployees_Click" BorderThickness="0" Foreground="White">
 					<StackPanel Orientation="Vertical">
 						<Image Source="/Resources/Employee.png" Height="32"/>
 						<TextBlock Text="Employees"/>
 					</StackPanel>
-					
 				</Button>
 
-				<Button Padding="7" Margin="10 5" Background="Transparent" Cursor="Hand" Name="BtnDepartments" Click="BtnDepartments_Click" BorderThickness="0" Foreground="White">
+				<Separator Margin="10 5"/>
+
+				<Button Padding="7" Background="Transparent" Cursor="Hand" Name="BtnDepartments" Click="BtnDepartments_Click" BorderThickness="0" Foreground="White">
 					<StackPanel Orientation="Vertical">
 						<Image Source="/Resources/Department.png" Height="32"/>
 						<TextBlock Text="Departments"/>
 					</StackPanel>
 				</Button>
 
-				<Button Padding="7" Margin="10 5" Background="Transparent" Cursor="Hand" Name="BtnUsers" Click="BtnUsers_Click" BorderThickness="0" Foreground="White">
+				<Separator Margin="10 5"/>
+				
+				<Button Padding="7" Background="Transparent" Cursor="Hand" Name="BtnUsers" Click="BtnUsers_Click" BorderThickness="0" Foreground="White">
 					<StackPanel Orientation="Vertical">
 						<Image Source="/Resources/Login.png" Height="32"/>
 						<TextBlock Text="Users"/>
 					</StackPanel>
 				</Button>
-
+				
 			</StackPanel>
 
-			<StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Height="50" HorizontalAlignment="Center" Margin="0 10">
+			<!--Bottom buttons-->
+			<StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Height="50" HorizontalAlignment="Center">
 
 				<Button Width="40" Height="40" Cursor="Hand" Margin="5" Padding="5" Name="BtnSettings" Click="BtnSettings_Click" Background="Transparent" BorderThickness="0">
 					<Image Source="/Resources/Settings.png" />
@@ -59,7 +84,11 @@
 
 		</Grid>
 
-		<Frame Grid.Column="1" Name="FrmMain" NavigationUIVisibility="Hidden"/>
+		<Frame Grid.Column="1" Grid.Row="1" Name="FrmMain" NavigationUIVisibility="Hidden" Margin="20" BorderThickness="1">
+			<Frame.Effect>
+				<DropShadowEffect BlurRadius="10" RenderingBias="Quality" ShadowDepth="0"/>
+			</Frame.Effect>
+		</Frame>
 
 	</Grid>
 </Window>

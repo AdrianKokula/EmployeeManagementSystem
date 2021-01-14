@@ -44,6 +44,10 @@ namespace EmployeeManagementSystem {
 
 		#region "handlers"
 
+		private void BtnClose_Click(object sender, RoutedEventArgs e) {
+			Close();
+		}
+
 		private void BtnEmployees_Click(object sender, RoutedEventArgs e) {
 			FrmMain.Content = new Employees(database, loggedUser);
 		}
@@ -73,8 +77,7 @@ namespace EmployeeManagementSystem {
 
 		#region "methods"
 
-	
-		#endregion
 
+		#endregion
 	}
 }

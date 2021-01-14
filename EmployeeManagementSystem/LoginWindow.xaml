@@ -8,7 +8,16 @@
 		xmlns:local="clr-namespace:EmployeeManagementSystem"
 		mc:Ignorable="d" FontSize="20" FontFamily="Bahnschrift Light" WindowStartupLocation="CenterScreen" Foreground="White"
 		Title="EMS - Login" Height="600" Width="450" ResizeMode="NoResize" WindowStyle="None" MouseDown="Window_MouseDown" MouseUp="Window_MouseUp">
-	<Grid Background="#013243">
+	<Grid>
+		
+		<Grid.Background>
+			<LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+				<LinearGradientBrush.GradientStops>
+					<GradientStop Offset="0.4" Color="#013243" />
+					<GradientStop Offset="1" Color="#1C4C5C" />
+				</LinearGradientBrush.GradientStops>
+			</LinearGradientBrush>
+		</Grid.Background>
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="auto"/>
