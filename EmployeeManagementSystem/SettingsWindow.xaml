@@ -6,10 +6,32 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EmployeeManagementSystem"
-        mc:Ignorable="d" FontSize="16" WindowStartupLocation="CenterScreen"
-        Title="EMS - Settings" Height="450" Width="800">
+        mc:Ignorable="d" FontSize="20" FontFamily="Bahnschrift Light" WindowStartupLocation="CenterScreen" Foreground="White"
+        Title="EMS - Settings" Height="450" Width="800" ResizeMode="NoResize" WindowStyle="None">
     <Grid>
 
+		<Grid.Background>
+			<LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+				<LinearGradientBrush.GradientStops>
+					<GradientStop Offset="0.4" Color="#013243" />
+					<GradientStop Offset="1" Color="#1C4C5C" />
+				</LinearGradientBrush.GradientStops>
+			</LinearGradientBrush>
+		</Grid.Background>
+
+		<Grid.RowDefinitions>
+			<RowDefinition Height="auto"/>
+			<RowDefinition Height="auto"/>
+			<RowDefinition Height="auto"/>
+			<RowDefinition Height="auto"/>
+			<RowDefinition Height="auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+
+		<Button Grid.Row="0" Background="Transparent" HorizontalAlignment="Right" Margin="3" BorderThickness="0" Cursor="Hand" Name="BtnClose">
+			<Image Source="Resources/Exit.png" MaxHeight="16"/>
+		</Button>
+		
 		<StackPanel Orientation="Vertical">
 
 			<TextBlock Text="Settings" HorizontalAlignment="Center"/>

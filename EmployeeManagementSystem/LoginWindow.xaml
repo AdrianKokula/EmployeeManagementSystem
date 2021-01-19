@@ -42,29 +42,17 @@
 
 			<!-- Password input -->
 			<DockPanel HorizontalAlignment="Stretch" LastChildFill="True" Margin="0 15">
+				
 				<Image Source="Resources/Email.png" Margin="10 5" MaxHeight="26"/>
-
-				<TextBox Width="auto" VerticalAlignment="Center" Name="TbEmail" Padding="10 9" Background="#1C4857" BorderThickness="0" Foreground="White" FontSize="16">
-					<TextBox.Resources>
-						<Style TargetType="Border">
-							<Setter Property="CornerRadius" Value="6" />
-						</Style>
-					</TextBox.Resources>
-				</TextBox>
+				<TextBox Width="auto" Name="TbEmail" Padding="10 9" Background="#1C4857" BorderThickness="0" Foreground="White" FontSize="16" />
 
 			</DockPanel>
 
 			<!-- Password input -->
 			<DockPanel HorizontalAlignment="Stretch" LastChildFill="True" Margin="0 15 0 25">
+				
 				<Image Source="Resources/Password.png" Margin="10 5" MaxHeight="26"/>
-
-				<PasswordBox VerticalAlignment="Center" Name="PbPassword" Background="#1C4857" BorderThickness="0" Foreground="White" FontSize="16" Padding="10 9">
-					<PasswordBox.Resources>
-						<Style TargetType="Border">
-							<Setter Property="CornerRadius" Value="6" />
-						</Style>
-					</PasswordBox.Resources>
-				</PasswordBox>
+				<PasswordBox Template="{StaticResource passwordbox}" Name="PbPassword" Background="#1C4857" Foreground="White" FontSize="16" Padding="10 9" />
 
 			</DockPanel>
 
@@ -77,13 +65,7 @@
 				<TextBlock Text="Remember email" VerticalAlignment="Center"/>
 			</CheckBox>
 
-			<Button Content="Login" Name="BtnLogin" Click="BtnLogin_Click" Background="#FFAA4D" Cursor="Hand" FontWeight="Bold" Padding="5 10" Foreground="White">
-				<Button.Resources>
-					<Style TargetType="Border">
-						<Setter Property="CornerRadius" Value="6" />
-					</Style>
-				</Button.Resources>
-			</Button>
+			<Button Content="Login" Name="BtnLogin" Click="BtnLogin_Click" Background="#FFAA4D" Cursor="Hand" FontWeight="Bold" Padding="5 10" Foreground="White" />
 
 		</StackPanel>
 

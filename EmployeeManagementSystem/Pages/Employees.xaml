@@ -7,23 +7,25 @@
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 	  xmlns:local="clr-namespace:EmployeeManagementSystem.Pages"
 	  mc:Ignorable="d" FontSize="16" FontFamily="Bahnschrift Light"
-	  d:DesignHeight="450" d:DesignWidth="800"
+	  d:DesignHeight="450" d:DesignWidth="850"
 	  Title="Employees">
 
+	<Page.Resources>
+		
+		<Style x:Key="GridViewColumnsStyle" TargetType="{x:Type GridViewColumnHeader}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+						<TextBlock Text="{TemplateBinding Content}" Margin="0 10" Foreground="White" />
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+		
+	</Page.Resources>
+	
 	<Grid Name="GridMain">
 
-		<Grid.Resources>
-			<Style x:Key="GridViewColumnsStyle" TargetType="{x:Type GridViewColumnHeader}">
-				<Setter Property="Template">
-					<Setter.Value>
-						<ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
-							<TextBlock Text="{TemplateBinding Content}" Margin="0 10" Foreground="White" />
-						</ControlTemplate>
-					</Setter.Value>
-				</Setter>
-			</Style>
-		</Grid.Resources>
-		
 		<Grid.RowDefinitions>
 			<RowDefinition Height="auto" />
 			<RowDefinition Height="*" />
@@ -55,7 +57,7 @@
 			<ListView.ItemContainerStyle>
 				<Style TargetType="{x:Type ListViewItem}" >
 					<Setter Property="Height" Value="48" />
-					<Setter Property="Margin" Value="0 5" />
+					<Setter Property="Margin" Value="0 0" />
 					<Setter Property="Background" Value="#3f474e" />
 					<Setter Property="Cursor" Value="Hand" />
 				</Style>
@@ -64,11 +66,11 @@
 			<ListView.View>
 				<GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnsStyle}">
 					<GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding ID}" />
-					<GridViewColumn Header="First name" Width="150" DisplayMemberBinding="{Binding FirstName}" />
-					<GridViewColumn Header="Last name" Width="150" DisplayMemberBinding="{Binding LastName}" />
-					<GridViewColumn Header="Department" Width="225" DisplayMemberBinding="{Binding Department}" />
-					<GridViewColumn Header="Date of birth" DisplayMemberBinding="{Binding DateOfBirth}" />
-					<GridViewColumn Header="Residence" DisplayMemberBinding="{Binding Residence}"/>
+					<GridViewColumn Header="FIRST NAME" Width="150" DisplayMemberBinding="{Binding FirstName}" />
+					<GridViewColumn Header="LAST NAME" Width="150" DisplayMemberBinding="{Binding LastName}" />
+					<GridViewColumn Header="DEPARTMENT" Width="200" DisplayMemberBinding="{Binding Department}" />
+					<GridViewColumn Header="DATE OF BIRTH" DisplayMemberBinding="{Binding DateOfBirth}" />
+					<GridViewColumn Header="RESIDENCEE" DisplayMemberBinding="{Binding Residence}"/>
 				</GridView>
 			</ListView.View>
 			
