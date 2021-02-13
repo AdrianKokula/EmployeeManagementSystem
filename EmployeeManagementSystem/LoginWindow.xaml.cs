@@ -17,23 +17,23 @@ using System.Data.SqlClient;
 using EmployeeManagementSystem.Classes;
 
 namespace EmployeeManagementSystem {
+
 	/// <summary>
 	/// Interaction logic for Login.xaml
 	/// </summary>
 	public partial class LoginWindow : Window {
 
-		private readonly Database database;
-
-		#region "constructors"
+		#region Constructors
 
 		public LoginWindow() {
 
 			InitializeComponent();
 
-			database = new Database(Properties.Settings.Default.ConnectionString);
+			if(App.Database == null)
+				App.Database = new Database(Properties.Settings.Default.ConnectionString);
 
-			while (!database.TestConnection()) {
-				SettingsWindow settingsWindow = new SettingsWindow(database);
+			while (!App.Database.TestConnection()) {
+				SettingsWindow settingsWindow = new SettingsWindow();
 				settingsWindow.ShowDialog();
 			}
 
@@ -43,7 +43,7 @@ namespace EmployeeManagementSystem {
 
 		#endregion
 
-		#region "handlers"
+		#region Handlers
 
 		private void Window_MouseDown(object sender, MouseButtonEventArgs e) {
 
@@ -68,9 +68,9 @@ namespace EmployeeManagementSystem {
 
 		#endregion
 
-		#region "methods"
+		#region Methods
 
-		#region "private"
+		#region Private methods
 
 		private void Login() {
 
@@ -80,15 +80,12 @@ namespace EmployeeManagementSystem {
 
 			if (string.IsNullOrWhiteSpace(userName)) return;
 
-			if (CbRememberMail.IsChecked == true) {
-				Properties.Settings.Default.LoginEmail = email;
-			} else {
-				Properties.Settings.Default.LoginEmail = String.Empty;
-			}
-
+			Properties.Settings.Default.LoginEmail = (bool)CbRememberMail.IsChecked ? email : string.Empty;
 			Properties.Settings.Default.Save();
 
-			ShowMainWindow(userName);
+			App.LoggedUser = userName;
+
+			ShowMainWindow();
 
 		}
 
@@ -110,14 +107,14 @@ SELECT [dbo].[GetUsernameFromCredentials](@email, @password)";
 			sqlCommand.Parameters.Add("@pEmail", System.Data.SqlDbType.NVarChar).Value = email;
 			sqlCommand.Parameters.Add("@pPassword", System.Data.SqlDbType.NVarChar).Value = password;
 
-			string userName = Tools.StringFromObject(database.Scalar(sqlCommand));
+			string userName = Tools.StringFromObject(App.Database.Scalar(sqlCommand));
 
 			return userName;
 		}
 
-		private void ShowMainWindow(string userName) {
+		private void ShowMainWindow() {
 
-			MainWindow mainWindow = new MainWindow(database, userName);
+			MainWindow mainWindow = new MainWindow();
 			mainWindow.Show();
 			Close();
 

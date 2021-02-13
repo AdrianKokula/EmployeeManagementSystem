@@ -22,13 +22,11 @@ namespace EmployeeManagementSystem.Pages {
 	/// </summary>
 	public partial class About : Page {
 
-		private readonly Database database;
-
-		public About(Database database) {
+		public About() {
 
 			InitializeComponent();
-			this.database = database;
 
 		}
+
 	}
 }

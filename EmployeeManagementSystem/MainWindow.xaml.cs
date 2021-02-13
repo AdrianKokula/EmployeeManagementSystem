@@ -24,25 +24,18 @@ namespace EmployeeManagementSystem {
 	/// </summary>
 	public partial class MainWindow : Window {
 
-		private readonly Database database;
+		#region Constructors
 
-		private readonly string loggedUser;
-
-		#region "constructors"
-
-		public MainWindow(Database database, string loggedUser) {
+		public MainWindow() {
 
 			InitializeComponent();
-			this.database = database;
-			this.loggedUser = loggedUser;
-
-			FrmMain.Content = new Employees(database, loggedUser);
+			FrmMain.Content = new Employees();
 
 		}
 
 		#endregion
 
-		#region "handlers"
+		#region Handlers
 
 		private void Window_MouseDown(object sender, MouseButtonEventArgs e) {
 
@@ -62,24 +55,24 @@ namespace EmployeeManagementSystem {
 		}
 
 		private void BtnEmployees_Click(object sender, RoutedEventArgs e) {
-			FrmMain.Content = new Employees(database, loggedUser);
+			FrmMain.Content = new Employees();
 		}
 
 		private void BtnDepartments_Click(object sender, RoutedEventArgs e) {
-			FrmMain.Content = new Departments(database, loggedUser);
+			FrmMain.Content = new Departments();
 		}
 
 		private void BtnUsers_Click(object sender, RoutedEventArgs e) {
-			FrmMain.Content = new Users(database, loggedUser);
+			FrmMain.Content = new Users();
 		}
 
 		private void BtnSettings_Click(object sender, RoutedEventArgs e) {
-			SettingsWindow settingsWindow = new SettingsWindow(database);
+			SettingsWindow settingsWindow = new SettingsWindow();
 			settingsWindow.ShowDialog();
 		}
 
 		private void BtnAbout_Click(object sender, RoutedEventArgs e) {
-			FrmMain.Content = new About(database);
+			FrmMain.Content = new About();
 		}
 
 		private void BtnExit_Click(object sender, RoutedEventArgs e) {
@@ -88,7 +81,7 @@ namespace EmployeeManagementSystem {
 
 		#endregion
 
-		#region "methods"
+		#region Methods
 
 
 		#endregion

@@ -26,18 +26,14 @@ namespace EmployeeManagementSystem.UserControls {
 	/// </summary>
 	public partial class EditDepartment : UserControl {
 
-		private readonly Database database;
-		private readonly string loggedUser;
 		private readonly int departmentID;
 
-		#region "constructors"
+		#region Constructors
 
-		public EditDepartment(Database database, string loggedUser, int departmentID) {
+		public EditDepartment(int departmentID) {
 
 			InitializeComponent();
 
-			this.database = database;
-			this.loggedUser = loggedUser;
 			this.departmentID = departmentID;
 
 			Load();
@@ -46,7 +42,7 @@ namespace EmployeeManagementSystem.UserControls {
 
 		#endregion
 
-		#region "handlers"
+		#region Handlers
 
 		private void BtnSubmit_Click(object sender, RoutedEventArgs e) {
 			UpdateDepartment();
@@ -54,9 +50,9 @@ namespace EmployeeManagementSystem.UserControls {
 
 		#endregion
 
-		#region "methods"
+		#region Methods
 
-		#region "private"
+		#region Private methods
 
 		private void Load() {
 
@@ -68,7 +64,7 @@ namespace EmployeeManagementSystem.UserControls {
 			SqlCommand sqlCommand = new SqlCommand(query);
 			DataTable dataTableStates = new DataTable();
 
-			string result = database.FillDataTable(ref dataTableStates, sqlCommand);
+			string result = App.Database.FillDataTable(ref dataTableStates, sqlCommand);
 			if (!result.Equals("OK")) return;
 
 			CbState.ItemsSource = dataTableStates.AsDataView();
@@ -85,7 +81,7 @@ SELECT [Name], StateID, City, Street, PostalCode
 			sqlCommand.Parameters.Add("@pDepartmentID", SqlDbType.Int).Value = this.departmentID;
 
 			DataTable dataTableDepartment = new DataTable();
-			result = database.FillDataTable(ref dataTableDepartment, sqlCommand);
+			result = App.Database.FillDataTable(ref dataTableDepartment, sqlCommand);
 
 			if (!result.Equals("OK")) return;
 			if (dataTableDepartment.Rows.Count <= 0) return;
@@ -136,9 +132,9 @@ SELECT @Result";
 			sqlCommand.Parameters.Add("@pCity", SqlDbType.NVarChar).Value = TbCity.Text;
 			sqlCommand.Parameters.Add("@pStreet", SqlDbType.NVarChar).Value = TbStreet.Text;
 			sqlCommand.Parameters.Add("@pPostalCode", SqlDbType.NVarChar).Value = TbPostalCode.Text;
-			sqlCommand.Parameters.Add("@pLoggedUser", SqlDbType.NVarChar).Value = this.loggedUser;
+			sqlCommand.Parameters.Add("@pLoggedUser", SqlDbType.NVarChar).Value = App.LoggedUser;
 
-			string result = Tools.StringFromObject(database.Scalar(sqlCommand));
+			string result = Tools.StringFromObject(App.Database.Scalar(sqlCommand));
 			if (!result.Equals("OK")) return;
 
 		}

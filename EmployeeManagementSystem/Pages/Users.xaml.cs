@@ -28,19 +28,13 @@ namespace EmployeeManagementSystem.Pages {
 	/// </summary>
 	public partial class Users : Page {
 
-		private readonly Database database;
-		private readonly string loggedUser;
-
 		private EditUser editUser;
 
-		#region	"constructors"
+		#region	Constructors
 
-		public Users(Database database, string loggedUser) {
+		public Users() {
 
 			InitializeComponent();
-
-			this.database = database;
-			this.loggedUser = loggedUser;
 
 			LoadData();
 
@@ -48,11 +42,11 @@ namespace EmployeeManagementSystem.Pages {
 
 		#endregion
 
-		#region "handlers"
+		#region Handlers
 
 		private void BtnAdd_Click(object sender, RoutedEventArgs e) {
 
-			AddUser userWindow = new AddUser(this.database, this.loggedUser) {
+			AddUser userWindow = new AddUser() {
 				Owner = Window.GetWindow(this)
 			};
 
@@ -67,7 +61,7 @@ namespace EmployeeManagementSystem.Pages {
 			DataRowView dataRow = (DataRowView)e.AddedItems[0];
 			int userID = (int)dataRow["ID"];
 
-			editUser = new EditUser(database, loggedUser, userID);
+			editUser = new EditUser(userID);
 			Grid.SetRow(editUser, 2);
 			GridMain.Children.Add(editUser);
 
@@ -75,9 +69,9 @@ namespace EmployeeManagementSystem.Pages {
 
 		#endregion
 
-		#region "methods"
+		#region Methods
 
-		#region "private"
+		#region Private methods
 
 		private void LoadData() {
 
@@ -85,7 +79,7 @@ namespace EmployeeManagementSystem.Pages {
 			SqlCommand sqlCommand = new SqlCommand(query);
 
 			DataTable dataTableEmployees = new DataTable();
-			string queryResult = database.FillDataTable(ref dataTableEmployees, sqlCommand);
+			string queryResult = App.Database.FillDataTable(ref dataTableEmployees, sqlCommand);
 
 			if (!queryResult.Equals("OK")) return;
 

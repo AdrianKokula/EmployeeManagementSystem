@@ -26,19 +26,21 @@ namespace EmployeeManagementSystem.UserControls {
 	/// </summary>
 	public partial class EditEmployee : UserControl {
 
-		private readonly Database database;
 		private readonly int employeeID;
-		private readonly string loggedUser;
 
-		#region "constructors"
+		#region Constructors
 
-		public EditEmployee(Database database, string loggedUser, int employeeID) {
+		public EditEmployee() {
+
+			InitializeComponent();
+
+		}
+
+		public EditEmployee(int employeeID) {
 
 			InitializeComponent();
 
 			this.employeeID = employeeID;
-			this.loggedUser = loggedUser;
-			this.database = database;
 
 			Load();
 
@@ -46,7 +48,7 @@ namespace EmployeeManagementSystem.UserControls {
 
 		#endregion
 
-		#region "handlers"
+		#region Handlers
 
 		private void BtnSubmit_Click(object sender, RoutedEventArgs e) {
 			UpdateEmployee();
@@ -54,9 +56,9 @@ namespace EmployeeManagementSystem.UserControls {
 
 		#endregion
 
-		#region "methods"
+		#region Methods
 
-		#region "private"
+		#region Private methods
 
 		private void Load() {
 
@@ -68,7 +70,7 @@ namespace EmployeeManagementSystem.UserControls {
 			SqlCommand sqlCommand = new SqlCommand(query);
 			DataTable dataTableDepartments = new DataTable();
 
-			string result = database.FillDataTable(ref dataTableDepartments, sqlCommand);
+			string result = App.Database.FillDataTable(ref dataTableDepartments, sqlCommand);
 			if (!result.Equals("OK")) return;
 
 			CbDepartment.ItemsSource = dataTableDepartments.AsDataView();
@@ -86,7 +88,7 @@ SELECT FirstName, LastName, DepartmentID, DateOfBirth, PermanentResidence
 
 			DataTable dataTableEmployee = new DataTable();
 
-			result = database.FillDataTable(ref dataTableEmployee, sqlCommand);
+			result = App.Database.FillDataTable(ref dataTableEmployee, sqlCommand);
 
 			if (!result.Equals("OK")) return;
 			if (dataTableEmployee.Rows.Count <= 0) return;
@@ -139,9 +141,9 @@ SELECT @Result;";
 			sqlCommand.Parameters.Add("@pDepartmentID", SqlDbType.Int).Value = Tools.IntFromObject(CbDepartment.SelectedValue);
 			sqlCommand.Parameters.Add("@pDateOfBirth", SqlDbType.Date).Value = DpDateOfBirth.SelectedDate.Value;
 			sqlCommand.Parameters.Add("@pPermanentResidence", SqlDbType.NVarChar).Value = TbResidence.Text;
-			sqlCommand.Parameters.Add("@pLoggedUser", SqlDbType.NVarChar).Value = this.loggedUser;
+			sqlCommand.Parameters.Add("@pLoggedUser", SqlDbType.NVarChar).Value = App.LoggedUser;
 
-			string result = Tools.StringFromObject(database.Scalar(sqlCommand));
+			string result = Tools.StringFromObject(App.Database.Scalar(sqlCommand));
 			if (!result.Equals("OK")) return;
 
 		}

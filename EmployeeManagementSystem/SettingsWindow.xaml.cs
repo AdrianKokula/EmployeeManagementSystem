@@ -23,14 +23,11 @@ namespace EmployeeManagementSystem {
 	/// </summary>
 	public partial class SettingsWindow : Window {
 
-		private readonly Database database;
+		#region Constructors
 
-		#region "constructors"
-
-		public SettingsWindow(Database database) {
+		public SettingsWindow() {
 
 			InitializeComponent();
-			this.database = database;
 
 			InitControls();
 
@@ -38,7 +35,7 @@ namespace EmployeeManagementSystem {
 
 		#endregion
 
-		#region "handlers"
+		#region Handlers
 
 		private void BtnSaveSettings_Click(object sender, RoutedEventArgs e) {
 
@@ -50,27 +47,37 @@ namespace EmployeeManagementSystem {
 				IntegratedSecurity = (bool)CbWindowsAuth.IsChecked
 			};
 
-			database.ConnectionString = connectionStringBuilder.ConnectionString;
+			App.Database.ConnectionString = connectionStringBuilder.ConnectionString;
 
-			if(!database.TestConnection()) {
+			if(!App.Database.TestConnection()) {
 				MessageBox.Show("Connection couldn't be established. Please try again.", "Credentials", MessageBoxButton.OK, MessageBoxImage.Error);
 				return;
 			}
 
-			MessageBox.Show("Connection established.");
-
-			Properties.Settings.Default.ConnectionString = database.ConnectionString;
+			Properties.Settings.Default.ConnectionString = App.Database.ConnectionString;
 			Properties.Settings.Default.Save();
 
 			Close();
 
 		}
 
+		private void CbWindowsAuth_CheckedChanged(object sender, RoutedEventArgs e) {
+
+			if ((bool)CbWindowsAuth.IsChecked) {
+				TbDbUserName.IsEnabled = false;
+				TbDbUserPassword.IsEnabled = false;
+			} else {
+				TbDbUserName.IsEnabled = true;
+				TbDbUserPassword.IsEnabled = true;
+			}
+
+		}
+
 		#endregion
 
-		#region "methods"
+		#region Methods
 
-		#region "private"
+		#region Private methods
 
 		/// <summary>
 		/// Set values to window controls
@@ -91,5 +98,6 @@ namespace EmployeeManagementSystem {
 
 		#endregion
 
+		
 	}
 }

@@ -35,7 +35,7 @@
 		</Button>
 		
 		<!--Navigation-->
-		<Grid Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Left" Background="#FF6C40">
+		<Grid Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Left" Background="#973B2E">
 
 			<!--Main items-->
 			<StackPanel Margin="15 20">

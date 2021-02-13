@@ -25,16 +25,11 @@ namespace EmployeeManagementSystem.Windows {
 	/// </summary>
 	public partial class AddEmployee : Window {
 
-		private readonly Database database;
-		private readonly string loggedUser;
+		#region Constructors
 
-		#region "constructors"
-
-		public AddEmployee(Database database, string loggedUser) {
+		public AddEmployee() {
 
 			InitializeComponent();
-			this.database = database;
-			this.loggedUser = loggedUser;
 
 			LoadData();
 
@@ -42,7 +37,7 @@ namespace EmployeeManagementSystem.Windows {
 
 		#endregion
 
-		#region "handlers"
+		#region Handlers
 		
 		private void BtnSubmit_Click(object sender, RoutedEventArgs e) {
 			CreateEmployee();
@@ -54,9 +49,9 @@ namespace EmployeeManagementSystem.Windows {
 
 		#endregion
 
-		#region "methods"
+		#region Methods
 
-		#region "private"
+		#region Private methods
 
 		private void LoadData() {
 
@@ -67,7 +62,7 @@ namespace EmployeeManagementSystem.Windows {
 			SqlCommand sqlCommand = new SqlCommand(query);
 			DataTable dataTableDepartments = new DataTable();
 
-			string result = database.FillDataTable(ref dataTableDepartments, sqlCommand);
+			string result = App.Database.FillDataTable(ref dataTableDepartments, sqlCommand);
 			if (!result.Equals("OK")) return;
 
 			CbDepartment.ItemsSource = dataTableDepartments.AsDataView();
@@ -111,9 +106,9 @@ SELECT @Result;";
 			sqlCommand.Parameters.Add("@pDepartmentID", SqlDbType.Int).Value = Tools.IntFromObject(CbDepartment.SelectedValue);
 			sqlCommand.Parameters.Add("@pDateOfBirth", SqlDbType.Date).Value = DpDateOfBirth.SelectedDate.Value;
 			sqlCommand.Parameters.Add("@pPermanentResidence", SqlDbType.NVarChar).Value = TbResidence.Text;
-			sqlCommand.Parameters.Add("@pLoggedUser", SqlDbType.NVarChar).Value = this.loggedUser;
+			sqlCommand.Parameters.Add("@pLoggedUser", SqlDbType.NVarChar).Value = App.LoggedUser;
 
-			string result = Tools.StringFromObject(database.Scalar(sqlCommand));
+			string result = Tools.StringFromObject(App.Database.Scalar(sqlCommand));
 			if (!result.Equals("OK")) return;
 
 			Close();

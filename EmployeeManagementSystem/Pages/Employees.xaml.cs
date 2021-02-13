@@ -29,19 +29,13 @@ namespace EmployeeManagementSystem.Pages {
 	/// </summary>
 	public partial class Employees : Page {
 
-		private readonly Database database;
-		private readonly string loggedUser;
-
 		private EditEmployee editEmployee;
 
-		#region "constructors"
+		#region Constructors
 
-		public Employees(Database database, string loggedUser) {
+		public Employees() {
 
 			InitializeComponent();
-
-			this.database = database;
-			this.loggedUser = loggedUser;
 
 			LoadData();
 
@@ -49,15 +43,15 @@ namespace EmployeeManagementSystem.Pages {
 
 		#endregion
 
-		#region "handlers"
+		#region Handlers
 
 		private void LvEmployees_SelectionChanged(object sender, SelectionChangedEventArgs e) {
 
 			// first selected row
 			DataRowView dataRow = (DataRowView)e.AddedItems[0];
 			int employeeID = (int)dataRow["ID"];
-
-			editEmployee = new EditEmployee(database, loggedUser, employeeID);
+			
+			editEmployee = new EditEmployee(employeeID);
 			Grid.SetRow(editEmployee, 2);
 			GridMain.Children.Add(editEmployee);
 
@@ -65,7 +59,7 @@ namespace EmployeeManagementSystem.Pages {
 
 		private void BtnAdd_Click(object sender, RoutedEventArgs e) {
 
-			AddEmployee employeeWindow = new AddEmployee(this.database, this.loggedUser) {
+			AddEmployee employeeWindow = new AddEmployee() {
 				Owner = Window.GetWindow(this)
 			};
 
@@ -76,9 +70,9 @@ namespace EmployeeManagementSystem.Pages {
 
 		#endregion
 
-		#region "methods"
+		#region Methods
 
-		#region "private"
+		#region Private methods
 
 		private void LoadData() {
 
@@ -86,7 +80,7 @@ namespace EmployeeManagementSystem.Pages {
 			SqlCommand sqlCommand = new SqlCommand(query);
 
 			DataTable dataTableEmployees = new DataTable();
-			string queryResult = database.FillDataTable(ref dataTableEmployees, sqlCommand);
+			string queryResult = App.Database.FillDataTable(ref dataTableEmployees, sqlCommand);
 
 			if (!queryResult.Equals("OK")) return;
 

@@ -7,7 +7,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EmployeeManagementSystem"
         mc:Ignorable="d" FontSize="20" FontFamily="Bahnschrift Light" WindowStartupLocation="CenterScreen" Foreground="White"
-        Title="EMS - Settings" Height="450" Width="800" ResizeMode="NoResize" WindowStyle="None">
+        Title="EMS - Settings" Height="450" Width="350" ResizeMode="NoResize" WindowStyle="None">
     <Grid>
 
 		<Grid.Background>
@@ -28,39 +28,46 @@
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
 
-		<Button Grid.Row="0" Background="Transparent" HorizontalAlignment="Right" Margin="3" BorderThickness="0" Cursor="Hand" Name="BtnClose">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="auto" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+		
+		<Button Grid.Row="0" Background="Transparent" HorizontalAlignment="Right" Margin="3" BorderThickness="0" Cursor="Hand" Name="BtnClose"
+				Grid.ColumnSpan="3">
 			<Image Source="Resources/Exit.png" MaxHeight="16"/>
 		</Button>
 		
-		<StackPanel Orientation="Vertical">
+		<StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="1">
 
-			<TextBlock Text="Settings" HorizontalAlignment="Center"/>
+			<TextBlock Text="Connection settings" HorizontalAlignment="Center" Margin="10" FontSize="20"/>
 
-			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-				<TextBlock Text="Server name: "/>
+			<StackPanel HorizontalAlignment="Center" Margin="0 5">
+				<TextBlock Text="Server name" FontSize="14"/>
 				<TextBox Width="200" Name="TbServerName"/>
 			</StackPanel>
 
-			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-				<TextBlock Text="Database: "/>
+			<StackPanel HorizontalAlignment="Center" Margin="0 5">
+				<TextBlock Text="Database" FontSize="14"/>
 				<TextBox Width="200" Name="TbDatabaseName"/>
 			</StackPanel>
 
-			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-				<TextBlock Text="Windows authentification: "/>
-				<CheckBox VerticalAlignment="Center" Name="CbWindowsAuth"/>
-			</StackPanel>
-
-			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-				<TextBlock Text="User name: "/>
+			<StackPanel HorizontalAlignment="Center" Margin="0 5">
+				<TextBlock Text="User name" FontSize="14"/>
 				<TextBox Width="200" Name="TbDbUserName"/>
 			</StackPanel>
 
-			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-				<TextBlock Text="User password: "/>
+			<StackPanel HorizontalAlignment="Center" Margin="0 5">
+				<TextBlock Text="User password" FontSize="14"/>
 				<TextBox Width="200" Name="TbDbUserPassword"/>
 			</StackPanel>
-			
+
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+				<TextBlock Text="Windows authentification" />
+				<CheckBox VerticalAlignment="Center" Name="CbWindowsAuth" Checked="CbWindowsAuth_CheckedChanged" Unchecked="CbWindowsAuth_CheckedChanged"/>
+			</StackPanel>
+
 			<Button Content="Save" Name="BtnSaveSettings" Click="BtnSaveSettings_Click"/>
 
 		</StackPanel>

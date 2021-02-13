@@ -24,22 +24,16 @@ namespace EmployeeManagementSystem.Windows {
 	/// </summary>
 	public partial class AddUser : Window {
 
-		private readonly Database database;
-		private readonly string loggedUser;
+		#region Constructors
 
-		#region "constructors"
-
-		public AddUser(Database database, string loggedUser) {
+		public AddUser() {
 
 			InitializeComponent();
-			this.database = database;
-			this.loggedUser = loggedUser;
-
 		}
 
 		#endregion
 
-		#region "handlers"
+		#region Handlers
 
 		private void BtnSubmit_Click(object sender, RoutedEventArgs e) {
 			CreateUser();
@@ -51,9 +45,9 @@ namespace EmployeeManagementSystem.Windows {
 
 		#endregion
 
-		#region "methods"
+		#region Methods
 
-		#region "private"
+		#region Private methods
 
 		private bool ValidateFields() {
 
@@ -83,9 +77,9 @@ SELECT @Result;";
 			sqlCommand.Parameters.Add("@pUserName", System.Data.SqlDbType.NVarChar).Value = TbName.Text;
 			sqlCommand.Parameters.Add("@pEmail", System.Data.SqlDbType.NVarChar).Value = TbEmail.Text;
 			sqlCommand.Parameters.Add("@pPassword", System.Data.SqlDbType.NVarChar).Value = PbPassword.Password;
-			sqlCommand.Parameters.Add("@pLoggedUser", System.Data.SqlDbType.NVarChar).Value = this.loggedUser;
+			sqlCommand.Parameters.Add("@pLoggedUser", System.Data.SqlDbType.NVarChar).Value = App.LoggedUser;
 
-			string result = Tools.StringFromObject(database.Scalar(sqlCommand));
+			string result = Tools.StringFromObject(App.Database.Scalar(sqlCommand));
 			if (!result.Equals("OK")) return;
 
 			Close();
@@ -94,7 +88,6 @@ SELECT @Result;";
 		#endregion
 
 		#endregion
-
 
 	}
 }
