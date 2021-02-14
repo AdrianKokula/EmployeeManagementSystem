@@ -10,7 +10,22 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
 
-		<StackPanel Margin="5" HorizontalAlignment="Center">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="auto"/>
+			<RowDefinition Height="auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+
+		<Grid Grid.Row="0" Background="#E99454">
+
+			<StackPanel Orientation="Horizontal" Margin="7">
+				<Image Source="../Resources/Employee.png" MaxHeight="32" Margin="5 0"/>
+				<TextBlock Grid.Column="1" FontSize="20" Text="Employees - edit existing" VerticalAlignment="Center" Foreground="White"/>
+			</StackPanel>
+
+		</Grid>
+
+		<StackPanel Grid.Row="1" Margin="5" HorizontalAlignment="Center">
 
 			<StackPanel Orientation="Horizontal">
 				<TextBlock Text="First name: "/>

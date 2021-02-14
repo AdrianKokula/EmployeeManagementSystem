@@ -26,24 +26,24 @@ namespace EmployeeManagementSystem.UserControls {
 	/// </summary>
 	public partial class EditEmployee : UserControl {
 
-		private readonly int employeeID;
+		private int _EmployeeID;
+
+		#region Properties
+
+		public int EmployeeID {
+			get => _EmployeeID;
+			set {
+				_EmployeeID = value;
+				Load();
+			}
+		}
+
+		#endregion
 
 		#region Constructors
 
 		public EditEmployee() {
-
 			InitializeComponent();
-
-		}
-
-		public EditEmployee(int employeeID) {
-
-			InitializeComponent();
-
-			this.employeeID = employeeID;
-
-			Load();
-
 		}
 
 		#endregion
@@ -84,7 +84,7 @@ SELECT FirstName, LastName, DepartmentID, DateOfBirth, PermanentResidence
 	WHERE ID = @EmployeeID";
 
 			sqlCommand = new SqlCommand(query);
-			sqlCommand.Parameters.Add("@pEmployeeID", SqlDbType.Int).Value = this.employeeID;
+			sqlCommand.Parameters.Add("@pEmployeeID", SqlDbType.Int).Value = _EmployeeID;
 
 			DataTable dataTableEmployee = new DataTable();
 
@@ -135,7 +135,7 @@ EXEC dbo.UpdateEmployee @ID, @FirstName, @LastName, @DepartmentID, @DateOfBirth,
 SELECT @Result;";
 
 			SqlCommand sqlCommand = new SqlCommand(query);
-			sqlCommand.Parameters.Add("@pID", SqlDbType.Int).Value = this.employeeID;
+			sqlCommand.Parameters.Add("@pID", SqlDbType.Int).Value = _EmployeeID;
 			sqlCommand.Parameters.Add("@pFirstName", SqlDbType.NVarChar).Value = TbFirstName.Text;
 			sqlCommand.Parameters.Add("@pLastName", SqlDbType.NVarChar).Value = TbLastName.Text;
 			sqlCommand.Parameters.Add("@pDepartmentID", SqlDbType.Int).Value = Tools.IntFromObject(CbDepartment.SelectedValue);

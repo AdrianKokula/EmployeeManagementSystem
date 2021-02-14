@@ -26,18 +26,16 @@ namespace EmployeeManagementSystem.UserControls {
 	/// </summary>
 	public partial class EditUser : UserControl {
 
-		private readonly int userID;
+		private int _UserID;
 
-		#region Constructors
+		#region Properties
 
-		public EditUser(int userID) {
-
-			InitializeComponent();
-
-			this.userID = userID;
-
-			Load();
-
+		public int UserID {
+			get => _UserID;
+			set {
+				_UserID = value;
+				Load();
+			}
 		}
 
 		#endregion
@@ -64,7 +62,7 @@ SELECT [Name], Email, [Password]
 	WHERE ID = @UserID;";
 
 			SqlCommand sqlCommand = new SqlCommand(query);
-			sqlCommand.Parameters.Add("@pUserID", SqlDbType.Int).Value = this.userID;
+			sqlCommand.Parameters.Add("@pUserID", SqlDbType.Int).Value = _UserID;
 
 			DataTable dataTableUser = new DataTable();
 
@@ -106,7 +104,7 @@ EXEC dbo.UpdateUser @ID, @UserName, @Email, @Password, @LoggedUser, @Result OUTP
 SELECT @Result;";
 
 			SqlCommand sqlCommand = new SqlCommand(query);
-			sqlCommand.Parameters.Add("@pID", SqlDbType.Int).Value = this.userID;
+			sqlCommand.Parameters.Add("@pID", SqlDbType.Int).Value = _UserID;
 			sqlCommand.Parameters.Add("@pUserName", System.Data.SqlDbType.NVarChar).Value = TbName.Text;
 			sqlCommand.Parameters.Add("@pEmail", System.Data.SqlDbType.NVarChar).Value = TbEmail.Text;
 			sqlCommand.Parameters.Add("@pPassword", System.Data.SqlDbType.NVarChar).Value = PbPassword.Password;

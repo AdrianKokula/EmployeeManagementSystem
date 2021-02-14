@@ -26,18 +26,16 @@ namespace EmployeeManagementSystem.UserControls {
 	/// </summary>
 	public partial class EditDepartment : UserControl {
 
-		private readonly int departmentID;
+		private int _DepartmentID;
 
-		#region Constructors
+		#region Properties
 
-		public EditDepartment(int departmentID) {
-
-			InitializeComponent();
-
-			this.departmentID = departmentID;
-
-			Load();
-
+		public int DepartmentID {
+			get => _DepartmentID;
+			set {
+				_DepartmentID = value;
+				Load();
+			}
 		}
 
 		#endregion
@@ -78,7 +76,7 @@ SELECT [Name], StateID, City, Street, PostalCode
 	WHERE ID = @DepartmentID;";
 
 			sqlCommand = new SqlCommand(query);
-			sqlCommand.Parameters.Add("@pDepartmentID", SqlDbType.Int).Value = this.departmentID;
+			sqlCommand.Parameters.Add("@pDepartmentID", SqlDbType.Int).Value = _DepartmentID;
 
 			DataTable dataTableDepartment = new DataTable();
 			result = App.Database.FillDataTable(ref dataTableDepartment, sqlCommand);
@@ -126,7 +124,7 @@ EXEC dbo.UpdateDepartment @ID, @DepartmentName, @StateID, @City, @Street, @Posta
 SELECT @Result";
 
 			SqlCommand sqlCommand = new SqlCommand(query);
-			sqlCommand.Parameters.Add("@pID", SqlDbType.Int).Value = this.departmentID;
+			sqlCommand.Parameters.Add("@pID", SqlDbType.Int).Value = _DepartmentID;
 			sqlCommand.Parameters.Add("@pDepartmentName", SqlDbType.NVarChar).Value = TbName.Text;
 			sqlCommand.Parameters.Add("@pStateID", SqlDbType.Int).Value = Tools.IntFromObject(CbState.SelectedValue);
 			sqlCommand.Parameters.Add("@pCity", SqlDbType.NVarChar).Value = TbCity.Text;

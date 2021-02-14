@@ -24,8 +24,8 @@
 		</Style>
 		
 	</Page.Resources>
-	
-	<Grid Name="GridMain">
+
+	<Grid Name="GridMain" Background="#333b41">
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="auto" />
@@ -53,7 +53,7 @@
 
 		</Grid>
 
-		<ListView Grid.Row="1" Name="LvEmployees" BorderThickness="0 3" Background="#333b41" Foreground="White"
+		<ListView Grid.Row="1" Name="LvEmployees" BorderThickness="0 3" Foreground="White" Background="Transparent"
 				  SelectionChanged="LvEmployees_SelectionChanged">
 
 			<ListView.ItemContainerStyle>
@@ -78,7 +78,7 @@
 			
 		</ListView>
 
-		<controls:EditEmployee Grid.Row="2"/>
+		<controls:EditEmployee Grid.Row="2" Background="Transparent" Foreground="White"/>
 
 	</Grid>
 </Page>

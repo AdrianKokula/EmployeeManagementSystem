@@ -84,7 +84,7 @@
 
 		</Grid>
 
-		<Frame Grid.Column="1" Grid.Row="1" Name="FrmMain" NavigationUIVisibility="Hidden" Margin="20" BorderThickness="1">
+		<Frame Grid.Column="1" Grid.Row="1" Name="FrmMain" NavigationUIVisibility="Hidden" Margin="20" BorderThickness="1" Source="Employees.xaml">
 			<Frame.Effect>
 				<DropShadowEffect BlurRadius="10" RenderingBias="Quality" ShadowDepth="0"/>
 			</Frame.Effect>
