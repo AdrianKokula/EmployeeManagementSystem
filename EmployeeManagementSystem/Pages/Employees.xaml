@@ -8,7 +8,7 @@
 	  xmlns:local="clr-namespace:EmployeeManagementSystem.Pages"
 	  xmlns:controls="clr-namespace:EmployeeManagementSystem.UserControls"
 	  mc:Ignorable="d" FontSize="16" FontFamily="Bahnschrift Light"
-	  d:DesignHeight="450" d:DesignWidth="850"
+	  d:DesignHeight="700" d:DesignWidth="850"
 	  Title="Employees">
 
 	<Page.Resources>
@@ -78,7 +78,7 @@
 			
 		</ListView>
 
-		<controls:EditEmployee Grid.Row="2" Background="Transparent" Foreground="White"/>
+		<controls:EditEmployee Grid.Row="2"/>
 
 	</Grid>
 </Page>

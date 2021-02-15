@@ -40,11 +40,11 @@
 
 		<StackPanel Grid.Row="4" Margin="40 20">
 
-			<!-- Password input -->
+			<!-- Email input -->
 			<DockPanel HorizontalAlignment="Stretch" LastChildFill="True" Margin="0 15">
 				
 				<Image Source="Resources/Email.png" Margin="10 5" MaxHeight="26"/>
-				<TextBox Width="auto" Name="TbEmail" Padding="10 9" Background="#1C4857" BorderThickness="0" Foreground="White" FontSize="16" />
+				<TextBox Name="TbEmail" Padding="10 9" Background="#1C4857" BorderThickness="0" Foreground="White" FontSize="16" />
 
 			</DockPanel>
 
