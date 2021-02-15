@@ -50,10 +50,8 @@ namespace EmployeeManagementSystem.Pages {
 			// first selected row
 			DataRowView dataRow = (DataRowView)e.AddedItems[0];
 			int employeeID = (int)dataRow["ID"];
-			
-			editEmployee = new EditEmployee();
-			Grid.SetRow(editEmployee, 2);
-			GridMain.Children.Add(editEmployee);
+
+			EditEmp.EmployeeID = employeeID;
 
 		}
 

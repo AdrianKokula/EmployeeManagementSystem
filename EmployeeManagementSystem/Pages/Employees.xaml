@@ -30,7 +30,7 @@
 		<Grid.RowDefinitions>
 			<RowDefinition Height="auto" />
 			<RowDefinition Height="*" />
-			<RowDefinition Height="*" />
+			<RowDefinition Height="auto" />
 		</Grid.RowDefinitions>
 
 		<Grid Grid.Row="0" Background="#E99454">
@@ -78,7 +78,7 @@
 			
 		</ListView>
 
-		<controls:EditEmployee Grid.Row="2"/>
+		<controls:EditEmployee x:Name="EditEmp" Grid.Row="2"/>
 
 	</Grid>
 </Page>
