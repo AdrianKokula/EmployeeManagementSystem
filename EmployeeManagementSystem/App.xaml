@@ -6,45 +6,36 @@
 			 StartupUri="LoginWindow.xaml">
 	<Application.Resources>
 
-		<!--<ResourceDictionary>
+		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
 				<ui:ThemeResources />
 				<ui:XamlControlsResources />
-				--><!-- Other merged dictionaries here --><!--
+				<!-- Other merged dictionaries here -->
 			</ResourceDictionary.MergedDictionaries>
-			--><!-- Other app resources here --><!--
-		</ResourceDictionary>-->
+			<!-- Other app resources here -->
+			
+			<!--Styles for PasswordBox-->
+			<ControlTemplate x:Key="passwordbox" TargetType="{x:Type PasswordBox}">
+				<Border Background="{TemplateBinding Background}" x:Name="Bd" BorderThickness="0" CornerRadius="6">
+					<ScrollViewer Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
+				</Border>
+				<ControlTemplate.Triggers>
+					<Trigger Property="IsEnabled" Value="False">
+						<Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" TargetName="Bd"/>
+						<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+					</Trigger>
+				</ControlTemplate.Triggers>
+			</ControlTemplate>
 
-		<!--Styles for TextBox--><!--
-		<Style TargetType="{x:Type TextBox}">
-			<Style.Resources>
-				<Style TargetType="{x:Type Border}">
-					<Setter Property="CornerRadius" Value="6" />
-				</Style>
-			</Style.Resources>
-		</Style>
-		
-		--><!--Styles for PasswordBox--><!--
-		<ControlTemplate x:Key="passwordbox" TargetType="{x:Type PasswordBox}">
-			<Border Background="{TemplateBinding Background}" x:Name="Bd" BorderThickness="0" CornerRadius="6">
-				<ScrollViewer Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
-			</Border>
-			<ControlTemplate.Triggers>
-				<Trigger Property="IsEnabled" Value="False">
-					<Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" TargetName="Bd"/>
-					<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
-				</Trigger>
-			</ControlTemplate.Triggers>
-		</ControlTemplate>
+			<!--<Style TargetType="{x:Type Button}">
+				<Style.Resources>
+					<Style TargetType="Border">
+						<Setter Property="CornerRadius" Value="6" />
+					</Style>
+				</Style.Resources>
+			</Style>-->
 
-		--><!--Styles for Button--><!--
-		<Style TargetType="{x:Type Button}">
-			<Style.Resources>
-				<Style TargetType="Border">
-					<Setter Property="CornerRadius" Value="6" />
-				</Style>
-			</Style.Resources>
-		</Style>-->
+		</ResourceDictionary>
 
 	</Application.Resources>
 </Application>

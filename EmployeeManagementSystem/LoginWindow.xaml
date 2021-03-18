@@ -52,20 +52,22 @@
 			<DockPanel HorizontalAlignment="Stretch" LastChildFill="True" Margin="0 15 0 25">
 				
 				<Image Source="Resources/Password.png" Margin="10 5" MaxHeight="26"/>
-				<PasswordBox Template="{StaticResource passwordbox}" Name="PbPassword" Background="#1C4857" Foreground="White" FontSize="16" Padding="10 9" />
+				<PasswordBox Name="PbPassword" Background="#1C4857" Foreground="White" FontSize="16" Padding="10 9" />
 
 			</DockPanel>
 
 			<CheckBox Margin="45 0 0 30" Background="#1C4857" BorderThickness="0" Foreground="White" VerticalAlignment="Center" FontSize="15" Name="CbRememberMail" IsChecked="True">
-				<CheckBox.Resources>
-					<Style TargetType="Border">
-						<Setter Property="CornerRadius" Value="3" />
-					</Style>
-				</CheckBox.Resources>
 				<TextBlock Text="Remember email" VerticalAlignment="Center"/>
 			</CheckBox>
 
-			<Button Content="Login" Name="BtnLogin" Click="BtnLogin_Click" Background="#FFAA4D" Cursor="Hand" FontWeight="Bold" Padding="5 10" Foreground="White" />
+			<Button Content="Login"
+					Name="BtnLogin"
+					Click="BtnLogin_Click"
+					Background="#FFAA4D"
+					Cursor="Hand"
+					FontWeight="Bold"
+					Padding="5 10"
+					Foreground="White" />
 
 		</StackPanel>
 

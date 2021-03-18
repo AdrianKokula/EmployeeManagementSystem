@@ -62,7 +62,6 @@
 			<StackPanel Grid.Row="1" Grid.Column="0">
 				<TextBlock Text="Department: "/>
 				<ComboBox Name="CbDepartment"
-						  Style="{StaticResource ComboBoxFlatStyle}"
 						  DisplayMemberPath="Department"
 						  SelectedValuePath="ID" />
 			</StackPanel>
