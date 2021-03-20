@@ -29,8 +29,6 @@ namespace EmployeeManagementSystem.Pages {
 	/// </summary>
 	public partial class Employees : Page {
 
-		private EditEmployee editEmployee;
-
 		#region Constructors
 
 		public Employees() {
@@ -38,6 +36,8 @@ namespace EmployeeManagementSystem.Pages {
 			InitializeComponent();
 
 			LoadData();
+
+			EditEmp.Visibility = Visibility.Collapsed;
 
 		}
 
@@ -52,6 +52,8 @@ namespace EmployeeManagementSystem.Pages {
 			int employeeID = (int)dataRow["ID"];
 
 			EditEmp.EmployeeID = employeeID;
+
+			EditEmp.Visibility = Visibility.Visible;
 
 		}
 
