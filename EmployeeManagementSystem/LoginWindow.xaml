@@ -5,6 +5,7 @@
 		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:ui="http://schemas.modernwpf.com/2019"
 		xmlns:local="clr-namespace:EmployeeManagementSystem"
 		mc:Ignorable="d" FontSize="20" FontFamily="Bahnschrift Light" WindowStartupLocation="CenterScreen" Foreground="White"
 		Title="EMS - Login" Height="600" Width="450" ResizeMode="NoResize" WindowStyle="None" MouseDown="Window_MouseDown" MouseUp="Window_MouseUp">
@@ -28,7 +29,14 @@
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
 
-		<Button Background="Transparent" HorizontalAlignment="Right" Margin="3" BorderThickness="0" Cursor="Hand" Name="BtnClose" Click="BtnClose_Click">
+		<Button Background="Transparent"
+				HorizontalAlignment="Right"
+				Margin="3"
+				BorderThickness="0"
+				Cursor="Hand"
+				Name="BtnClose"
+				Click="BtnClose_Click">
+			
 			<Image Source="Resources/Exit.png" MaxHeight="16"/>
 		</Button>
 
@@ -40,25 +48,37 @@
 
 		<StackPanel Grid.Row="4" Margin="40 20">
 
-			<!-- Email input -->
-			<DockPanel HorizontalAlignment="Stretch" LastChildFill="True" Margin="0 15">
-				
-				<Image Source="Resources/Email.png" Margin="10 5" MaxHeight="26"/>
-				<TextBox Name="TbEmail" Padding="10 9" Background="#1C4857" BorderThickness="0" Foreground="White" FontSize="16" />
+				<!-- Email input -->
+				<DockPanel HorizontalAlignment="Stretch" LastChildFill="True" Margin="0 15">
 
-			</DockPanel>
+					<Image Source="Resources/Email.png" Margin="10 5" MaxHeight="26"/>
+					<TextBox Name="TbEmail"
+							 Padding="10 9"
+							 Background="#1C4857"
+							 BorderThickness="0"
+							 Foreground="White"
+							 FontSize="16"
+							 ui:ControlHelper.PlaceholderText="Email"/>
 
-			<!-- Password input -->
-			<DockPanel HorizontalAlignment="Stretch" LastChildFill="True" Margin="0 15 0 25">
-				
-				<Image Source="Resources/Password.png" Margin="10 5" MaxHeight="26"/>
-				<PasswordBox Name="PbPassword" Background="#1C4857" Foreground="White" FontSize="16" Padding="10 9" />
+				</DockPanel>
 
-			</DockPanel>
+				<!-- Password input -->
+				<DockPanel HorizontalAlignment="Stretch" LastChildFill="True" Margin="0 15 0 25">
 
-			<CheckBox Margin="45 0 0 30" Background="#1C4857" BorderThickness="0" Foreground="White" VerticalAlignment="Center" FontSize="15" Name="CbRememberMail" IsChecked="True">
-				<TextBlock Text="Remember email" VerticalAlignment="Center"/>
-			</CheckBox>
+					<Image Source="Resources/Password.png" Margin="10 5" MaxHeight="26"/>
+					<PasswordBox Name="PbPassword"
+								 Background="#1C4857"
+								 Foreground="White"
+								 FontSize="16"
+								 Padding="10 9"
+								 BorderThickness="0"
+								 ui:ControlHelper.PlaceholderText="Password"/>
+
+				</DockPanel>
+
+				<CheckBox Margin="45 0 0 30" Background="#1C4857" BorderThickness="0" Foreground="White" VerticalAlignment="Center" FontSize="15" Name="CbRememberMail" IsChecked="True" Cursor="Hand">
+					<TextBlock Text="Remember email" VerticalAlignment="Center"/>
+				</CheckBox>
 
 			<Button Content="Login"
 					Name="BtnLogin"
@@ -67,7 +87,8 @@
 					Cursor="Hand"
 					FontWeight="Bold"
 					Padding="5 10"
-					Foreground="White" />
+					Foreground="White"
+					HorizontalAlignment="Stretch"/>
 
 		</StackPanel>
 

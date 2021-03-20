@@ -40,7 +40,7 @@
 			<!--Main items-->
 			<StackPanel Margin="15 20">
 
-				<Button Padding="7" Background="Transparent" Cursor="Hand" Name="BtnEmployees" Click="BtnEmployees_Click" BorderThickness="0" Foreground="White">
+				<Button Padding="7" Background="Transparent" Cursor="Hand" Name="BtnEmployees" Click="BtnEmployees_Click" BorderThickness="0" Foreground="White" HorizontalAlignment="Stretch">
 					<StackPanel Orientation="Vertical">
 						<Image Source="/Resources/Employee.png" Height="32"/>
 						<TextBlock Text="Employees"/>
@@ -49,7 +49,7 @@
 
 				<Separator Margin="10 5"/>
 
-				<Button Padding="7" Background="Transparent" Cursor="Hand" Name="BtnDepartments" Click="BtnDepartments_Click" BorderThickness="0" Foreground="White">
+				<Button Padding="7" Background="Transparent" Cursor="Hand" Name="BtnDepartments" Click="BtnDepartments_Click" BorderThickness="0" Foreground="White" HorizontalAlignment="Stretch">
 					<StackPanel Orientation="Vertical">
 						<Image Source="/Resources/Department.png" Height="32"/>
 						<TextBlock Text="Departments"/>
@@ -57,8 +57,8 @@
 				</Button>
 
 				<Separator Margin="10 5"/>
-				
-				<Button Padding="7" Background="Transparent" Cursor="Hand" Name="BtnUsers" Click="BtnUsers_Click" BorderThickness="0" Foreground="White">
+
+				<Button Padding="7" Background="Transparent" Cursor="Hand" Name="BtnUsers" Click="BtnUsers_Click" BorderThickness="0" Foreground="White" HorizontalAlignment="Stretch">
 					<StackPanel Orientation="Vertical">
 						<Image Source="/Resources/Login.png" Height="32"/>
 						<TextBlock Text="Users"/>
