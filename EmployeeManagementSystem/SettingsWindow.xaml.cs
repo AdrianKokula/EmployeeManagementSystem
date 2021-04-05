@@ -73,6 +73,10 @@ namespace EmployeeManagementSystem {
 
 		}
 
+		private void BtnClose_Click(object sender, RoutedEventArgs e) {
+			Close();
+		}
+
 		#endregion
 
 		#region Methods
@@ -94,10 +98,10 @@ namespace EmployeeManagementSystem {
 
 		}
 
-		#endregion
 
 		#endregion
 
-		
+		#endregion
+
 	}
 }

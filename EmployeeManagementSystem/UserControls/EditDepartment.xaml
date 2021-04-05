@@ -6,43 +6,90 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 			 xmlns:local="clr-namespace:EmployeeManagementSystem.UserControls"
-			 mc:Ignorable="d" Background="White"
-			 d:DesignHeight="450" d:DesignWidth="800">
+			 mc:Ignorable="d" Background="#333b41" Foreground="White"
+			 d:DesignHeight="220" d:DesignWidth="800">
 	<Grid>
-		
-		<StackPanel Margin="5" HorizontalAlignment="Center">
 
-			<StackPanel Orientation="Horizontal">
-				<TextBlock Text="Name: "/>
-				<TextBox Name="TbName" Width="200"/>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="auto"/>
+			<RowDefinition Height="auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+
+		<Grid Grid.Row="0" Background="#E99454">
+
+			<StackPanel Orientation="Horizontal" Margin="7">
+				<Image Source="../Resources/Department.png" MaxHeight="32" Margin="5 0"/>
+				<TextBlock Grid.Column="1" FontSize="20" Text="Departments - edit existing" VerticalAlignment="Center" Foreground="White"/>
 			</StackPanel>
 
-			<StackPanel Orientation="Horizontal">
+		</Grid>
+
+		<Grid Grid.Row="1">
+
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="1*" />
+				<ColumnDefinition Width="1*" />
+				<ColumnDefinition Width="1*" />
+			</Grid.ColumnDefinitions>
+
+			<Grid.RowDefinitions>
+				<RowDefinition Height="1*" />
+				<RowDefinition Height="1*" />
+			</Grid.RowDefinitions>
+
+			<StackPanel Grid.Column="0" Margin="10 5">
+				<TextBlock VerticalAlignment="Center" Text="Name: "/>
+				<TextBox Name="TbName" Padding="10 5" Background="#3f474e" BorderThickness="0" FontSize="16"/>
+			</StackPanel>
+
+			<StackPanel Grid.Column="1" Margin="10 5">
 				<TextBlock Text="State: "/>
 				<ComboBox Name="CbState"
 						  DisplayMemberPath="State"
 						  SelectedValuePath="ID"
-						  Width="200"/>
+						 HorizontalAlignment="Stretch"
+						  Background="#3f474e"
+						  BorderThickness="0"
+						  Padding="10 5"/>
 			</StackPanel>
 
-			<StackPanel Orientation="Horizontal">
+			<StackPanel Grid.Column="2" Margin="10 5">
 				<TextBlock Text="City: "/>
-				<TextBox Name="TbCity" Width="200"/>
+				<TextBox Name="TbCity" Background="#3f474e" BorderThickness="0" FontSize="16"/>
 			</StackPanel>
 
-			<StackPanel Orientation="Horizontal">
+			<StackPanel Grid.Row="1" Grid.Column="0" Margin="10 5">
 				<TextBlock Text="Street: "/>
-				<TextBox Name="TbStreet" Width="200"/>
+				<TextBox Name="TbStreet" Background="#3f474e" BorderThickness="0" FontSize="16"/>
 			</StackPanel>
 
-			<StackPanel Orientation="Horizontal">
+			<StackPanel Grid.Row="1" Grid.Column="1" Margin="10 5">
 				<TextBlock Text="Postal code: "/>
-				<TextBox Name="TbPostalCode" Width="200"/>
+				<TextBox Name="TbPostalCode" Background="#3f474e" BorderThickness="0" FontSize="16"/>
 			</StackPanel>
 
-			<Button Name="BtnSubmit" Content="Submit" Click="BtnSubmit_Click"/>
+		</Grid>
 
-		</StackPanel>
+		<Grid Grid.Row="2">
+
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="1*"/>
+				<ColumnDefinition Width="1*"/>
+				<ColumnDefinition Width="1*"/>
+			</Grid.ColumnDefinitions>
+
+			<Button Name="BtnSubmit"
+					Grid.Column="1"
+					Margin="10"
+					HorizontalAlignment="Stretch"
+					Content="Submit"
+					Click="BtnSubmit_Click"
+					Cursor="Hand"
+					Background="#FFAA4D"
+					Foreground="White"/>
+
+		</Grid>
 
 	</Grid>
 </UserControl>

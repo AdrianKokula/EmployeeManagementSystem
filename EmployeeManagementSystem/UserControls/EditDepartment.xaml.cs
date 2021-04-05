@@ -40,6 +40,14 @@ namespace EmployeeManagementSystem.UserControls {
 
 		#endregion
 
+		#region Constructors
+
+		public EditDepartment() {
+			InitializeComponent();
+		}
+
+		#endregion
+
 		#region Handlers
 
 		private void BtnSubmit_Click(object sender, RoutedEventArgs e) {

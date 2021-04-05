@@ -7,7 +7,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:EmployeeManagementSystem.UserControls"
              mc:Ignorable="d" Background="#333b41" Foreground="White"
-             d:DesignHeight="175" d:DesignWidth="800">
+             d:DesignHeight="220" d:DesignWidth="800">
     <Grid>
 
 		<Grid.RowDefinitions>
@@ -43,21 +43,21 @@
 				<TextBlock Text="First name: " VerticalAlignment="Center"/>
 				<TextBox Name="TbFirstName"
 						 Padding="10 5"
-						 Background="#3f474e" BorderThickness="0" Foreground="White" FontSize="16"/>
+						 Background="#3f474e" BorderThickness="0" FontSize="16"/>
 
 			</StackPanel>
 
 			<StackPanel Grid.Column="1" Margin="10 5">
 
 				<TextBlock Text="Last name: " VerticalAlignment="Center"/>
-				<TextBox Name="TbLastName" Padding="10 5" Background="#3f474e" BorderThickness="0" Foreground="White" FontSize="16" />
+				<TextBox Name="TbLastName" Padding="10 5" Background="#3f474e" BorderThickness="0" FontSize="16" />
 
 			</StackPanel>
 
 			<StackPanel Grid.Column="2" Margin="10 5">
 
 				<TextBlock Text="Residence: " VerticalAlignment="Center"/>
-				<TextBox Name="TbResidence" Padding="10 5" Background="#3f474e" BorderThickness="0" Foreground="White" FontSize="16" />
+				<TextBox Name="TbResidence" Padding="10 5" Background="#3f474e" BorderThickness="0" FontSize="16" />
 
 			</StackPanel>
 
@@ -67,12 +67,18 @@
 						  DisplayMemberPath="Department"
 						  SelectedValuePath="ID"
 						  HorizontalAlignment="Stretch"
+						  Background="#3f474e"
+						  BorderThickness="0"
 						  Padding="10 5"/>
 			</StackPanel>
 
 			<StackPanel Grid.Row="1" Grid.Column="1" Margin="10 5">
 				<TextBlock Text="Date of birth: "/>
-				<DatePicker Name="DpDateOfBirth" HorizontalAlignment="Stretch" Padding="10 5"/>
+				<DatePicker Name="DpDateOfBirth"
+							HorizontalAlignment="Stretch"
+							Padding="10 5"
+							Background="#3f474e"
+							BorderThickness="0"/>
 			</StackPanel>
 
 		</Grid>
@@ -92,7 +98,8 @@
 					Content="Submit"
 					Click="BtnSubmit_Click"
 					Cursor="Hand"
-					Background="#FFAA4D"/>
+					Background="#FFAA4D"
+					Foreground="White"/>
 
 		</Grid>
 
