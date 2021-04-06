@@ -51,7 +51,15 @@ namespace EmployeeManagementSystem {
 		}
 
 		private void BtnClose_Click(object sender, RoutedEventArgs e) {
-			Close();
+			Application.Current.Shutdown();
+		}
+
+		private void BtnMinimize_Click(object sender, RoutedEventArgs e) {
+			this.WindowState = WindowState.Minimized;
+		}
+
+		private void BtnMaximize_Click(object sender, RoutedEventArgs e) {
+			this.WindowState = this.WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
 		}
 
 		private void BtnEmployees_Click(object sender, RoutedEventArgs e) {

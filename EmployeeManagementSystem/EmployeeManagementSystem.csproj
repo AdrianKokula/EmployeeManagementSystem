@@ -25,6 +25,8 @@
     <None Remove="Resources\Login.png" />
     <None Remove="Resources\Logo.ico" />
     <None Remove="Resources\Logo.png" />
+    <None Remove="Resources\Maximize.png" />
+    <None Remove="Resources\Minimize.png" />
     <None Remove="Resources\Password.png" />
     <None Remove="Resources\Quit.png" />
     <None Remove="Resources\Remove.png" />
@@ -52,7 +54,9 @@
     <Resource Include="Resources\Password.png" />
     <Resource Include="Resources\Quit.png" />
     <Resource Include="Resources\Remove.png" />
+    <Resource Include="Resources\Maximize.png" />
     <Resource Include="Resources\Settings.png" />
+    <Resource Include="Resources\Minimize.png" />
     <Resource Include="Resources\User.png" />
   </ItemGroup>
 
