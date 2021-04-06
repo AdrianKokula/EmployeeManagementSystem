@@ -46,29 +46,46 @@
 
 			<StackPanel HorizontalAlignment="Stretch" Margin="0 5">
 				<TextBlock Text="Server name" FontSize="14"/>
-				<TextBox Name="TbServerName"/>
+				<TextBox Name="TbServerName"
+						 BorderThickness="0"
+						 Foreground="White"
+						 FontSize="16"
+						 Padding="10 9"/>
 			</StackPanel>
 
 			<StackPanel HorizontalAlignment="Stretch" Margin="0 5">
 				<TextBlock Text="Database" FontSize="14"/>
-				<TextBox Name="TbDatabaseName"/>
+				<TextBox Name="TbDatabaseName"
+						 BorderThickness="0"
+						 Foreground="White"
+						 FontSize="16"
+						 Padding="10 9"/>
 			</StackPanel>
 
 			<StackPanel HorizontalAlignment="Stretch" Margin="0 5">
 				<TextBlock Text="User name" FontSize="14"/>
-				<TextBox Name="TbDbUserName"/>
+				<TextBox Name="TbDbUserName"
+						 BorderThickness="0"
+						 Foreground="White"
+						 FontSize="16"
+						 Padding="10 9"/>
 			</StackPanel>
 
 			<StackPanel HorizontalAlignment="Stretch" Margin="0 5">
 				<TextBlock Text="User password" FontSize="14"/>
-				<TextBox Name="TbDbUserPassword"/>
+				<TextBox Name="TbDbUserPassword"
+						 BorderThickness="0"
+						 Foreground="White"
+						 FontSize="16"
+						 Padding="10 9"/>
 			</StackPanel>
 
-			<StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal" Margin="10">
-				<TextBlock Text="Windows authentification" />
+			<StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal" Margin="0 5">
 				<CheckBox Name="CbWindowsAuth"
 						  Checked="CbWindowsAuth_CheckedChanged"
-						  Unchecked="CbWindowsAuth_CheckedChanged"/>
+						  Unchecked="CbWindowsAuth_CheckedChanged">
+					<TextBlock Text="Windows authentification" Foreground="White"/>
+				</CheckBox>
 			</StackPanel>
 
 			<Button Content="Save"

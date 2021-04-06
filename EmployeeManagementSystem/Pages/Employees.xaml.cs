@@ -52,7 +52,6 @@ namespace EmployeeManagementSystem.Pages {
 			int employeeID = (int)dataRow["ID"];
 
 			EditEmp.EmployeeID = employeeID;
-
 			EditEmp.Visibility = Visibility.Visible;
 
 		}

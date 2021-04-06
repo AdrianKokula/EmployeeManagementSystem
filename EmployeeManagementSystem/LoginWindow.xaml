@@ -7,7 +7,7 @@
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:ui="http://schemas.modernwpf.com/2019"
 		xmlns:local="clr-namespace:EmployeeManagementSystem"
-		mc:Ignorable="d" FontSize="20" FontFamily="Bahnschrift Light" WindowStartupLocation="CenterScreen" Foreground="White"
+		mc:Ignorable="d" FontFamily="Bahnschrift Light" WindowStartupLocation="CenterScreen" Foreground="White"
 		Title="EMS - Login" Height="600" Width="450" ResizeMode="NoResize" WindowStyle="None" MouseDown="Window_MouseDown" MouseUp="Window_MouseUp">
 	<Grid>
 		

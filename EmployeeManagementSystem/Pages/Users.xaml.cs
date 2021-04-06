@@ -28,8 +28,6 @@ namespace EmployeeManagementSystem.Pages {
 	/// </summary>
 	public partial class Users : Page {
 
-		private EditUser editUser;
-
 		#region	Constructors
 
 		public Users() {
@@ -37,6 +35,8 @@ namespace EmployeeManagementSystem.Pages {
 			InitializeComponent();
 
 			LoadData();
+
+			EditUser.Visibility = Visibility.Collapsed;
 
 		}
 
@@ -46,11 +46,11 @@ namespace EmployeeManagementSystem.Pages {
 
 		private void BtnAdd_Click(object sender, RoutedEventArgs e) {
 
-			AddUser userWindow = new AddUser() {
+			/*AddUser userWindow = new AddUser() {
 				Owner = Window.GetWindow(this)
 			};
 
-			userWindow.ShowDialog();
+			userWindow.ShowDialog();*/
 			LoadData();
 
 		}
@@ -61,9 +61,8 @@ namespace EmployeeManagementSystem.Pages {
 			DataRowView dataRow = (DataRowView)e.AddedItems[0];
 			int userID = (int)dataRow["ID"];
 
-			editUser = new EditUser();
-			Grid.SetRow(editUser, 2);
-			GridMain.Children.Add(editUser);
+			EditUser.UserID = userID;
+			EditUser.Visibility = Visibility.Visible;
 
 		}
 

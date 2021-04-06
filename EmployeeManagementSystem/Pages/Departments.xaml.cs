@@ -28,8 +28,6 @@ namespace EmployeeManagementSystem.Pages {
 	/// </summary>
 	public partial class Departments : Page {
 
-		private EditDepartment editDepartment;
-
 		#region	Constructors
 
 		public Departments() {
@@ -37,6 +35,8 @@ namespace EmployeeManagementSystem.Pages {
 			InitializeComponent();
 
 			LoadData();
+
+			EditDep.Visibility = Visibility.Collapsed;
 
 		}
 
@@ -46,11 +46,12 @@ namespace EmployeeManagementSystem.Pages {
 
 		private void BtnAdd_Click(object sender, RoutedEventArgs e) {
 
-			AddDepartment departmentWindow = new AddDepartment() {
+			/*AddDepartment departmentWindow = new AddDepartment() {
 				Owner = Window.GetWindow(this)
 			};
 
-			departmentWindow.ShowDialog();
+			departmentWindow.ShowDialog();*/
+
 			LoadData();
 
 		}
@@ -59,11 +60,10 @@ namespace EmployeeManagementSystem.Pages {
 
 			// first selected row
 			DataRowView dataRow = (DataRowView)e.AddedItems[0];
-			int employeeID = (int)dataRow["ID"];
+			int departmentID = (int)dataRow["ID"];
 
-			editDepartment = new EditDepartment();
-			Grid.SetRow(editDepartment, 2);
-			GridMain.Children.Add(editDepartment);
+			EditDep.DepartmentID = departmentID;
+			EditDep.Visibility = Visibility.Visible;
 
 		}
 
