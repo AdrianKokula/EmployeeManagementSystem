@@ -6,7 +6,7 @@
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:local="clr-namespace:EmployeeManagementSystem"
-		mc:Ignorable="d" FontSize="20" FontFamily="Bahnschrift Light" WindowStartupLocation="CenterScreen" Foreground="White"
+		mc:Ignorable="d" FontSize="20" FontFamily="Helvetica" WindowStartupLocation="CenterScreen" Foreground="White"
 		Title="EMS - Settings" Height="450" Width="350" ResizeMode="NoResize" WindowStyle="None">
 	<Grid>
 

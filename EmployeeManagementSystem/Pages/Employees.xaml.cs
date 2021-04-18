@@ -37,7 +37,7 @@ namespace EmployeeManagementSystem.Pages {
 
 			LoadData();
 
-			EditEmp.Visibility = Visibility.Collapsed;
+			//EditEmp.Visibility = Visibility.Collapsed;
 
 		}
 
@@ -58,11 +58,11 @@ namespace EmployeeManagementSystem.Pages {
 
 		private void BtnAdd_Click(object sender, RoutedEventArgs e) {
 
-			/*AddEmployee employeeWindow = new AddEmployee() {
+			AddEmployee employeeWindow = new AddEmployee() {
 				Owner = Window.GetWindow(this)
 			};
 
-			employeeWindow.ShowDialog();*/
+			employeeWindow.ShowDialog();
 			
 			LoadData();
 

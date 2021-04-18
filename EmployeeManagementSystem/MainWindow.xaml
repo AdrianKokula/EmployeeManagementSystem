@@ -6,126 +6,105 @@
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"	
 		xmlns:local="clr-namespace:EmployeeManagementSystem"
-		mc:Ignorable="d" FontSize="20" FontFamily="Bahnschrift Light" WindowStartupLocation="CenterScreen" Foreground="#51507a" Background="Transparent"
-		Title="EMS - Employee Management System" Height="720" Width="1280" WindowStyle="None" MouseUp="Window_MouseUp" MouseDown="Window_MouseDown"
-		AllowsTransparency="True" >
+		mc:Ignorable="d" FontSize="20" FontFamily="Helvetica" WindowStartupLocation="CenterScreen"
+		Title="EMS - Employee Management System" Height="768" Width="1366" MouseUp="Window_MouseUp" MouseDown="Window_MouseDown">
 
-	<Border Background="#f6f6fe" CornerRadius="7">
+	<Grid>
 
-		<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="145" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
 
-			<Grid.RowDefinitions>
-				<RowDefinition Height="auto" />
-				<RowDefinition Height="*" />
-			</Grid.RowDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="60" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
 
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="275"/>
-				<ColumnDefinition Width="*"/>
-			</Grid.ColumnDefinitions>
+		<Grid Background="#19233E">
 
-			<Border Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="7" Background="Silver">
-
-				<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-
-					<Button BorderThickness="0" Cursor="Hand" Name="BtnMinimize" Click="BtnMinimize_Click">
-						<Image Source="Resources/Minimize.png" MaxHeight="16"/>
-					</Button>
-
-					<Button BorderThickness="0" Cursor="Hand" Name="BtnMaximize" Click="BtnMaximize_Click">
-						<Image Source="Resources/Maximize.png" MaxHeight="16"/>
-					</Button>
-
-					<Button BorderThickness="0" Cursor="Hand" Name="BtnClose" Click="BtnClose_Click">
-						<Image Source="Resources/Exit.png" MaxHeight="16"/>
-					</Button>
-
-				</StackPanel>
-
-			</Border>
-
-			<Border Grid.Row="1" Margin="30">
-
-				<Grid>
-					
-					<StackPanel Margin="10 15">
-
-						<Image Grid.Row="1" Source="Resources/Logo.ico" MaxHeight="48" HorizontalAlignment="Left" Margin="15 5"/>
-					
-						<Button Padding="7" Margin="0 5" Cursor="Hand" Name="BtnEmployees" Click="BtnEmployees_Click" BorderThickness="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left">
-							<StackPanel Orientation="Horizontal" >
-								<Image Source="/Resources/Employee.png" Height="32" Margin="5 0 10 0"/>
-								<TextBlock Text="Employees" VerticalAlignment="Center"/>
-							</StackPanel>
-						</Button>
-
-						<Button Padding="7" Margin="0 5" Cursor="Hand" Name="BtnDepartments" Click="BtnDepartments_Click" BorderThickness="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left">
-							<StackPanel Orientation="Horizontal">
-								<Image Source="/Resources/Department.png" Height="32" Margin="5 0 10 0"/>
-								<TextBlock Text="Departments" VerticalAlignment="Center"/>
-							</StackPanel>
-						</Button>
-
-						<Button Padding="7" Margin="0 5" Cursor="Hand" Name="BtnUsers" Click="BtnUsers_Click" BorderThickness="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left">
-							<StackPanel Orientation="Horizontal">
-								<Image Source="/Resources/Login.png" Height="32" Margin="5 0 10 0"/>
-								<TextBlock Text="Users" VerticalAlignment="Center"/>
-							</StackPanel>
-						</Button>
-
-					</StackPanel>
-
-					<StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Height="50" HorizontalAlignment="Center">
-
-						<Button Width="40" Height="40" Cursor="Hand" Margin="5" Padding="5" Name="BtnSettings" Click="BtnSettings_Click" BorderThickness="0">
-							<Image Source="/Resources/Settings.png" />
-						</Button>
-						<Button Width="40" Height="40" Cursor="Hand" Margin="5" Padding="5" Name="BtnAbout" Click="BtnAbout_Click" BorderThickness="0">
-							<Image Source="/Resources/About.png" />
-						</Button>
-						<Button Width="40" Height="40" Cursor="Hand" Margin="5" Padding="5" Name="BtnExit" Click="BtnExit_Click" BorderThickness="0">
-							<Image Source="/Resources/Quit.png" />
-						</Button>
-
-					</StackPanel>
-
-				</Grid>
-
-			</Border>
-
-			<Border Grid.Row="1" Grid.Column="1" CornerRadius="7" Background="#fefefe" Margin="20">
-
-				<Frame Name="FrmMain"
-					   NavigationUIVisibility="Hidden"
-					   Margin="10"
-					   BorderThickness="1"
-					   Source="Employees.xaml">
-
-					<Frame.Effect>
-						<DropShadowEffect BlurRadius="10" RenderingBias="Quality" ShadowDepth="0"/>
-					</Frame.Effect>
-
-				</Frame>
-
-			</Border>
-
-			<!--<Border Grid.Column="1" Grid.Row="1" CornerRadius="7" Background="#333b41" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-
-				<Frame Name="FrmMain"
-					   NavigationUIVisibility="Hidden"
-					   Margin="10"
-					   BorderThickness="1"
-					   Source="Employees.xaml">
-
-					<Frame.Effect>
-						<DropShadowEffect BlurRadius="10" RenderingBias="Quality" ShadowDepth="0"/>
-					</Frame.Effect>
-
-				</Frame>
-
-			</Border>-->
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+				<Image Source="/Resources/Logo.png" MaxHeight="32"/>
+				<TextBlock Text="EMS" VerticalAlignment="Center" Foreground="white"/>
+			</StackPanel>
 
 		</Grid>
+
+		<StackPanel Grid.Column="1" Orientation="Horizontal" Background="#fcfcfc">
+			<Image Source="/Resources/Employees.png" MaxHeight="32" Margin="5 0" Name="imgPageIcon"/>
+			<TextBlock FontSize="20"
+					   Text="Employees"
+					   VerticalAlignment="Center"
+					   FontWeight="Bold"
+					   Foreground="#51507A"
+					   Name="tbPageName"/>
+		</StackPanel>
+
+		<Grid Grid.Row="1" Background="#232F49">
+
+			<!--Main items-->
+			<StackPanel Margin="15 20">
+
+				<TextBlock Text="General" Foreground="#B4B7C0" FontSize="14" Margin="0 0 0 10"/>
+
+				<Button Padding="5 15" Background="Transparent" Cursor="Hand" Name="BtnEmployees" Click="BtnEmployees_Click" BorderThickness="0" HorizontalAlignment="Stretch">
+					<StackPanel Orientation="Vertical">
+						<Image Source="/Resources/Employees.png" Height="32"/>
+						<TextBlock Text="Employees"/>
+					</StackPanel>
+				</Button>
+
+				<Button Padding="5 15" Background="Transparent" Cursor="Hand" Name="BtnDepartments" Click="BtnDepartments_Click" BorderThickness="0" HorizontalAlignment="Stretch">
+					<StackPanel Orientation="Vertical">
+						<Image Source="/Resources/Department.png" Height="32"/>
+						<TextBlock Text="Departments"/>
+					</StackPanel>
+				</Button>
+
+				<Button Padding="5 15" Background="Transparent" Cursor="Hand" Name="BtnUsers" Click="BtnUsers_Click" BorderThickness="0" HorizontalAlignment="Stretch">
+					<StackPanel Orientation="Vertical">
+						<Image Source="/Resources/Login.png" Height="32"/>
+						<TextBlock Text="Users"/>
+					</StackPanel>
+				</Button>
+
+			</StackPanel>
+
+			<!--Bottom buttons-->
+
+			<StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Height="50" HorizontalAlignment="Center">
+
+				<Button Width="40" Height="40" Cursor="Hand" Margin="5" Padding="5" Name="BtnSettings" Click="BtnSettings_Click" Background="Transparent" BorderThickness="0">
+					<Image Source="/Resources/Settings.png" />
+				</Button>
+				<Button Width="40" Height="40" Cursor="Hand" Margin="5" Padding="5" Name="BtnAbout" Click="BtnAbout_Click" Background="Transparent" BorderThickness="0">
+					<Image Source="/Resources/About.png" />
+				</Button>
+				<Button Width="40" Height="40" Cursor="Hand" Margin="5" Padding="5" Name="BtnExit" Click="BtnExit_Click" Background="Transparent" BorderThickness="0">
+					<Image Source="/Resources/Quit.png" />
+				</Button>
+
+			</StackPanel>
+
+		</Grid>
+		
+		<Border Grid.Row="1" Grid.Column="1" Background="AliceBlue" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+			<Frame Name="FrmMain"
+					   NavigationUIVisibility="Hidden"
+					   Margin="10"
+					   BorderThickness="1"
+					   Source="Employees.xaml">
+
+				<!--<Frame.Effect>
+					<DropShadowEffect BlurRadius="10" RenderingBias="Quality" ShadowDepth="0"/>
+				</Frame.Effect>-->
+
+			</Frame>
+
+		</Border>
+
+	</Grid>
 
 		<!--<Grid>
 			
@@ -240,5 +219,4 @@
 			
 		</Grid>-->
 
-	</Border>
 </Window>

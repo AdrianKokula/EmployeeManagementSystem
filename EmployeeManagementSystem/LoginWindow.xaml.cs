@@ -39,6 +39,9 @@ namespace EmployeeManagementSystem {
 
 			TbEmail.Text = Properties.Settings.Default.LoginEmail;
 
+			PbPassword.Password = "heslo";
+			Login();
+
 		}
 
 		#endregion

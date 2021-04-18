@@ -7,8 +7,8 @@
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 	  xmlns:local="clr-namespace:EmployeeManagementSystem.Pages"
 	  xmlns:controls="clr-namespace:EmployeeManagementSystem.UserControls"
-	  mc:Ignorable="d" FontSize="16" FontFamily="Bahnschrift Light"
-	  d:DesignHeight="700" d:DesignWidth="850" Foreground="White"
+	  mc:Ignorable="d" FontSize="16" FontFamily="Helvetica" Background="AliceBlue"
+	  d:DesignHeight="700" d:DesignWidth="850" Foreground="#51507A"
 	  Title="Employees">
 
 	<Page.Resources>
@@ -17,7 +17,7 @@
 			<Setter Property="Template">
 				<Setter.Value>
 					<ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
-						<TextBlock Text="{TemplateBinding Content}" Margin="0 10" Foreground="White"/>
+						<TextBlock Text="{TemplateBinding Content}" Margin="0 10" Foreground="#51507A" FontWeight="Bold"/>
 					</ControlTemplate>
 				</Setter.Value>
 			</Setter>
@@ -25,7 +25,105 @@
 		
 	</Page.Resources>
 
-	<Grid Name="GridMain" >
+	<Grid Name="GridMain">
+
+		<Grid.RowDefinitions>
+			<RowDefinition Height="auto" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="auto" />
+		</Grid.RowDefinitions>
+
+		<!--<Border Grid.Row="0" CornerRadius="5" Background="#fefefe">
+			<Grid>
+
+				<DockPanel Margin="10" LastChildFill="False">
+
+					<StackPanel Orientation="Horizontal">
+						<Image Source="../Resources/Employees.png" MaxHeight="32" Margin="5 0"/>
+						<TextBlock Grid.Column="1" FontSize="20" Text="Employees" VerticalAlignment="Center" FontWeight="Bold" Foreground="#51507A"/>
+					</StackPanel>
+
+					<Button Grid.Column="2" Name="BtnAdd" Padding="0" DockPanel.Dock="Right" Cursor="Hand" Click="BtnAdd_Click" BorderThickness="0" Background="Transparent">
+						<StackPanel Orientation="Horizontal">
+							<Image Source="../Resources/Add.png" MaxHeight="32" MaxWidth="32" Margin="5"/>
+							<TextBlock Text="Add" VerticalAlignment="Center"/>
+						</StackPanel>
+					</Button>
+
+				</DockPanel>
+
+			</Grid>
+		</Border>-->
+
+		<StackPanel>
+
+			<TextBlock Text="Filters" Foreground="#B4B7C0" FontSize="14" Margin="0 0 0 0"/>
+
+			<Grid>
+
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="1*" />
+					<ColumnDefinition Width="1*" />
+					<ColumnDefinition Width="1*" />
+				</Grid.ColumnDefinitions>
+
+				<StackPanel Grid.Column="0" Margin="10 5">
+
+					<TextBlock Text="First name: " VerticalAlignment="Center"/>
+					<TextBox Name="TbFirstName"
+							 Padding="10 5"
+							 BorderThickness="0" FontSize="16"/>
+
+				</StackPanel>
+
+				<StackPanel Grid.Column="1" Margin="10 5">
+
+					<TextBlock Text="Last name: " VerticalAlignment="Center"/>
+					<TextBox Name="TbLastName"
+							 Padding="10 5"
+							 BorderThickness="0" FontSize="16"/>
+
+				</StackPanel>
+
+			</Grid>
+
+		</StackPanel>
+
+		<StackPanel Grid.Row="1">
+			
+			<TextBlock Text="Data" Foreground="#B4B7C0" FontSize="14" Margin="0 0 0 0"/>
+
+			<ListView Grid.Row="1" Name="LvEmployees" BorderThickness="3" Padding="10 0"
+				SelectionChanged="LvEmployees_SelectionChanged" Foreground="#51507A">
+
+				<ListView.ItemContainerStyle>
+					<Style TargetType="{x:Type ListViewItem}" >
+						<Setter Property="Height" Value="48" />
+						<Setter Property="Margin" Value="0 0" />
+						<Setter Property="Cursor" Value="Hand" />
+					</Style>
+				</ListView.ItemContainerStyle>
+
+				<ListView.View>
+					<GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnsStyle}">
+						<GridViewColumn Header="Id" Width="0" DisplayMemberBinding="{Binding ID}" />
+						<GridViewColumn Header="First name" Width="150" DisplayMemberBinding="{Binding FirstName}" />
+						<GridViewColumn Header="Last name" Width="150" DisplayMemberBinding="{Binding LastName}" />
+						<GridViewColumn Header="Department" Width="200" DisplayMemberBinding="{Binding Department}" />
+						<GridViewColumn Header="Date of birth" DisplayMemberBinding="{Binding DateOfBirth}" />
+						<GridViewColumn Header="Residence" DisplayMemberBinding="{Binding Residence}"/>
+					</GridView>
+				</ListView.View>
+
+			</ListView>
+			
+		</StackPanel>
+		
+		<controls:EditEmployee x:Name="EditEmp" Grid.Row="2"/>
+		
+	</Grid>
+
+	<!--<Grid Name="GridMain" >
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="auto" />
@@ -82,5 +180,5 @@
 
 		<controls:EditEmployee x:Name="EditEmp" Grid.Row="2"/>
 
-	</Grid>
+	</Grid>-->
 </Page>

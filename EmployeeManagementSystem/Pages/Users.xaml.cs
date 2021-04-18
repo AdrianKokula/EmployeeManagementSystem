@@ -36,7 +36,7 @@ namespace EmployeeManagementSystem.Pages {
 
 			LoadData();
 
-			EditUser.Visibility = Visibility.Collapsed;
+			//EditUser.Visibility = Visibility.Collapsed;
 
 		}
 

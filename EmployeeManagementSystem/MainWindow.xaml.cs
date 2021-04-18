@@ -63,15 +63,15 @@ namespace EmployeeManagementSystem {
 		}
 
 		private void BtnEmployees_Click(object sender, RoutedEventArgs e) {
-			FrmMain.Content = new Employees();
+			LoadEmpoyees();
 		}
 
 		private void BtnDepartments_Click(object sender, RoutedEventArgs e) {
-			FrmMain.Content = new Departments();
+			LoadDepartments();
 		}
 
 		private void BtnUsers_Click(object sender, RoutedEventArgs e) {
-			FrmMain.Content = new Users();
+			LoadUsers();
 		}
 
 		private void BtnSettings_Click(object sender, RoutedEventArgs e) {
@@ -91,6 +91,23 @@ namespace EmployeeManagementSystem {
 
 		#region Methods
 
+		private void LoadEmpoyees() {
+			FrmMain.Content = new Employees();
+			tbPageName.Text = "Employees";
+			imgPageIcon.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Employees.png"));
+		}
+
+		private void LoadDepartments() {
+			FrmMain.Content = new Departments();
+			tbPageName.Text = "Departments";
+			imgPageIcon.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Department.png"));
+		}
+
+		private void LoadUsers() {
+			FrmMain.Content = new Users();
+			tbPageName.Text = "Users";
+			imgPageIcon.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Login.png"));
+		}
 
 		#endregion
 
