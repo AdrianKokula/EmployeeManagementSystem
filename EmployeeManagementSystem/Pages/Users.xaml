@@ -69,8 +69,8 @@
 
 				<StackPanel Grid.Column="0" Margin="10 5">
 
-					<TextBlock Text="Department: " VerticalAlignment="Center"/>
-					<TextBox Name="TbDepartment"
+					<TextBlock Text="User name: " VerticalAlignment="Center"/>
+					<TextBox Name="TbUserName"
 							 Padding="10 5"
 							 BorderThickness="0" FontSize="16"/>
 
@@ -78,8 +78,8 @@
 
 				<StackPanel Grid.Column="1" Margin="10 5">
 
-					<TextBlock Text="City: " VerticalAlignment="Center"/>
-					<TextBox Name="TbCity"
+					<TextBlock Text="Email: " VerticalAlignment="Center"/>
+					<TextBox Name="TbEmail"
 							 Padding="10 5"
 							 BorderThickness="0" FontSize="16"/>
 

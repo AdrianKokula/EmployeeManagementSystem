@@ -19,8 +19,8 @@
 		<Border Grid.Row="0" Background="#54C1FA" CornerRadius="5">
 
 			<StackPanel Orientation="Horizontal" Margin="7">
-				<Image Source="../Resources/Department.png" MaxHeight="32" Margin="5 0"/>
-				<TextBlock Grid.Column="1" FontSize="20" Text="Departments - edit existing" VerticalAlignment="Center" Foreground="White"/>
+				<Image Source="../Resources/Department_white.png" MaxHeight="32" Margin="5 0"/>
+				<TextBlock Grid.Column="1" FontSize="20" Text="Departments - edit existing" VerticalAlignment="Center" Foreground="#FAFAFA"/>
 			</StackPanel>
 
 		</Border>
@@ -49,7 +49,6 @@
 						  DisplayMemberPath="State"
 						  SelectedValuePath="ID"
 						  HorizontalAlignment="Stretch"
-						 
 						  BorderThickness="0"
 						  Padding="10 5"/>
 			</StackPanel>
@@ -87,7 +86,7 @@
 					Click="BtnSubmit_Click"
 					Cursor="Hand"
 					Background="#54C1FA"
-					Foreground="White"/>
+					Foreground="#FAFAFA"/>
 
 		</Grid>
 

@@ -25,12 +25,12 @@
 
 			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 				<Image Source="/Resources/Logo.png" MaxHeight="32"/>
-				<TextBlock Text="EMS" VerticalAlignment="Center" Foreground="white"/>
+				<TextBlock Text="EMS" VerticalAlignment="Center" Foreground="#FAFAFA"/>
 			</StackPanel>
 
 		</Grid>
 
-		<StackPanel Grid.Column="1" Orientation="Horizontal" Background="#fcfcfc">
+		<StackPanel Grid.Column="1" Orientation="Horizontal" Background="#FAFAFA">
 			<Image Source="/Resources/Employees.png" MaxHeight="32" Margin="5 0" Name="imgPageIcon"/>
 			<TextBlock FontSize="20"
 					   Text="Employees"

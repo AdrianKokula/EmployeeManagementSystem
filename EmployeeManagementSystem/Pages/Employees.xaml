@@ -55,6 +55,7 @@
 			</Grid>
 		</Border>-->
 
+		<!--Filters-->
 		<StackPanel>
 
 			<TextBlock Text="Filters" Foreground="#B4B7C0" FontSize="14" Margin="0 0 0 0"/>
@@ -89,18 +90,91 @@
 
 		</StackPanel>
 
+		<!--Data-->
 		<StackPanel Grid.Row="1">
 			
-			<TextBlock Text="Data" Foreground="#B4B7C0" FontSize="14" Margin="0 0 0 0"/>
+			<TextBlock Text="Data" Foreground="#B4B7C0" FontSize="16" Margin="0 0 0 0"/>
 
-			<ListView Grid.Row="1" Name="LvEmployees" BorderThickness="3" Padding="10 0"
-				SelectionChanged="LvEmployees_SelectionChanged" Foreground="#51507A">
+			<!--<Button Background="Transparent">
+				<StackPanel Orientation="Horizontal">
+					<Image Source="../Resources/EmployeeAdd.png" MaxHeight="16"/>
+					<TextBlock Text=" Add new" VerticalAlignment="Center"/>
+				</StackPanel>
+			</Button>-->
+
+			<DataGrid Name="DgEmployees" Foreground="#51507A" CanUserAddRows="False" IsReadOnly="True" RowHeight="48" Padding="10 0" GridLinesVisibility="None"
+					  AutoGenerateColumns="False" SelectionUnit="FullRow" HeadersVisibility="Column" AlternatingRowBackground="Azure">
+
+				<DataGrid.Resources>
+					<Style TargetType="{x:Type DataGridCell}">
+						<Style.Triggers>
+							<Trigger Property="DataGridCell.IsSelected" Value="True">
+								<Setter Property="Background" Value="LightSeaGreen" />
+							</Trigger>
+						</Style.Triggers>
+					</Style>
+				</DataGrid.Resources>
+
+				<DataGrid.RowStyle>
+					<Style TargetType="DataGridRow">
+						<Setter Property="Margin" Value="0 2" />
+						<Setter Property="Cursor" Value="Hand" />
+						<Setter Property="FontSize" Value="16" />
+					</Style>
+				</DataGrid.RowStyle>
+
+				<DataGrid.ColumnHeaderStyle>
+					<Style TargetType="{x:Type DataGridColumnHeader}">
+						<Setter Property="DocumentViewerBase.Background" Value="Transparent" />
+						<Setter Property="Margin" Value="0 10" />
+					</Style>
+				</DataGrid.ColumnHeaderStyle>
+
+				<DataGrid.Columns>
+
+					<DataGridTextColumn Header="Id" Visibility="Collapsed" Binding="{Binding ID}" />
+					<DataGridTextColumn Width="150" Binding="{Binding FirstName}">
+						<DataGridTextColumn.Header>
+							<TextBlock FontWeight="Bold" Text="First name"/>
+						</DataGridTextColumn.Header>
+					</DataGridTextColumn>
+
+					<DataGridTextColumn Width="150" Binding="{Binding LastName}">
+						<DataGridTextColumn.Header>
+							<TextBlock FontWeight="Bold" Text="Last name"/>
+						</DataGridTextColumn.Header>
+					</DataGridTextColumn>
+					
+					<DataGridTextColumn Width="175" Binding="{Binding Department}">
+						<DataGridTextColumn.Header>
+							<TextBlock FontWeight="Bold" Text="Department"/>
+						</DataGridTextColumn.Header>
+					</DataGridTextColumn>
+					
+					<DataGridTextColumn Width="125" Binding="{Binding DateOfBirth}">
+						<DataGridTextColumn.Header>
+							<TextBlock FontWeight="Bold" Text="Date of birth"/>
+						</DataGridTextColumn.Header>
+					</DataGridTextColumn>
+					
+					<DataGridTextColumn Width="*" Binding="{Binding Residence}">
+						<DataGridTextColumn.Header>
+							<TextBlock FontWeight="Bold" Text="Residence"/>
+						</DataGridTextColumn.Header>
+					</DataGridTextColumn>
+				</DataGrid.Columns>
+
+			</DataGrid>
+			
+			<ListView Name="LvEmployees" BorderThickness="3" Padding="10 0"
+				SelectionChanged="LvEmployees_SelectionChanged" Foreground="#51507A" Visibility="Collapsed">
 
 				<ListView.ItemContainerStyle>
 					<Style TargetType="{x:Type ListViewItem}" >
 						<Setter Property="Height" Value="48" />
 						<Setter Property="Margin" Value="0 0" />
 						<Setter Property="Cursor" Value="Hand" />
+						<Setter Property="Background" Value="Azure" />
 					</Style>
 				</ListView.ItemContainerStyle>
 

@@ -20,7 +20,7 @@
 
 			<StackPanel Orientation="Horizontal" Margin="7">
 				<Image Source="../Resources/User.png" MaxHeight="32" Margin="5 0"/>
-				<TextBlock Grid.Column="1" FontSize="20" Text="Users - edit existing" VerticalAlignment="Center" Foreground="White"/>
+				<TextBlock Grid.Column="1" FontSize="20" Text="Users - edit existing" VerticalAlignment="Center" Foreground="#FAFAFA"/>
 			</StackPanel>
 
 		</Border>
@@ -66,7 +66,7 @@
 					Click="BtnSubmit_Click"
 					Cursor="Hand"
 					Background="#54C1FA"
-					Foreground="White"/>
+					Foreground="#FAFAFA"/>
 
 		</Grid>
 
