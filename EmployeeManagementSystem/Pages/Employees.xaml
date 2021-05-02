@@ -56,7 +56,19 @@
 		</Border>-->
 
 		<!--Filters-->
-		<StackPanel>
+		<Grid>
+
+			<TextBlock Text="Data" Foreground="#B4B7C0" FontSize="16" VerticalAlignment="Center"/>
+
+			<Button FontSize="16" HorizontalAlignment="Right" Background="Transparent" Cursor="Hand">
+				<StackPanel Orientation="Horizontal">
+					<Image Source="../Resources/Filter.png" MaxHeight="24" MaxWidth="24" />
+					<TextBlock Text="Filters" Foreground="#B4B7C0" VerticalAlignment="Center"/>
+				</StackPanel>
+			</Button>
+
+		</Grid>
+		<!--<StackPanel>
 
 			<TextBlock Text="Filters" Foreground="#B4B7C0" FontSize="14" Margin="0 0 0 0"/>
 
@@ -88,12 +100,12 @@
 
 			</Grid>
 
-		</StackPanel>
+		</StackPanel>-->
 
 		<!--Data-->
 		<StackPanel Grid.Row="1">
-			
-			<TextBlock Text="Data" Foreground="#B4B7C0" FontSize="16" Margin="0 0 0 0"/>
+
+			<!--<TextBlock Text="Data" Foreground="#B4B7C0" FontSize="16"/>-->
 
 			<!--<Button Background="Transparent">
 				<StackPanel Orientation="Horizontal">
