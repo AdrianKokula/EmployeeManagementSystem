@@ -85,7 +85,7 @@ namespace EmployeeManagementSystem.Pages {
 			if (!queryResult.Equals("OK")) return;
 
 			DgEmployees.ItemsSource = dataTableEmployees.DefaultView;
-			LvEmployees.ItemsSource = dataTableEmployees.DefaultView;
+			//LvEmployees.ItemsSource = dataTableEmployees.DefaultView;
 
 		}
 

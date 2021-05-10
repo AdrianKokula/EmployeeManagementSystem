@@ -135,7 +135,7 @@
 			</Button>-->
 
 			<DataGrid Name="DgEmployees" Foreground="#51507A" CanUserAddRows="False" IsReadOnly="True" RowHeight="48" Padding="10 0" GridLinesVisibility="None"
-					  AutoGenerateColumns="False" SelectionUnit="FullRow" HeadersVisibility="Column" AlternatingRowBackground="Azure">
+					  AutoGenerateColumns="False" SelectionUnit="FullRow" HeadersVisibility="Column" AlternatingRowBackground="#D1F0FF">
 
 				<DataGrid.Resources>
 					<Style TargetType="{x:Type DataGridCell}">
@@ -144,6 +144,7 @@
 								<Setter Property="Background" Value="LightSeaGreen" />
 							</Trigger>
 						</Style.Triggers>
+						<Setter Property="BorderThickness" Value="0" />
 					</Style>
 				</DataGrid.Resources>
 
@@ -198,7 +199,7 @@
 
 			</DataGrid>
 			
-			<ListView Name="LvEmployees" BorderThickness="3" Padding="10 0"
+			<!--<ListView Name="LvEmployees" BorderThickness="3" Padding="10 0"
 				SelectionChanged="LvEmployees_SelectionChanged" Foreground="#51507A" Visibility="Collapsed">
 
 				<ListView.ItemContainerStyle>
@@ -221,7 +222,7 @@
 					</GridView>
 				</ListView.View>
 
-			</ListView>
+			</ListView>-->
 			
 		</StackPanel>
 		

@@ -91,7 +91,72 @@
 
 		<StackPanel Grid.Row="1">
 
-			<ListView Grid.Row="1" Name="LvDepartments" BorderThickness="3" Padding="10 0"
+			<DataGrid Name="DgDepartments" Foreground="#51507A" CanUserAddRows="False" IsReadOnly="True" RowHeight="48" Padding="10 0" GridLinesVisibility="None"
+					  AutoGenerateColumns="False" SelectionUnit="FullRow" HeadersVisibility="Column" AlternatingRowBackground="#D4EDFA">
+
+				<DataGrid.Resources>
+					<Style TargetType="{x:Type DataGridCell}">
+						<Style.Triggers>
+							<Trigger Property="DataGridCell.IsSelected" Value="True">
+								<Setter Property="Background" Value="LightSeaGreen" />
+							</Trigger>
+						</Style.Triggers>
+						<Setter Property="BorderThickness" Value="0" />
+					</Style>
+				</DataGrid.Resources>
+
+				<DataGrid.RowStyle>
+					<Style TargetType="DataGridRow">
+						<Setter Property="Margin" Value="0 2" />
+						<Setter Property="Cursor" Value="Hand" />
+						<Setter Property="FontSize" Value="16" />
+					</Style>
+				</DataGrid.RowStyle>
+
+				<DataGrid.ColumnHeaderStyle>
+					<Style TargetType="{x:Type DataGridColumnHeader}">
+						<Setter Property="DocumentViewerBase.Background" Value="Transparent" />
+						<Setter Property="Margin" Value="0 10" />
+					</Style>
+				</DataGrid.ColumnHeaderStyle>
+
+				<DataGrid.Columns>
+
+					<DataGridTextColumn Header="Id" Visibility="Collapsed" Binding="{Binding ID}" />
+					<DataGridTextColumn Width="200" Binding="{Binding DepartmentName}">
+						<DataGridTextColumn.Header>
+							<TextBlock FontWeight="Bold" Text="Department name"/>
+						</DataGridTextColumn.Header>
+					</DataGridTextColumn>
+
+					<DataGridTextColumn Width="150" Binding="{Binding State}">
+						<DataGridTextColumn.Header>
+							<TextBlock FontWeight="Bold" Text="State"/>
+						</DataGridTextColumn.Header>
+					</DataGridTextColumn>
+
+					<DataGridTextColumn Width="150" Binding="{Binding City}">
+						<DataGridTextColumn.Header>
+							<TextBlock FontWeight="Bold" Text="City"/>
+						</DataGridTextColumn.Header>
+					</DataGridTextColumn>
+
+					<DataGridTextColumn Width="200" Binding="{Binding Street}">
+						<DataGridTextColumn.Header>
+							<TextBlock FontWeight="Bold" Text="Street"/>
+						</DataGridTextColumn.Header>
+					</DataGridTextColumn>
+
+					<DataGridTextColumn Width="*" Binding="{Binding PostalCode}">
+						<DataGridTextColumn.Header>
+							<TextBlock FontWeight="Bold" Text="PostalCode"/>
+						</DataGridTextColumn.Header>
+					</DataGridTextColumn>
+				</DataGrid.Columns>
+
+			</DataGrid>
+
+			<!--<ListView Name="LvDepartments" BorderThickness="3" Padding="10 0"
 				  SelectionChanged="LvDepartments_SelectionChanged" Foreground="#51507A">
 
 				<ListView.ItemContainerStyle>
@@ -113,7 +178,7 @@
 					</GridView>
 				</ListView.View>
 
-			</ListView>
+			</ListView>-->
 			
 		</StackPanel>
 
