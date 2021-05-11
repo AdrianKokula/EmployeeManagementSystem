@@ -37,7 +37,7 @@ namespace EmployeeManagementSystem.Pages {
 
 			LoadData();
 
-			//EditEmp.Visibility = Visibility.Collapsed;
+			EditEmp.Visibility = Visibility.Collapsed;
 
 		}
 
@@ -45,7 +45,9 @@ namespace EmployeeManagementSystem.Pages {
 
 		#region Handlers
 
-		private void LvEmployees_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+		private void DgEmployees_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+
+			if (e.AddedItems.Count == 0) return;
 
 			// first selected row
 			DataRowView dataRow = (DataRowView)e.AddedItems[0];
@@ -56,7 +58,20 @@ namespace EmployeeManagementSystem.Pages {
 
 		}
 
-		private void BtnAdd_Click(object sender, RoutedEventArgs e) {
+		private void DgEmployees_KeyDown(object sender, KeyEventArgs e) {
+
+			switch(e.Key) {
+
+				case Key.Escape:
+					DgEmployees.UnselectAll();
+					EditEmp.Visibility = Visibility.Collapsed;
+					break;
+
+			}
+
+		}
+
+		private void BtnAddEmployee_Click(object sender, RoutedEventArgs e) {
 
 			AddEmployee employeeWindow = new AddEmployee() {
 				Owner = Window.GetWindow(this)
@@ -85,7 +100,6 @@ namespace EmployeeManagementSystem.Pages {
 			if (!queryResult.Equals("OK")) return;
 
 			DgEmployees.ItemsSource = dataTableEmployees.DefaultView;
-			//LvEmployees.ItemsSource = dataTableEmployees.DefaultView;
 
 		}
 

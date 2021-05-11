@@ -26,73 +26,65 @@
 	</Page.Resources>
 
 	<Grid Name="GridMain">
-		
+
 		<Grid.RowDefinitions>
 			<RowDefinition Height="auto" />
 			<RowDefinition Height="*" />
 			<RowDefinition Height="auto" />
 		</Grid.RowDefinitions>
 
-		<!--<Border Grid.Row="0" Background="#E99454" CornerRadius="5">
-			<Grid>
-
-				<DockPanel Margin="10" LastChildFill="False">
-
-					<StackPanel Orientation="Horizontal">
-						<Image Source="../Resources/Login.png" MaxHeight="32" Margin="5 0"/>
-						<TextBlock Grid.Column="1" FontSize="20" Text="Users" VerticalAlignment="Center"/>
-					</StackPanel>
-
-					<Button Grid.Column="2" Name="BtnAdd" Padding="0" DockPanel.Dock="Right" Cursor="Hand" Click="BtnAdd_Click" BorderThickness="0" Background="Transparent">
-						<StackPanel Orientation="Horizontal">
-							<Image Source="../Resources/Add.png" MaxHeight="32" MaxWidth="32" Margin="5"/>
-							<TextBlock Text="Add" VerticalAlignment="Center"/>
-						</StackPanel>
-					</Button>
-
-				</DockPanel>
-
-			</Grid>
-		</Border>-->
-
 		<!--Filters-->
 		<Grid>
 
 			<TextBlock Text="Data" Foreground="#B4B7C0" FontSize="16" VerticalAlignment="Center"/>
 
-			<Button x:Name="BtnFilters" FontSize="16" HorizontalAlignment="Right" Background="Transparent" Cursor="Hand">
-				<Button.Triggers>
-					<EventTrigger RoutedEvent="Button.Click">
-						<EventTrigger.Actions>
-							<BeginStoryboard>
-								<Storyboard>
-									<BooleanAnimationUsingKeyFrames 
-											 Storyboard.TargetName="FilterPopup" 
-											 Storyboard.TargetProperty="IsOpen">
-										<DiscreteBooleanKeyFrame KeyTime="0:0:0" Value="True" />
-									</BooleanAnimationUsingKeyFrames>
-								</Storyboard>
-							</BeginStoryboard>
-						</EventTrigger.Actions>
-					</EventTrigger>
-				</Button.Triggers>
-				<StackPanel Orientation="Horizontal">
-					<Image Source="../Resources/Filter.png" MaxHeight="24" MaxWidth="24" />
-					<TextBlock Text="Filters" Foreground="#B4B7C0" VerticalAlignment="Center"/>
-				</StackPanel>
-			</Button>
+			<StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
 
-			<Popup Name="FilterPopup" StaysOpen="False" MinWidth="250"
-				   PlacementTarget="{Binding ElementName=BtnFilters}">
-				<controls:FilterUsers />
-			</Popup>
+				<Button x:Name="BtnFilters" FontSize="16" Background="#54C1FA" Cursor="Hand" Margin="8 0">
+					<Button.Triggers>
+						<EventTrigger RoutedEvent="Button.Click">
+							<EventTrigger.Actions>
+								<BeginStoryboard>
+									<Storyboard>
+										<BooleanAnimationUsingKeyFrames 
+												 Storyboard.TargetName="FilterPopup" 
+												 Storyboard.TargetProperty="IsOpen">
+											<DiscreteBooleanKeyFrame KeyTime="0:0:0" Value="True" />
+										</BooleanAnimationUsingKeyFrames>
+									</Storyboard>
+								</BeginStoryboard>
+							</EventTrigger.Actions>
+						</EventTrigger>
+					</Button.Triggers>
+					<StackPanel Orientation="Horizontal">
+						<Image Source="../Resources/Filter_white.png" MaxHeight="24" MaxWidth="24" />
+						<TextBlock Text="Filters" Foreground="#FFFFFF" VerticalAlignment="Center"/>
+					</StackPanel>
+				</Button>
+
+				<Popup Name="FilterPopup" StaysOpen="False" MinWidth="250"
+					   PlacementTarget="{Binding ElementName=BtnFilters}">
+					<controls:FilterUsers />
+				</Popup>
+
+				<Button x:Name="BtnAddUser" FontSize="16" Background="LightGreen" Cursor="Hand"
+						Click="BtnAddUser_Click">
+					<StackPanel Orientation="Horizontal">
+						<Image Source="../Resources/Add_white.png" MaxHeight="24" MaxWidth="24" />
+						<TextBlock Text="Add" Foreground="#FFFFFF" VerticalAlignment="Center"/>
+					</StackPanel>
+				</Button>
+
+			</StackPanel>
 
 		</Grid>
 
 		<StackPanel Grid.Row="1">
 
 			<DataGrid Name="DgUsers" Foreground="#51507A" CanUserAddRows="False" IsReadOnly="True" RowHeight="48" Padding="10 0" GridLinesVisibility="None"
-					  AutoGenerateColumns="False" SelectionUnit="FullRow" HeadersVisibility="Column" AlternatingRowBackground="#D4EDFA">
+					  AutoGenerateColumns="False" SelectionUnit="FullRow" HeadersVisibility="Column" AlternatingRowBackground="#D4EDFA"
+					  SelectionChanged="DgUsers_SelectionChanged"
+					  KeyDown="DgUsers_KeyDown">
 
 				<DataGrid.Resources>
 					<Style TargetType="{x:Type DataGridCell}">
@@ -138,28 +130,7 @@
 				</DataGrid.Columns>
 
 			</DataGrid>
-			
-			<!--<ListView Grid.Row="1" Name="LvUsers" BorderThickness="3" Padding="10 0"
-				  SelectionChanged="LvUsers_SelectionChanged" Foreground="#51507A">
 
-				<ListView.ItemContainerStyle>
-					<Style TargetType="{x:Type ListViewItem}" >
-						<Setter Property="Height" Value="48" />
-						<Setter Property="Margin" Value="0 0" />
-						<Setter Property="Cursor" Value="Hand" />
-					</Style>
-				</ListView.ItemContainerStyle>
-
-				<ListView.View>
-					<GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnsStyle}">
-						<GridViewColumn Header="Id" Width="0" DisplayMemberBinding="{Binding ID}" />
-						<GridViewColumn Header="User name" Width="175" DisplayMemberBinding="{Binding Name}" />
-						<GridViewColumn Header="Email" Width="300" DisplayMemberBinding="{Binding Email}" />
-					</GridView>
-				</ListView.View>
-
-			</ListView>-->
-			
 		</StackPanel>
 
 		<controls:EditUser x:Name="EditUser" Grid.Row="2"/>

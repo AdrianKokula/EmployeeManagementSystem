@@ -33,109 +33,59 @@
 			<RowDefinition Height="auto" />
 		</Grid.RowDefinitions>
 
-		<!--<Border Grid.Row="0" CornerRadius="5" Background="#fefefe">
-			<Grid>
-
-				<DockPanel Margin="10" LastChildFill="False">
-
-					<StackPanel Orientation="Horizontal">
-						<Image Source="../Resources/Employees.png" MaxHeight="32" Margin="5 0"/>
-						<TextBlock Grid.Column="1" FontSize="20" Text="Employees" VerticalAlignment="Center" FontWeight="Bold" Foreground="#51507A"/>
-					</StackPanel>
-
-					<Button Grid.Column="2" Name="BtnAdd" Padding="0" DockPanel.Dock="Right" Cursor="Hand" Click="BtnAdd_Click" BorderThickness="0" Background="Transparent">
-						<StackPanel Orientation="Horizontal">
-							<Image Source="../Resources/Add.png" MaxHeight="32" MaxWidth="32" Margin="5"/>
-							<TextBlock Text="Add" VerticalAlignment="Center"/>
-						</StackPanel>
-					</Button>
-
-				</DockPanel>
-
-			</Grid>
-		</Border>-->
-
 		<!--Filters-->
 		<Grid>
 
 			<TextBlock Text="Data" Foreground="#B4B7C0" FontSize="16" VerticalAlignment="Center"/>
 
-			<Button x:Name="BtnFilters" FontSize="16" HorizontalAlignment="Right" Background="Transparent" Cursor="Hand">
-				<Button.Triggers>
-					<EventTrigger RoutedEvent="Button.Click">
-						<EventTrigger.Actions>
-							<BeginStoryboard>
-								<Storyboard>
-									<BooleanAnimationUsingKeyFrames 
+			<StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+
+				<Button x:Name="BtnFilters" FontSize="16" Background="#54C1FA" Cursor="Hand" Margin="8 0">
+					<Button.Triggers>
+						<EventTrigger RoutedEvent="Button.Click">
+							<EventTrigger.Actions>
+								<BeginStoryboard>
+									<Storyboard>
+										<BooleanAnimationUsingKeyFrames 
 											 Storyboard.TargetName="FilterPopup" 
 											 Storyboard.TargetProperty="IsOpen">
-										<DiscreteBooleanKeyFrame KeyTime="0:0:0" Value="True" />
-									</BooleanAnimationUsingKeyFrames>
-								</Storyboard>
-							</BeginStoryboard>
-						</EventTrigger.Actions>
-					</EventTrigger>
-				</Button.Triggers>
-				<StackPanel Orientation="Horizontal">
-					<Image Source="../Resources/Filter.png" MaxHeight="24" MaxWidth="24" />
-					<TextBlock Text="Filters" Foreground="#B4B7C0" VerticalAlignment="Center"/>
-				</StackPanel>
-			</Button>
+											<DiscreteBooleanKeyFrame KeyTime="0:0:0" Value="True" />
+										</BooleanAnimationUsingKeyFrames>
+									</Storyboard>
+								</BeginStoryboard>
+							</EventTrigger.Actions>
+						</EventTrigger>
+					</Button.Triggers>
+					<StackPanel Orientation="Horizontal">
+						<Image Source="../Resources/Filter_white.png" MaxHeight="24" MaxWidth="24" />
+						<TextBlock Text="Filters" Foreground="#FFFFFF" VerticalAlignment="Center"/>
+					</StackPanel>
+				</Button>
 
-			<Popup Name="FilterPopup" StaysOpen="False" MinWidth="250"
+				<Popup Name="FilterPopup" StaysOpen="False" MinWidth="250"
 				   PlacementTarget="{Binding ElementName=BtnFilters}">
-				<controls:FilterEmployees />
-			</Popup>
+					<controls:FilterEmployees />
+				</Popup>
 
+				<Button x:Name="BtnAddEmployee" FontSize="16" Background="LightGreen" Cursor="Hand"
+						Click="BtnAddEmployee_Click">
+					<StackPanel Orientation="Horizontal">
+						<Image Source="../Resources/Add_white.png" MaxHeight="24" MaxWidth="24" />
+						<TextBlock Text="Add" Foreground="#FFFFFF" VerticalAlignment="Center"/>
+					</StackPanel>
+				</Button>
+
+			</StackPanel>
+			
 		</Grid>
-		<!--<StackPanel>
-
-			<TextBlock Text="Filters" Foreground="#B4B7C0" FontSize="14" Margin="0 0 0 0"/>
-
-			<Grid>
-
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="1*" />
-					<ColumnDefinition Width="1*" />
-					<ColumnDefinition Width="1*" />
-				</Grid.ColumnDefinitions>
-
-				<StackPanel Grid.Column="0" Margin="10 5">
-
-					<TextBlock Text="First name: " VerticalAlignment="Center"/>
-					<TextBox Name="TbFirstName"
-							 Padding="10 5"
-							 BorderThickness="0" FontSize="16"/>
-
-				</StackPanel>
-
-				<StackPanel Grid.Column="1" Margin="10 5">
-
-					<TextBlock Text="Last name: " VerticalAlignment="Center"/>
-					<TextBox Name="TbLastName"
-							 Padding="10 5"
-							 BorderThickness="0" FontSize="16"/>
-
-				</StackPanel>
-
-			</Grid>
-
-		</StackPanel>-->
 
 		<!--Data-->
 		<StackPanel Grid.Row="1">
 
-			<!--<TextBlock Text="Data" Foreground="#B4B7C0" FontSize="16"/>-->
-
-			<!--<Button Background="Transparent">
-				<StackPanel Orientation="Horizontal">
-					<Image Source="../Resources/EmployeeAdd.png" MaxHeight="16"/>
-					<TextBlock Text=" Add new" VerticalAlignment="Center"/>
-				</StackPanel>
-			</Button>-->
-
 			<DataGrid Name="DgEmployees" Foreground="#51507A" CanUserAddRows="False" IsReadOnly="True" RowHeight="48" Padding="10 0" GridLinesVisibility="None"
-					  AutoGenerateColumns="False" SelectionUnit="FullRow" HeadersVisibility="Column" AlternatingRowBackground="#D1F0FF">
+					  AutoGenerateColumns="False" SelectionUnit="FullRow" HeadersVisibility="Column" AlternatingRowBackground="#D1F0FF"
+					  SelectionChanged="DgEmployees_SelectionChanged"
+					  KeyDown="DgEmployees_KeyDown">
 
 				<DataGrid.Resources>
 					<Style TargetType="{x:Type DataGridCell}">
@@ -177,19 +127,19 @@
 							<TextBlock FontWeight="Bold" Text="Last name"/>
 						</DataGridTextColumn.Header>
 					</DataGridTextColumn>
-					
+
 					<DataGridTextColumn Width="175" Binding="{Binding Department}">
 						<DataGridTextColumn.Header>
 							<TextBlock FontWeight="Bold" Text="Department"/>
 						</DataGridTextColumn.Header>
 					</DataGridTextColumn>
-					
+
 					<DataGridTextColumn Width="125" Binding="{Binding DateOfBirth}">
 						<DataGridTextColumn.Header>
 							<TextBlock FontWeight="Bold" Text="Date of birth"/>
 						</DataGridTextColumn.Header>
 					</DataGridTextColumn>
-					
+
 					<DataGridTextColumn Width="*" Binding="{Binding Residence}">
 						<DataGridTextColumn.Header>
 							<TextBlock FontWeight="Bold" Text="Residence"/>
@@ -198,94 +148,11 @@
 				</DataGrid.Columns>
 
 			</DataGrid>
-			
-			<!--<ListView Name="LvEmployees" BorderThickness="3" Padding="10 0"
-				SelectionChanged="LvEmployees_SelectionChanged" Foreground="#51507A" Visibility="Collapsed">
 
-				<ListView.ItemContainerStyle>
-					<Style TargetType="{x:Type ListViewItem}" >
-						<Setter Property="Height" Value="48" />
-						<Setter Property="Margin" Value="0 0" />
-						<Setter Property="Cursor" Value="Hand" />
-						<Setter Property="Background" Value="Azure" />
-					</Style>
-				</ListView.ItemContainerStyle>
-
-				<ListView.View>
-					<GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnsStyle}">
-						<GridViewColumn Header="Id" Width="0" DisplayMemberBinding="{Binding ID}" />
-						<GridViewColumn Header="First name" Width="150" DisplayMemberBinding="{Binding FirstName}" />
-						<GridViewColumn Header="Last name" Width="150" DisplayMemberBinding="{Binding LastName}" />
-						<GridViewColumn Header="Department" Width="200" DisplayMemberBinding="{Binding Department}" />
-						<GridViewColumn Header="Date of birth" DisplayMemberBinding="{Binding DateOfBirth}" />
-						<GridViewColumn Header="Residence" DisplayMemberBinding="{Binding Residence}"/>
-					</GridView>
-				</ListView.View>
-
-			</ListView>-->
-			
 		</StackPanel>
 		
 		<controls:EditEmployee x:Name="EditEmp" Grid.Row="2"/>
 		
 	</Grid>
 
-	<!--<Grid Name="GridMain" >
-
-		<Grid.RowDefinitions>
-			<RowDefinition Height="auto" />
-			<RowDefinition Height="*" />
-			<RowDefinition Height="auto" />
-		</Grid.RowDefinitions>
-
-		<Border Grid.Row="0" Background="#E99454" CornerRadius="5">
-			<Grid>
-
-				<DockPanel Margin="10" LastChildFill="False">
-
-					<StackPanel Orientation="Horizontal">
-						<Image Source="../Resources/Employee.png" MaxHeight="32" Margin="5 0"/>
-						<TextBlock Grid.Column="1" FontSize="20" Text="Employees" VerticalAlignment="Center"/>
-					</StackPanel>
-
-					<Button Grid.Column="2" Name="BtnAdd" Padding="0" DockPanel.Dock="Right" Cursor="Hand" Click="BtnAdd_Click" BorderThickness="0" Background="Transparent">
-						<StackPanel Orientation="Horizontal">
-							<Image Source="../Resources/Add.png" MaxHeight="32" MaxWidth="32" Margin="5"/>
-							<TextBlock Text="Add" VerticalAlignment="Center"/>
-						</StackPanel>
-					</Button>
-
-				</DockPanel>
-
-			</Grid>
-		</Border>
-
-		<ListView Grid.Row="1" Name="LvEmployees" BorderThickness="0 3" Padding="10" Background="#333b41"
-				SelectionChanged="LvEmployees_SelectionChanged" >
-
-			<ListView.ItemContainerStyle>
-				<Style TargetType="{x:Type ListViewItem}" >
-					<Setter Property="Height" Value="48" />
-					<Setter Property="Margin" Value="0 0" />
-					<Setter Property="Background" Value="#3f474e" />
-					<Setter Property="Cursor" Value="Hand" />
-				</Style>
-			</ListView.ItemContainerStyle>
-
-			<ListView.View>
-				<GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnsStyle}">
-					<GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding ID}" />
-					<GridViewColumn Header="FIRST NAME" Width="150" DisplayMemberBinding="{Binding FirstName}" />
-					<GridViewColumn Header="LAST NAME" Width="150" DisplayMemberBinding="{Binding LastName}" />
-					<GridViewColumn Header="DEPARTMENT" Width="200" DisplayMemberBinding="{Binding Department}" />
-					<GridViewColumn Header="DATE OF BIRTH" DisplayMemberBinding="{Binding DateOfBirth}" />
-					<GridViewColumn Header="RESIDENCEE" DisplayMemberBinding="{Binding Residence}"/>
-				</GridView>
-			</ListView.View>
-
-		</ListView>
-
-		<controls:EditEmployee x:Name="EditEmp" Grid.Row="2"/>
-
-	</Grid>-->
 </Page>

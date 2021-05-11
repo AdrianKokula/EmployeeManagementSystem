@@ -17,6 +17,7 @@
     <None Remove="Resources\About.png" />
     <None Remove="Resources\About_white.png" />
     <None Remove="Resources\Add.png" />
+    <None Remove="Resources\Add_white.png" />
     <None Remove="Resources\CloseWindow.png" />
     <None Remove="Resources\Department.png" />
     <None Remove="Resources\Department_white.png" />
@@ -56,6 +57,7 @@
     <Resource Include="Resources\About.png" />
     <Resource Include="Resources\About_white.png" />
     <Resource Include="Resources\Add.png" />
+    <Resource Include="Resources\Add_white.png" />
     <Resource Include="Resources\CloseWindow.png" />
     <Resource Include="Resources\Department.png" />
     <Resource Include="Resources\Department_white.png" />

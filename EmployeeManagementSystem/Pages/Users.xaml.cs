@@ -36,7 +36,7 @@ namespace EmployeeManagementSystem.Pages {
 
 			LoadData();
 
-			//EditUser.Visibility = Visibility.Collapsed;
+			EditUser.Visibility = Visibility.Collapsed;
 
 		}
 
@@ -44,18 +44,20 @@ namespace EmployeeManagementSystem.Pages {
 
 		#region Handlers
 
-		private void BtnAdd_Click(object sender, RoutedEventArgs e) {
+		private void BtnAddUser_Click(object sender, RoutedEventArgs e) {
 
-			/*AddUser userWindow = new AddUser() {
+			AddUser userWindow = new AddUser() {
 				Owner = Window.GetWindow(this)
 			};
 
-			userWindow.ShowDialog();*/
+			userWindow.ShowDialog();
 			LoadData();
 
 		}
 
-		private void LvUsers_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+		private void DgUsers_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+
+			if (e.AddedItems.Count == 0) return;
 
 			// first selected row
 			DataRowView dataRow = (DataRowView)e.AddedItems[0];
@@ -63,6 +65,19 @@ namespace EmployeeManagementSystem.Pages {
 
 			EditUser.UserID = userID;
 			EditUser.Visibility = Visibility.Visible;
+
+		}
+
+		private void DgUsers_KeyDown(object sender, KeyEventArgs e) {
+
+			switch (e.Key) {
+
+				case Key.Escape:
+					DgUsers.UnselectAll();
+					EditUser.Visibility = Visibility.Collapsed;
+					break;
+
+			}
 
 		}
 
@@ -83,7 +98,6 @@ namespace EmployeeManagementSystem.Pages {
 			if (!queryResult.Equals("OK")) return;
 
 			DgUsers.ItemsSource = dataTableEmployees.DefaultView;
-			//LvUsers.ItemsSource = dataTableEmployees.DefaultView;
 
 		}
 
