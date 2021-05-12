@@ -7,18 +7,9 @@
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:ui="http://schemas.modernwpf.com/2019"
 		xmlns:local="clr-namespace:EmployeeManagementSystem"
-		mc:Ignorable="d" FontFamily="Helvetica" WindowStartupLocation="CenterScreen" Foreground="White"
+		mc:Ignorable="d" FontSize="16" WindowStartupLocation="CenterScreen" FontFamily="Helvetica" Background="AliceBlue" Foreground="#51507A"
 		Title="EMS - Login" Height="600" Width="450" ResizeMode="NoResize" WindowStyle="None" MouseDown="Window_MouseDown" MouseUp="Window_MouseUp">
 	<Grid>
-		
-		<Grid.Background>
-			<LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-				<LinearGradientBrush.GradientStops>
-					<GradientStop Offset="0.4" Color="#013243" />
-					<GradientStop Offset="1" Color="#1C4C5C" />
-				</LinearGradientBrush.GradientStops>
-			</LinearGradientBrush>
-		</Grid.Background>
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="auto"/>
@@ -40,7 +31,9 @@
 			<Image Source="Resources/Exit.png" MaxHeight="16"/>
 		</Button>
 
-		<Image Grid.Row="1" Source="Resources/Logo.ico" MaxHeight="64" Margin="0 15 0 0"/>
+		<StackPanel Grid.Row="1" Background="#19233E" Margin="0 5">
+			<Image Source="Resources/Logo.ico" MaxHeight="64" Margin="10"/>
+		</StackPanel>
 
 		<TextBlock Grid.Row="2" Text="Sing in" HorizontalAlignment="Center" FontSize="36" Margin="0 10"/>
 
@@ -54,9 +47,7 @@
 					<Image Source="Resources/Email.png" Margin="10 5" MaxHeight="26"/>
 					<TextBox Name="TbEmail"
 							 Padding="10 9"
-							 Background="#1C4857"
 							 BorderThickness="0"
-							 Foreground="White"
 							 FontSize="16"
 							 ui:ControlHelper.PlaceholderText="Email"/>
 
@@ -67,8 +58,6 @@
 
 					<Image Source="Resources/Password.png" Margin="10 5" MaxHeight="26"/>
 					<PasswordBox Name="PbPassword"
-								 Background="#1C4857"
-								 Foreground="White"
 								 FontSize="16"
 								 Padding="10 9"
 								 BorderThickness="0"
@@ -76,18 +65,18 @@
 
 				</DockPanel>
 
-				<CheckBox Margin="45 0 0 30" Background="#1C4857" BorderThickness="0" Foreground="White" VerticalAlignment="Center" FontSize="15" Name="CbRememberMail" IsChecked="True" Cursor="Hand">
-					<TextBlock Text="Remember email" VerticalAlignment="Center"/>
+				<CheckBox Margin="45 0 0 30" BorderThickness="0" VerticalAlignment="Center" FontSize="15" Name="CbRememberMail" IsChecked="True" Cursor="Hand">
+					<TextBlock Text="Remember email" VerticalAlignment="Center" Foreground="#51507A"/>
 				</CheckBox>
 
 			<Button Content="Login"
 					Name="BtnLogin"
 					Click="BtnLogin_Click"
-					Background="#FFAA4D"
+					Background="#54C1FA"
+					Foreground="#FAFAFA"
 					Cursor="Hand"
 					FontWeight="Bold"
 					Padding="5 10"
-					Foreground="White"
 					HorizontalAlignment="Stretch"/>
 
 		</StackPanel>

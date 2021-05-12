@@ -23,6 +23,7 @@
     <None Remove="Resources\Department_white.png" />
     <None Remove="Resources\Edit.png" />
     <None Remove="Resources\Email.png" />
+    <None Remove="Resources\Email_white.png" />
     <None Remove="Resources\Employee.png" />
     <None Remove="Resources\EmployeeAdd.png" />
     <None Remove="Resources\EmployeeAdd_white.png" />
@@ -40,6 +41,7 @@
     <None Remove="Resources\Maximize.png" />
     <None Remove="Resources\Minimize.png" />
     <None Remove="Resources\Password.png" />
+    <None Remove="Resources\Password_white.png" />
     <None Remove="Resources\Quit.png" />
     <None Remove="Resources\Quit_white.png" />
     <None Remove="Resources\Remove.png" />
@@ -63,6 +65,7 @@
     <Resource Include="Resources\Department_white.png" />
     <Resource Include="Resources\Edit.png" />
     <Resource Include="Resources\Email.png" />
+    <Resource Include="Resources\Email_white.png" />
     <Resource Include="Resources\Employee.png" />
     <Resource Include="Resources\EmployeeAdd.png" />
     <Resource Include="Resources\EmployeeAdd_white.png" />
@@ -78,6 +81,7 @@
     <Resource Include="Resources\Logo.ico" />
     <Resource Include="Resources\Logo.png" />
     <Resource Include="Resources\Password.png" />
+    <Resource Include="Resources\Password_white.png" />
     <Resource Include="Resources\Quit.png" />
     <Resource Include="Resources\Quit_white.png" />
     <Resource Include="Resources\Remove.png" />

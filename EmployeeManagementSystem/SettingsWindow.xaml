@@ -6,18 +6,9 @@
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:local="clr-namespace:EmployeeManagementSystem"
-		mc:Ignorable="d" FontSize="20" FontFamily="Helvetica" WindowStartupLocation="CenterScreen" Foreground="White"
-		Title="EMS - Settings" Height="450" Width="350" ResizeMode="NoResize" WindowStyle="None">
+		mc:Ignorable="d" FontSize="16" WindowStartupLocation="CenterScreen" FontFamily="Helvetica" Background="AliceBlue"
+		Title="EMS - Settings" Height="450" Width="350" ResizeMode="NoResize" WindowStyle="None" Foreground="#51507A">
 	<Grid>
-
-		<Grid.Background>
-			<LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-				<LinearGradientBrush.GradientStops>
-					<GradientStop Offset="0.4" Color="#013243" />
-					<GradientStop Offset="1" Color="#1C4C5C" />
-				</LinearGradientBrush.GradientStops>
-			</LinearGradientBrush>
-		</Grid.Background>
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="auto"/>
@@ -34,10 +25,8 @@
 			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
 
-		<Button Grid.Row="0" Background="Transparent" HorizontalAlignment="Right" Margin="3" BorderThickness="0" Cursor="Hand" Name="BtnClose"
-				Grid.ColumnSpan="3"
-				Click="BtnClose_Click">
-			<Image Source="Resources/Exit.png" MaxHeight="16"/>
+		<Button Grid.Row="0" Grid.ColumnSpan="3" MaxHeight="32" MaxWidth="32" HorizontalAlignment="Right" Padding="0" Name="BtnClose" Cursor="Hand" Click="BtnClose_Click">
+			<Image Source="Resources/CloseWindow.png"/>
 		</Button>
 
 		<StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="1">
@@ -45,37 +34,33 @@
 			<TextBlock Text="Connection settings" HorizontalAlignment="Center" Margin="10" FontSize="20"/>
 
 			<StackPanel HorizontalAlignment="Stretch" Margin="0 5">
-				<TextBlock Text="Server name" FontSize="14"/>
+				<TextBlock Text="Server name"/>
 				<TextBox Name="TbServerName"
 						 BorderThickness="0"
-						 Foreground="White"
 						 FontSize="16"
 						 Padding="10 9"/>
 			</StackPanel>
 
 			<StackPanel HorizontalAlignment="Stretch" Margin="0 5">
-				<TextBlock Text="Database" FontSize="14"/>
+				<TextBlock Text="Database"/>
 				<TextBox Name="TbDatabaseName"
 						 BorderThickness="0"
-						 Foreground="White"
 						 FontSize="16"
 						 Padding="10 9"/>
 			</StackPanel>
 
 			<StackPanel HorizontalAlignment="Stretch" Margin="0 5">
-				<TextBlock Text="User name" FontSize="14"/>
+				<TextBlock Text="User name"/>
 				<TextBox Name="TbDbUserName"
 						 BorderThickness="0"
-						 Foreground="White"
 						 FontSize="16"
 						 Padding="10 9"/>
 			</StackPanel>
 
 			<StackPanel HorizontalAlignment="Stretch" Margin="0 5">
-				<TextBlock Text="User password" FontSize="14"/>
+				<TextBlock Text="User password"/>
 				<TextBox Name="TbDbUserPassword"
 						 BorderThickness="0"
-						 Foreground="White"
 						 FontSize="16"
 						 Padding="10 9"/>
 			</StackPanel>
@@ -84,16 +69,16 @@
 				<CheckBox Name="CbWindowsAuth"
 						  Checked="CbWindowsAuth_CheckedChanged"
 						  Unchecked="CbWindowsAuth_CheckedChanged">
-					<TextBlock Text="Windows authentification" Foreground="White"/>
+					<TextBlock Text="Windows authentification"/>
 				</CheckBox>
 			</StackPanel>
 
 			<Button Content="Save"
 					Name="BtnSaveSettings"
-					Background="#FFAA4D"
+					Background="#54C1FA"
+					Foreground="#FAFAFA"
 					Padding="5 10"
 					Cursor="Hand"
-					Foreground="White"
 					HorizontalAlignment="Stretch"
 					Click="BtnSaveSettings_Click"/>
 

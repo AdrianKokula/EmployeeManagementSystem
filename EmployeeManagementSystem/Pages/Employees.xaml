@@ -7,7 +7,7 @@
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 	  xmlns:local="clr-namespace:EmployeeManagementSystem.Pages"
 	  xmlns:controls="clr-namespace:EmployeeManagementSystem.UserControls"
-	  mc:Ignorable="d" FontSize="16" FontFamily="Helvetica" Background="AliceBlue"
+	  mc:Ignorable="d" FontSize="16"
 	  d:DesignHeight="700" d:DesignWidth="850" Foreground="#51507A"
 	  Title="Employees">
 
