@@ -8,7 +8,7 @@
 		xmlns:ui="http://schemas.modernwpf.com/2019"
 		xmlns:local="clr-namespace:EmployeeManagementSystem"
 		mc:Ignorable="d" FontSize="16" WindowStartupLocation="CenterScreen" FontFamily="Helvetica" Background="AliceBlue" Foreground="#51507A"
-		Title="EMS - Login" Height="600" Width="450" ResizeMode="NoResize" WindowStyle="None" MouseDown="Window_MouseDown" MouseUp="Window_MouseUp">
+		Title="EMS - Login" Height="600" Width="450" ResizeMode="NoResize">
 	<Grid>
 
 		<Grid.RowDefinitions>
@@ -20,7 +20,7 @@
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
 
-		<Button Background="Transparent"
+		<!--<Button Background="Transparent"
 				HorizontalAlignment="Right"
 				Margin="3"
 				BorderThickness="0"
@@ -29,9 +29,9 @@
 				Click="BtnClose_Click">
 			
 			<Image Source="Resources/Exit.png" MaxHeight="16"/>
-		</Button>
+		</Button>-->
 
-		<StackPanel Grid.Row="1" Background="#19233E" Margin="0 5">
+		<StackPanel Grid.Row="1" Background="#19233E" Margin="0">
 			<Image Source="Resources/Logo.ico" MaxHeight="64" Margin="10"/>
 		</StackPanel>
 

@@ -48,19 +48,6 @@ namespace EmployeeManagementSystem {
 
 		#region Handlers
 
-		private void Window_MouseDown(object sender, MouseButtonEventArgs e) {
-
-			if(e.ChangedButton == MouseButton.Left) {
-				this.Cursor = Cursors.SizeAll;
-				this.DragMove();
-			}
-
-		}
-
-		private void Window_MouseUp(object sender, MouseButtonEventArgs e) {
-			this.Cursor = Cursors.Arrow;
-		}
-
 		private void BtnClose_Click(object sender, RoutedEventArgs e) {
 			Close();
 		}
