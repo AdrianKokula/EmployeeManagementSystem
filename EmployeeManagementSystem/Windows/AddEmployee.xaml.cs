@@ -39,7 +39,7 @@ namespace EmployeeManagementSystem.Windows {
 
 		#region Handlers
 		
-		private void BtnSubmit_Click(object sender, RoutedEventArgs e) {
+		private void BtnAddEmployee_Click(object sender, RoutedEventArgs e) {
 			CreateEmployee();
 		}
 

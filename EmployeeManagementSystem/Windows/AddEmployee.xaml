@@ -7,22 +7,20 @@
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:local="clr-namespace:EmployeeManagementSystem.Windows"
 		mc:Ignorable="d" FontSize="16" WindowStartupLocation="CenterOwner" FontFamily="Helvetica" Background="AliceBlue"
-		Title="EditEmployeeWindow" Height="425" Width="350" WindowStyle="None" Foreground="#51507A">
+		Title="Add new employee" Height="475" Width="350" Foreground="#51507A" ResizeMode="NoResize">
 	<Grid>
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="auto" />
-			<RowDefinition Height="auto" />
 			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
 
-		<Button Grid.Row="0" MaxHeight="32" MaxWidth="32" HorizontalAlignment="Right" Padding="0" Name="BtnClose" Cursor="Hand" Click="BtnClose_Click">
-			<Image Source="../Resources/CloseWindow.png"/>
-		</Button>
+		<StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+			<Image Source="../Resources/EmployeeAdd.png" MaxHeight="32" Margin="5"/>
+			<TextBlock Text="Add new employee" VerticalAlignment="Center" FontWeight="Bold" FontSize="18"/>
+		</StackPanel>
 
-		<TextBlock Grid.Row="1" Text="Add new employee" HorizontalAlignment="Center" FontWeight="Bold" FontSize="18"/>
-
-		<StackPanel Grid.Row="2">
+		<StackPanel Grid.Row="1">
 
 			<StackPanel Margin="10 5">
 
@@ -68,8 +66,8 @@
 			<Button Name="BtnSubmit"
 					Margin="10"
 					HorizontalAlignment="Stretch"
-					Content="Submit"
-					Click="BtnSubmit_Click"
+					Content="Add employee"
+					Click="BtnAddEmployee_Click"
 					Cursor="Hand"
 					Background="#54C1FA"
 					Foreground="#FAFAFA" />
