@@ -67,9 +67,37 @@
 					<controls:FilterUsers />
 				</Popup>
 
-				<Button x:Name="BtnAddUser" FontSize="16" Background="LightGreen" Cursor="Hand"
+				<Button x:Name="BtnAddUser"
+						FontSize="16"
+						Cursor="Hand"
 						Click="BtnAddUser_Click">
-					<StackPanel Orientation="Horizontal">
+
+					<Button.Style>
+						<Style TargetType="{x:Type Button}">
+							<Setter Property="Template">
+								<Setter.Value>
+									<ControlTemplate TargetType="Button">
+										<Border x:Name="border"
+												Background="LightGreen"
+												CornerRadius="3">
+											<Grid>
+												<ContentPresenter Margin="{TemplateBinding Padding}"
+																	HorizontalAlignment="Center"
+																	VerticalAlignment="Center" />
+											</Grid>
+										</Border>
+										<ControlTemplate.Triggers>
+											<Trigger Property="IsMouseOver" Value="true">
+												<Setter TargetName="border" Property="Background" Value="#71BB71" />
+											</Trigger>
+										</ControlTemplate.Triggers>
+									</ControlTemplate>
+								</Setter.Value>
+							</Setter>
+						</Style>
+					</Button.Style>
+
+					<StackPanel Orientation="Horizontal" Margin="10 0">
 						<Image Source="../Resources/Add_white.png" MaxHeight="24" MaxWidth="24" />
 						<TextBlock Text="Add" Foreground="#FFFFFF" VerticalAlignment="Center"/>
 					</StackPanel>

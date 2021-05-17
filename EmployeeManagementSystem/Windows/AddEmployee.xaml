@@ -65,12 +65,43 @@
 
 			<Button Name="BtnSubmit"
 					Margin="10"
+					Padding="5"
 					HorizontalAlignment="Stretch"
-					Content="Add employee"
 					Click="BtnAddEmployee_Click"
 					Cursor="Hand"
-					Background="#54C1FA"
-					Foreground="#FAFAFA" />
+					Foreground="#FAFAFA">
+
+				<Button.Style>
+					<Style TargetType="{x:Type Button}">
+						<Setter Property="Template">
+							<Setter.Value>
+								<ControlTemplate TargetType="Button">
+									<Border x:Name="border"
+											Background="#54C1FA"
+											CornerRadius="3">
+										<Grid>
+											<ContentPresenter Margin="{TemplateBinding Padding}"
+																HorizontalAlignment="Center"
+																VerticalAlignment="Center" />
+										</Grid>
+									</Border>
+									<ControlTemplate.Triggers>
+										<Trigger Property="IsMouseOver" Value="true">
+											<Setter TargetName="border" Property="Background" Value="#55AEFF" />
+										</Trigger>
+									</ControlTemplate.Triggers>
+								</ControlTemplate>
+							</Setter.Value>
+						</Setter>
+					</Style>
+				</Button.Style>
+
+				<StackPanel Orientation="Horizontal">
+					<Image Source="../Resources/Add_white.png" Margin="5 0" MaxHeight="24" />
+					<TextBlock Text="Add employee" VerticalAlignment="Center"/>
+				</StackPanel>
+
+			</Button>
 
 		</StackPanel>
 
