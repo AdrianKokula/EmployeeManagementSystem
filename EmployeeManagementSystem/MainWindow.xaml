@@ -7,7 +7,7 @@
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"	
 		xmlns:local="clr-namespace:EmployeeManagementSystem"
 		mc:Ignorable="d" FontSize="20" FontFamily="Helvetica" WindowStartupLocation="CenterScreen"
-		Title="EMS - Employee Management System" Height="768" Width="1366" MouseUp="Window_MouseUp" MouseDown="Window_MouseDown">
+		Title="EMS - Employee Management System" Height="768" Width="1366">
 
 	<Grid>
 

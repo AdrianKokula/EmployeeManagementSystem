@@ -7,7 +7,7 @@
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:local="clr-namespace:EmployeeManagementSystem.Windows"
 		mc:Ignorable="d" FontSize="16" WindowStartupLocation="CenterOwner" FontFamily="Helvetica" Background="AliceBlue"
-		Title="Add new employee" Height="475" Width="350" Foreground="#51507A" ResizeMode="NoResize">
+		Title="Add new employee" Height="610" Width="375" Foreground="#51507A" ResizeMode="NoResize">
 	<Grid>
 
 		<Grid.RowDefinitions>
@@ -25,10 +25,13 @@
 			<StackPanel Margin="10 5">
 
 				<TextBlock Text="First name: " VerticalAlignment="Center"/>
-				<TextBox Name="TbFirstName"
-							Padding="10 5"
-							BorderThickness="0"/>
+				<TextBox Name="TbFirstName" Padding="10 5" BorderThickness="0"/>
 
+				<StackPanel Name="SpErrorEnterFirstName" Orientation="Horizontal" Margin="0 5 0 0">
+					<Image Source="../Resources/Exclamation.png" Height="16"/>
+					<TextBlock Text=" Enter first name"/>
+				</StackPanel>
+				
 			</StackPanel>
 
 			<StackPanel Margin="10 5">
@@ -36,6 +39,11 @@
 				<TextBlock Text="Last name: " VerticalAlignment="Center"/>
 				<TextBox Name="TbLastName" Padding="10 5" BorderThickness="0"/>
 
+				<StackPanel Name="SpErrorEnterLastName" Orientation="Horizontal" Margin="0 5 0 0">
+					<Image Source="../Resources/Exclamation.png" Height="16"/>
+					<TextBlock Text=" Enter last name"/>
+				</StackPanel>
+				
 			</StackPanel>
 
 			<StackPanel Margin="10 5">
@@ -46,20 +54,38 @@
 							HorizontalAlignment="Stretch"
 							BorderThickness="0"
 							Padding="10 5"/>
+
+				<StackPanel Name="SpErrorSelectDepartment" Orientation="Horizontal" Margin="0 5 0 0">
+					<Image Source="../Resources/Exclamation.png" Height="16"/>
+					<TextBlock Text=" Select department"/>
+				</StackPanel>
+
 			</StackPanel>
 
 			<StackPanel Margin="10 5">
 				<TextBlock Text="Date of birth: "/>
-				<DatePicker Name="DpDateOfBirth"
-							HorizontalAlignment="Stretch"
-							Padding="10 5"
-							BorderThickness="0"/>
+				<DatePicker Name="DpDateOfBirth" HorizontalAlignment="Stretch" Padding="10 5" BorderThickness="0"/>
+
+				<StackPanel Name="SpErrorSelectDateOfBirth" Orientation="Horizontal" Margin="0 5 0 0">
+					<Image Source="../Resources/Exclamation.png" Height="16"/>
+					<TextBlock Text=" Select date of birth"/>
+				</StackPanel>
+
+				<StackPanel Name="SpErrorDateOfBirthNotValid" Orientation="Horizontal" Margin="0 5 0 0">
+					<Image Source="../Resources/Exclamation.png" Height="16"/>
+					<TextBlock Text=" Are you sure you entered the right birthday?"/>
+				</StackPanel>
+
 			</StackPanel>
 
 			<StackPanel Margin="10 5">
-
 				<TextBlock Text="Residence: " VerticalAlignment="Center"/>
 				<TextBox Name="TbResidence" Padding="10 5" BorderThickness="0"/>
+
+				<StackPanel Name="SpErrorEnterResidence" Orientation="Horizontal" Margin="0 5 0 0">
+					<Image Source="../Resources/Exclamation.png" Height="16"/>
+					<TextBlock Text=" Enter residence"/>
+				</StackPanel>
 
 			</StackPanel>
 

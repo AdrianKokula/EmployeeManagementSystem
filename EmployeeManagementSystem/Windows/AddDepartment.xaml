@@ -1,14 +1,14 @@
 ﻿<!-- Copyright (c) 2020 Adrián Kokuľa - adriankokula.eu; License: The MIT License (MIT) -->
 	
 <Window x:Class="EmployeeManagementSystem.Windows.AddDepartment"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:EmployeeManagementSystem.Windows"
-        mc:Ignorable="d" FontSize="16" WindowStartupLocation="CenterOwner" FontFamily="Helvetica" Background="AliceBlue"
-        Title="Add new department" Height="475" Width="350" Foreground="#51507A" ResizeMode="NoResize">
-    <Grid>
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:local="clr-namespace:EmployeeManagementSystem.Windows"
+		mc:Ignorable="d" FontSize="16" WindowStartupLocation="CenterOwner" FontFamily="Helvetica" Background="AliceBlue"
+		Title="Add new department" Height="575" Width="350" Foreground="#51507A" ResizeMode="NoResize">
+	<Grid>
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="auto" />
@@ -25,6 +25,12 @@
 			<StackPanel Margin="10 5">
 				<TextBlock VerticalAlignment="Center" Text="Name: "/>
 				<TextBox Name="TbName" Padding="10 5" BorderThickness="0"/>
+
+				<StackPanel Name="SpErrorEnterName" Orientation="Horizontal" Margin="0 5 0 0">
+					<Image Source="../Resources/Exclamation.png" Height="16"/>
+					<TextBlock Text=" Enter name"/>
+				</StackPanel>
+
 			</StackPanel>
 
 			<StackPanel Margin="10 5">
@@ -35,21 +41,45 @@
 						  HorizontalAlignment="Stretch"
 						  BorderThickness="0"
 						  Padding="10 5"/>
+
+				<StackPanel Name="SpErrorSelectState" Orientation="Horizontal" Margin="0 5 0 0">
+					<Image Source="../Resources/Exclamation.png" Height="16"/>
+					<TextBlock Text=" Select state"/>
+				</StackPanel>
+
 			</StackPanel>
 
 			<StackPanel Margin="10 5">
 				<TextBlock Text="City: "/>
 				<TextBox Name="TbCity" BorderThickness="0"/>
+
+				<StackPanel Name="SpErrorEnterCity" Orientation="Horizontal" Margin="0 5 0 0">
+					<Image Source="../Resources/Exclamation.png" Height="16"/>
+					<TextBlock Text=" Enter city"/>
+				</StackPanel>
+
 			</StackPanel>
 
 			<StackPanel Margin="10 5">
 				<TextBlock Text="Street: "/>
 				<TextBox Name="TbStreet" BorderThickness="0"/>
+
+				<StackPanel Name="SpErrorEnterStreet" Orientation="Horizontal" Margin="0 5 0 0">
+					<Image Source="../Resources/Exclamation.png" Height="16"/>
+					<TextBlock Text=" Enter street"/>
+				</StackPanel>
+
 			</StackPanel>
 
 			<StackPanel Margin="10 5">
 				<TextBlock Text="Postal code: "/>
 				<TextBox Name="TbPostalCode" BorderThickness="0"/>
+
+				<StackPanel Name="SpErrorEnterPostalCode" Orientation="Horizontal" Margin="0 5 0 0">
+					<Image Source="../Resources/Exclamation.png" Height="16"/>
+					<TextBlock Text=" Enter postal code"/>
+				</StackPanel>
+
 			</StackPanel>
 
 			<Button Name="BtnSubmit"

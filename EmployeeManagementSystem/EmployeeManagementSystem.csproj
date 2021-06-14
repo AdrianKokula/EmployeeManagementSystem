@@ -31,6 +31,7 @@
     <None Remove="Resources\EmployeeEdit_white.png" />
     <None Remove="Resources\Employees.png" />
     <None Remove="Resources\Employees_white.png" />
+    <None Remove="Resources\Exclamation.png" />
     <None Remove="Resources\Exit.png" />
     <None Remove="Resources\Filter.png" />
     <None Remove="Resources\Filter_white.png" />
@@ -73,6 +74,7 @@
     <Resource Include="Resources\EmployeeEdit_white.png" />
     <Resource Include="Resources\Employees.png" />
     <Resource Include="Resources\Employees_white.png" />
+    <Resource Include="Resources\Exclamation.png" />
     <Resource Include="Resources\Exit.png" />
     <Resource Include="Resources\Filter.png" />
     <Resource Include="Resources\Filter_white.png" />

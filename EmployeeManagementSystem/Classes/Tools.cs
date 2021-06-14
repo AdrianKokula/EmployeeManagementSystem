@@ -17,6 +17,7 @@ namespace EmployeeManagementSystem.Classes {
 
 		public static int IntFromObject(object obj) {
 
+			if (obj == null) return 0;
 			if (obj == DBNull.Value) return 0;
 			if (!int.TryParse(obj.ToString(), out int result)) return 0;
 
