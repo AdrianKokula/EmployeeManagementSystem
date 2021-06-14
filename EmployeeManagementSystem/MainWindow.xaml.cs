@@ -37,46 +37,33 @@ namespace EmployeeManagementSystem {
 
 		#region Handlers
 
-		private void Window_MouseDown(object sender, MouseButtonEventArgs e) {
-
-			if (e.ChangedButton == MouseButton.Left) {
-				this.Cursor = Cursors.SizeAll;
-				this.DragMove();
-			}
-
-		}
-
-		private void Window_MouseUp(object sender, MouseButtonEventArgs e) {
-			this.Cursor = Cursors.Arrow;
-		}
-
 		private void BtnClose_Click(object sender, RoutedEventArgs e) {
 			Application.Current.Shutdown();
 		}
 
 		private void BtnMinimize_Click(object sender, RoutedEventArgs e) {
-			this.WindowState = WindowState.Minimized;
+			WindowState = WindowState.Minimized;
 		}
 
 		private void BtnMaximize_Click(object sender, RoutedEventArgs e) {
-			this.WindowState = this.WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
+			WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
 		}
 
 		private void BtnEmployees_Click(object sender, RoutedEventArgs e) {
-			FrmMain.Content = new Employees();
+			LoadEmpoyees();
 		}
 
 		private void BtnDepartments_Click(object sender, RoutedEventArgs e) {
-			FrmMain.Content = new Departments();
+			LoadDepartments();
 		}
 
 		private void BtnUsers_Click(object sender, RoutedEventArgs e) {
-			FrmMain.Content = new Users();
+			LoadUsers();
 		}
 
 		private void BtnSettings_Click(object sender, RoutedEventArgs e) {
 			SettingsWindow settingsWindow = new SettingsWindow();
-			settingsWindow.ShowDialog();
+			_ = settingsWindow.ShowDialog();
 		}
 
 		private void BtnAbout_Click(object sender, RoutedEventArgs e) {
@@ -91,6 +78,23 @@ namespace EmployeeManagementSystem {
 
 		#region Methods
 
+		private void LoadEmpoyees() {
+			FrmMain.Content = new Employees();
+			tbPageName.Text = "Employees";
+			imgPageIcon.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Employees.png"));
+		}
+
+		private void LoadDepartments() {
+			FrmMain.Content = new Departments();
+			tbPageName.Text = "Departments";
+			imgPageIcon.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Department.png"));
+		}
+
+		private void LoadUsers() {
+			FrmMain.Content = new Users();
+			tbPageName.Text = "Users";
+			imgPageIcon.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Login.png"));
+		}
 
 		#endregion
 

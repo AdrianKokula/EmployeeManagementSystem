@@ -31,6 +31,13 @@ namespace EmployeeManagementSystem.Windows {
 
 			InitializeComponent();
 
+			SpErrorEnterFirstName.Visibility = Visibility.Collapsed;
+			SpErrorEnterLastName.Visibility = Visibility.Collapsed;
+			SpErrorSelectDepartment.Visibility = Visibility.Collapsed;
+			SpErrorSelectDateOfBirth.Visibility = Visibility.Collapsed;
+			SpErrorDateOfBirthNotValid.Visibility = Visibility.Collapsed;
+			SpErrorEnterResidence.Visibility = Visibility.Collapsed;
+
 			LoadData();
 
 		}
@@ -39,7 +46,7 @@ namespace EmployeeManagementSystem.Windows {
 
 		#region Handlers
 		
-		private void BtnSubmit_Click(object sender, RoutedEventArgs e) {
+		private void BtnAddEmployee_Click(object sender, RoutedEventArgs e) {
 			CreateEmployee();
 		}
 
@@ -63,7 +70,7 @@ namespace EmployeeManagementSystem.Windows {
 			DataTable dataTableDepartments = new DataTable();
 
 			string result = App.Database.FillDataTable(ref dataTableDepartments, sqlCommand);
-			if (!result.Equals("OK")) return;
+			if (!result.Equals("OK", StringComparison.Ordinal)) return;
 
 			CbDepartment.ItemsSource = dataTableDepartments.AsDataView();
 			
@@ -71,20 +78,61 @@ namespace EmployeeManagementSystem.Windows {
 
 		private bool ValidateFields() {
 
-			if (string.IsNullOrWhiteSpace(TbFirstName.Text)) return false;
-			if (string.IsNullOrWhiteSpace(TbLastName.Text)) return false;
-			if (string.IsNullOrWhiteSpace(TbResidence.Text)) return false;
+			bool result = true;
 
-			if (Tools.IntFromObject(CbDepartment.SelectedValue) <= 0) return false;
+			if (string.IsNullOrWhiteSpace(TbFirstName.Text)) {
+				SpErrorEnterFirstName.Visibility = Visibility.Visible;
+				result = false;
+			} else {
+				SpErrorEnterFirstName.Visibility = Visibility.Collapsed;
+			}
 
-			if (!DpDateOfBirth.SelectedDate.HasValue) return false;
+			if (string.IsNullOrWhiteSpace(TbLastName.Text)) {
+				SpErrorEnterLastName.Visibility = Visibility.Visible;
+				result = false;
+			} else {
+				SpErrorEnterLastName.Visibility = Visibility.Collapsed;
+			}
 
-			return true;
+			if (Tools.IntFromObject(CbDepartment.SelectedValue) <= 0) {
+				SpErrorSelectDepartment.Visibility = Visibility.Visible;
+				result = false;
+			} else {
+				SpErrorSelectDepartment.Visibility = Visibility.Collapsed;
+			}
+
+			if (!DpDateOfBirth.SelectedDate.HasValue) {
+				SpErrorSelectDateOfBirth.Visibility = Visibility.Visible;
+				SpErrorDateOfBirthNotValid.Visibility = Visibility.Collapsed;
+				result = false;
+			} else {
+
+				SpErrorSelectDateOfBirth.Visibility = Visibility.Collapsed;
+
+				if (DpDateOfBirth.SelectedDate.Value.Date.CompareTo(DateTime.Now.Date) > 0) {
+					SpErrorDateOfBirthNotValid.Visibility = Visibility.Visible;
+					result = false;
+				} else {
+					SpErrorDateOfBirthNotValid.Visibility = Visibility.Collapsed;
+				}
+
+			}
+
+			if (string.IsNullOrWhiteSpace(TbResidence.Text)) {
+				SpErrorEnterResidence.Visibility = Visibility.Visible;
+				result = false;
+			} else {
+				SpErrorEnterResidence.Visibility = Visibility.Collapsed;
+			}
+
+			return result;
 		}
 
 		private void CreateEmployee() {
 
-			if (!ValidateFields()) return;
+			if (!ValidateFields()) {
+				return;
+			}
 
 			string query =
 @"DECLARE @FirstName nvarchar(128) = @pFirstName;

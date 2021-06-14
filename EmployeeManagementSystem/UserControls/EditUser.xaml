@@ -6,7 +6,7 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 			 xmlns:local="clr-namespace:EmployeeManagementSystem.UserControls"
-			 mc:Ignorable="d" Background="#333b41" Foreground="White"
+			 mc:Ignorable="d" Foreground="#51507A"
 			 d:DesignHeight="160" d:DesignWidth="800">
 	<Grid>
 
@@ -16,14 +16,14 @@
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
 
-		<Grid Grid.Row="0" Background="#E99454">
+		<Border Grid.Row="0" Background="#54C1FA" CornerRadius="5">
 
 			<StackPanel Orientation="Horizontal" Margin="7">
 				<Image Source="../Resources/User.png" MaxHeight="32" Margin="5 0"/>
-				<TextBlock Grid.Column="1" FontSize="20" Text="Users - edit existing" VerticalAlignment="Center" Foreground="White"/>
+				<TextBlock Grid.Column="1" FontSize="20" Text="Users - edit existing" VerticalAlignment="Center" Foreground="#FAFAFA"/>
 			</StackPanel>
 
-		</Grid>
+		</Border>
 
 		<Grid Grid.Row="1">
 
@@ -35,17 +35,17 @@
 
 			<StackPanel Grid.Column="0" Margin="10 5">
 				<TextBlock Text="Name: "/>
-				<TextBox Name="TbName" Padding="10 5" Background="#3f474e" BorderThickness="0" FontSize="16"/>
+				<TextBox Name="TbName" Padding="10 5" BorderThickness="0" FontSize="16"/>
 			</StackPanel>
 
 			<StackPanel Grid.Column="1" Margin="10 5">
 				<TextBlock Text="Email: "/>
-				<TextBox Name="TbEmail" Padding="10 5" Background="#3f474e" BorderThickness="0" FontSize="16"/>
+				<TextBox Name="TbEmail" Padding="10 5" BorderThickness="0" FontSize="16"/>
 			</StackPanel>
 
 			<StackPanel Grid.Column="2" Margin="10 5">
 				<TextBlock Text="Password: "/>
-				<PasswordBox Name="PbPassword" Padding="10 5" Background="#3f474e" BorderThickness="0" FontSize="16"/>
+				<PasswordBox Name="PbPassword" Padding="10 5" BorderThickness="0" FontSize="16"/>
 			</StackPanel>
 
 		</Grid>
@@ -65,11 +65,10 @@
 					Content="Submit"
 					Click="BtnSubmit_Click"
 					Cursor="Hand"
-					Background="#FFAA4D"
-					Foreground="White"/>
+					Background="#54C1FA"
+					Foreground="#FAFAFA"/>
 
 		</Grid>
-
 
 	</Grid>
 </UserControl>

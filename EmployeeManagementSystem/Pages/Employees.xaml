@@ -7,8 +7,8 @@
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 	  xmlns:local="clr-namespace:EmployeeManagementSystem.Pages"
 	  xmlns:controls="clr-namespace:EmployeeManagementSystem.UserControls"
-	  mc:Ignorable="d" FontSize="16" FontFamily="Bahnschrift Light"
-	  d:DesignHeight="700" d:DesignWidth="850" Foreground="White"
+	  mc:Ignorable="d" FontSize="16"
+	  d:DesignHeight="700" d:DesignWidth="850" Foreground="#51507A"
 	  Title="Employees">
 
 	<Page.Resources>
@@ -17,7 +17,7 @@
 			<Setter Property="Template">
 				<Setter.Value>
 					<ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
-						<TextBlock Text="{TemplateBinding Content}" Margin="0 10" Foreground="White"/>
+						<TextBlock Text="{TemplateBinding Content}" Margin="0 10" Foreground="#51507A" FontWeight="Bold"/>
 					</ControlTemplate>
 				</Setter.Value>
 			</Setter>
@@ -25,7 +25,7 @@
 		
 	</Page.Resources>
 
-	<Grid Name="GridMain" >
+	<Grid Name="GridMain">
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="auto" />
@@ -33,54 +33,154 @@
 			<RowDefinition Height="auto" />
 		</Grid.RowDefinitions>
 
-		<Border Grid.Row="0" Background="#E99454" CornerRadius="5">
-			<Grid>
+		<!--Filters-->
+		<Grid>
 
-				<DockPanel Margin="10" LastChildFill="False">
+			<TextBlock Text="Data" Foreground="#B4B7C0" FontSize="16" VerticalAlignment="Center"/>
 
+			<StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+
+				<Button x:Name="BtnFilters" FontSize="16" Background="#54C1FA" Cursor="Hand" Margin="8 0">
+					<Button.Triggers>
+						<EventTrigger RoutedEvent="Button.Click">
+							<EventTrigger.Actions>
+								<BeginStoryboard>
+									<Storyboard>
+										<BooleanAnimationUsingKeyFrames 
+											 Storyboard.TargetName="FilterPopup" 
+											 Storyboard.TargetProperty="IsOpen">
+											<DiscreteBooleanKeyFrame KeyTime="0:0:0" Value="True" />
+										</BooleanAnimationUsingKeyFrames>
+									</Storyboard>
+								</BeginStoryboard>
+							</EventTrigger.Actions>
+						</EventTrigger>
+					</Button.Triggers>
 					<StackPanel Orientation="Horizontal">
-						<Image Source="../Resources/Employee.png" MaxHeight="32" Margin="5 0"/>
-						<TextBlock Grid.Column="1" FontSize="20" Text="Employees" VerticalAlignment="Center"/>
+						<Image Source="../Resources/Filter_white.png" MaxHeight="24" MaxWidth="24" />
+						<TextBlock Text="Filters" Foreground="#FFFFFF" VerticalAlignment="Center"/>
 					</StackPanel>
+				</Button>
 
-					<Button Grid.Column="2" Name="BtnAdd" Padding="0" DockPanel.Dock="Right" Cursor="Hand" Click="BtnAdd_Click" BorderThickness="0" Background="Transparent">
-						<StackPanel Orientation="Horizontal">
-							<Image Source="../Resources/Add.png" MaxHeight="32" MaxWidth="32" Margin="5"/>
-							<TextBlock Text="Add" VerticalAlignment="Center"/>
-						</StackPanel>
-					</Button>
+				<Popup Name="FilterPopup" StaysOpen="False" MinWidth="250"
+				   PlacementTarget="{Binding ElementName=BtnFilters}">
+					<controls:FilterEmployees />
+				</Popup>
 
-				</DockPanel>
+				<Button x:Name="BtnAddEmployee"
+						FontSize="16"
+						Cursor="Hand"
+						Click="BtnAddEmployee_Click">
 
-			</Grid>
-		</Border>
+					<Button.Style>
+						<Style TargetType="{x:Type Button}">
+							<Setter Property="Template">
+								<Setter.Value>
+									<ControlTemplate TargetType="Button">
+										<Border x:Name="border"
+												Background="LightGreen"
+												CornerRadius="3">
+											<Grid>
+												<ContentPresenter Margin="{TemplateBinding Padding}"
+																	HorizontalAlignment="Center"
+																	VerticalAlignment="Center" />
+											</Grid>
+										</Border>
+										<ControlTemplate.Triggers>
+											<Trigger Property="IsMouseOver" Value="true">
+												<Setter TargetName="border" Property="Background" Value="#71BB71" />
+											</Trigger>
+										</ControlTemplate.Triggers>
+									</ControlTemplate>
+								</Setter.Value>
+							</Setter>
+						</Style>
+					</Button.Style>
 
-		<ListView Grid.Row="1" Name="LvEmployees" BorderThickness="0 3" Padding="10" Background="#333b41"
-				SelectionChanged="LvEmployees_SelectionChanged" >
+					<StackPanel Orientation="Horizontal" Margin="10 0">
+						<Image Source="../Resources/Add_white.png" MaxHeight="24" MaxWidth="24" />
+						<TextBlock Text="Add" Foreground="#FFFFFF" VerticalAlignment="Center"/>
+					</StackPanel>
+				</Button>
 
-			<ListView.ItemContainerStyle>
-				<Style TargetType="{x:Type ListViewItem}" >
-					<Setter Property="Height" Value="48" />
-					<Setter Property="Margin" Value="0 0" />
-					<Setter Property="Background" Value="#3f474e" />
-					<Setter Property="Cursor" Value="Hand" />
-				</Style>
-			</ListView.ItemContainerStyle>
+			</StackPanel>
+			
+		</Grid>
 
-			<ListView.View>
-				<GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnsStyle}">
-					<GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding ID}" />
-					<GridViewColumn Header="FIRST NAME" Width="150" DisplayMemberBinding="{Binding FirstName}" />
-					<GridViewColumn Header="LAST NAME" Width="150" DisplayMemberBinding="{Binding LastName}" />
-					<GridViewColumn Header="DEPARTMENT" Width="200" DisplayMemberBinding="{Binding Department}" />
-					<GridViewColumn Header="DATE OF BIRTH" DisplayMemberBinding="{Binding DateOfBirth}" />
-					<GridViewColumn Header="RESIDENCEE" DisplayMemberBinding="{Binding Residence}"/>
-				</GridView>
-			</ListView.View>
+		<!--Data-->
+		<StackPanel Grid.Row="1">
 
-		</ListView>
+			<DataGrid Name="DgEmployees" Foreground="#51507A" CanUserAddRows="False" IsReadOnly="True" RowHeight="48" Padding="10 0" GridLinesVisibility="None"
+					  AutoGenerateColumns="False" SelectionUnit="FullRow" HeadersVisibility="Column" AlternatingRowBackground="#D1F0FF"
+					  SelectionChanged="DgEmployees_SelectionChanged"
+					  KeyDown="DgEmployees_KeyDown">
 
+				<DataGrid.Resources>
+					<Style TargetType="{x:Type DataGridCell}">
+						<Style.Triggers>
+							<Trigger Property="DataGridCell.IsSelected" Value="True">
+								<Setter Property="Background" Value="LightSeaGreen" />
+							</Trigger>
+						</Style.Triggers>
+						<Setter Property="BorderThickness" Value="0" />
+					</Style>
+				</DataGrid.Resources>
+
+				<DataGrid.RowStyle>
+					<Style TargetType="DataGridRow">
+						<Setter Property="Margin" Value="0 2" />
+						<Setter Property="Cursor" Value="Hand" />
+						<Setter Property="FontSize" Value="16" />
+					</Style>
+				</DataGrid.RowStyle>
+
+				<DataGrid.ColumnHeaderStyle>
+					<Style TargetType="{x:Type DataGridColumnHeader}">
+						<Setter Property="DocumentViewerBase.Background" Value="Transparent" />
+						<Setter Property="Margin" Value="0 10" />
+					</Style>
+				</DataGrid.ColumnHeaderStyle>
+
+				<DataGrid.Columns>
+
+					<DataGridTextColumn Header="Id" Visibility="Collapsed" Binding="{Binding ID}" />
+					<DataGridTextColumn Width="150" Binding="{Binding FirstName}">
+						<DataGridTextColumn.Header>
+							<TextBlock FontWeight="Bold" Text="First name"/>
+						</DataGridTextColumn.Header>
+					</DataGridTextColumn>
+
+					<DataGridTextColumn Width="150" Binding="{Binding LastName}">
+						<DataGridTextColumn.Header>
+							<TextBlock FontWeight="Bold" Text="Last name"/>
+						</DataGridTextColumn.Header>
+					</DataGridTextColumn>
+
+					<DataGridTextColumn Width="175" Binding="{Binding Department}">
+						<DataGridTextColumn.Header>
+							<TextBlock FontWeight="Bold" Text="Department"/>
+						</DataGridTextColumn.Header>
+					</DataGridTextColumn>
+
+					<DataGridTextColumn Width="125" Binding="{Binding DateOfBirth}">
+						<DataGridTextColumn.Header>
+							<TextBlock FontWeight="Bold" Text="Date of birth"/>
+						</DataGridTextColumn.Header>
+					</DataGridTextColumn>
+
+					<DataGridTextColumn Width="*" Binding="{Binding Residence}">
+						<DataGridTextColumn.Header>
+							<TextBlock FontWeight="Bold" Text="Residence"/>
+						</DataGridTextColumn.Header>
+					</DataGridTextColumn>
+				</DataGrid.Columns>
+
+			</DataGrid>
+
+		</StackPanel>
+		
 		<controls:EditEmployee x:Name="EditEmp" Grid.Row="2"/>
-
+		
 	</Grid>
+
 </Page>

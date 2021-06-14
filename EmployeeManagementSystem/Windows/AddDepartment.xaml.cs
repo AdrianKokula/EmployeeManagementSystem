@@ -31,6 +31,12 @@ namespace EmployeeManagementSystem.Windows {
 
 			InitializeComponent();
 
+			SpErrorEnterName.Visibility = Visibility.Collapsed;
+			SpErrorSelectState.Visibility = Visibility.Collapsed;
+			SpErrorEnterCity.Visibility = Visibility.Collapsed;
+			SpErrorEnterStreet.Visibility = Visibility.Collapsed;
+			SpErrorEnterPostalCode.Visibility = Visibility.Collapsed;
+
 			LoadData();
 
 		}
@@ -39,7 +45,7 @@ namespace EmployeeManagementSystem.Windows {
 
 		#region Handlers
 
-		private void BtnSubmit_Click(object sender, RoutedEventArgs e) {
+		private void BtnAddDepartment_Click(object sender, RoutedEventArgs e) {
 			CreateDepartment();
 		}
 
@@ -63,7 +69,7 @@ namespace EmployeeManagementSystem.Windows {
 			DataTable dataTableStates = new DataTable();
 
 			string result = App.Database.FillDataTable(ref dataTableStates, sqlCommand);
-			if (!result.Equals("OK")) return;
+			if (!result.Equals("OK", StringComparison.Ordinal)) return;
 
 			CbState.ItemsSource = dataTableStates.AsDataView();
 
@@ -71,19 +77,53 @@ namespace EmployeeManagementSystem.Windows {
 
 		private bool ValidateFields() {
 
-			if (string.IsNullOrWhiteSpace(TbName.Text)) return false;
-			if (string.IsNullOrWhiteSpace(TbCity.Text)) return false;
-			if (string.IsNullOrWhiteSpace(TbStreet.Text)) return false;
-			if (string.IsNullOrWhiteSpace(TbPostalCode.Text)) return false;
+			bool result = true;
 
-			if (Tools.IntFromObject(CbState.SelectedValue) <= 0) return false;
+			if (string.IsNullOrWhiteSpace(TbName.Text)) {
+				SpErrorEnterName.Visibility = Visibility.Visible;
+				result = false;
+			} else {
+				SpErrorEnterName.Visibility = Visibility.Collapsed;
+			}
 
-			return true;
+			if (Tools.IntFromObject(CbState.SelectedValue) <= 0) {
+				SpErrorSelectState.Visibility = Visibility.Visible;
+				result = false;
+			} else {
+				SpErrorSelectState.Visibility = Visibility.Collapsed;
+			}
+
+			if (string.IsNullOrWhiteSpace(TbCity.Text)) {
+				SpErrorEnterCity.Visibility = Visibility.Visible;
+				result = false;
+			} else {
+				SpErrorEnterCity.Visibility = Visibility.Collapsed;
+			}
+
+			if (string.IsNullOrWhiteSpace(TbStreet.Text)) {
+				SpErrorEnterStreet.Visibility = Visibility.Visible;
+				result = false;
+			} else {
+				SpErrorEnterStreet.Visibility = Visibility.Collapsed;
+			}
+
+			if (string.IsNullOrWhiteSpace(TbPostalCode.Text)) {
+				SpErrorEnterPostalCode.Visibility = Visibility.Visible;
+				result = false;
+			} else {
+				SpErrorEnterPostalCode.Visibility = Visibility.Collapsed;
+			}
+
+			return result;
 		}
 
 		private void CreateDepartment() {
 
-			if (!ValidateFields()) return;
+			if (!ValidateFields()) {
+				return;
+			}
+
+			return;
 
 			string query =
 @"DECLARE @DepartmentName nvarchar(128) = @pDepartmentName;

@@ -7,18 +7,10 @@
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:ui="http://schemas.modernwpf.com/2019"
 		xmlns:local="clr-namespace:EmployeeManagementSystem"
-		mc:Ignorable="d" FontFamily="Bahnschrift Light" WindowStartupLocation="CenterScreen" Foreground="White"
-		Title="EMS - Login" Height="600" Width="450" ResizeMode="NoResize" WindowStyle="None" MouseDown="Window_MouseDown" MouseUp="Window_MouseUp">
+		mc:Ignorable="d" FontSize="16" WindowStartupLocation="CenterScreen" FontFamily="Helvetica" Background="AliceBlue" Foreground="#51507A"
+		Title="EMS - Login" Height="575" Width="450" ResizeMode="NoResize">
+	
 	<Grid>
-		
-		<Grid.Background>
-			<LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-				<LinearGradientBrush.GradientStops>
-					<GradientStop Offset="0.4" Color="#013243" />
-					<GradientStop Offset="1" Color="#1C4C5C" />
-				</LinearGradientBrush.GradientStops>
-			</LinearGradientBrush>
-		</Grid.Background>
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="auto"/>
@@ -29,7 +21,7 @@
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
 
-		<Button Background="Transparent"
+		<!--<Button Background="Transparent"
 				HorizontalAlignment="Right"
 				Margin="3"
 				BorderThickness="0"
@@ -38,9 +30,14 @@
 				Click="BtnClose_Click">
 			
 			<Image Source="Resources/Exit.png" MaxHeight="16"/>
-		</Button>
+		</Button>-->
 
-		<Image Grid.Row="1" Source="Resources/Logo.ico" MaxHeight="64" Margin="0 15 0 0"/>
+		<StackPanel Grid.Row="1" Background="#19233E">
+			<StackPanel Margin="0" Orientation="Horizontal" HorizontalAlignment="Center">
+				<Image Source="Resources/Logo.ico" MaxHeight="54" Margin="10"/>
+				<TextBlock Text="EMS" Foreground="#FAFAFA" VerticalAlignment="Center" FontSize="24"/>
+			</StackPanel>
+		</StackPanel>
 
 		<TextBlock Grid.Row="2" Text="Sing in" HorizontalAlignment="Center" FontSize="36" Margin="0 10"/>
 
@@ -54,9 +51,7 @@
 					<Image Source="Resources/Email.png" Margin="10 5" MaxHeight="26"/>
 					<TextBox Name="TbEmail"
 							 Padding="10 9"
-							 Background="#1C4857"
 							 BorderThickness="0"
-							 Foreground="White"
 							 FontSize="16"
 							 ui:ControlHelper.PlaceholderText="Email"/>
 
@@ -67,8 +62,6 @@
 
 					<Image Source="Resources/Password.png" Margin="10 5" MaxHeight="26"/>
 					<PasswordBox Name="PbPassword"
-								 Background="#1C4857"
-								 Foreground="White"
 								 FontSize="16"
 								 Padding="10 9"
 								 BorderThickness="0"
@@ -76,23 +69,53 @@
 
 				</DockPanel>
 
-				<CheckBox Margin="45 0 0 30" Background="#1C4857" BorderThickness="0" Foreground="White" VerticalAlignment="Center" FontSize="15" Name="CbRememberMail" IsChecked="True" Cursor="Hand">
-					<TextBlock Text="Remember email" VerticalAlignment="Center"/>
-				</CheckBox>
+			<CheckBox Margin="45 0 0 30" BorderThickness="0" VerticalAlignment="Center" FontSize="15" Name="CbRememberMail" IsChecked="True" Cursor="Hand" Background="Aquamarine">
+				<TextBlock Text="Remember email" VerticalAlignment="Center" Foreground="#51507A"/>
+			</CheckBox>
 
-			<Button Content="Login"
-					Name="BtnLogin"
+			<Button Name="BtnLogin"
 					Click="BtnLogin_Click"
-					Background="#FFAA4D"
+					Foreground="#FAFAFA"
 					Cursor="Hand"
 					FontWeight="Bold"
 					Padding="5 10"
-					Foreground="White"
-					HorizontalAlignment="Stretch"/>
+					HorizontalAlignment="Stretch">
+
+				<Button.Style>
+					<Style TargetType="{x:Type Button}">
+						<Setter Property="Template">
+							<Setter.Value>
+								<ControlTemplate TargetType="Button">
+									<Border x:Name="border"
+											Background="#54C1FA"
+											CornerRadius="3">
+										<Grid>
+											<ContentPresenter Margin="{TemplateBinding Padding}"
+																HorizontalAlignment="Center"
+																VerticalAlignment="Center" />
+										</Grid>
+									</Border>
+									<ControlTemplate.Triggers>
+										<Trigger Property="IsMouseOver" Value="true">
+											<Setter TargetName="border" Property="Background" Value="#55AEFF" />
+										</Trigger>
+									</ControlTemplate.Triggers>
+								</ControlTemplate>
+							</Setter.Value>
+						</Setter>
+					</Style>
+				</Button.Style>
+
+				<StackPanel Orientation="Horizontal">
+					<Image Source="Resources/Login_white.png" Margin="5 0" MaxHeight="24" />
+					<TextBlock Text="Login" VerticalAlignment="Center"/>
+				</StackPanel>
+
+			</Button>
 
 		</StackPanel>
 
-		<StackPanel Grid.Row="5" VerticalAlignment="Bottom" Margin="10">
+		<StackPanel Grid.Row="5" VerticalAlignment="Bottom" Margin="10 20">
 			<TextBlock Text="License: The MIT License (MIT)" FontSize="14" HorizontalAlignment="Center"/>
 			<TextBlock Text="Copyright (c) 2021 Adrián Kokuľa - adriankokula.eu" FontSize="14" HorizontalAlignment="Center"/>
 		</StackPanel>

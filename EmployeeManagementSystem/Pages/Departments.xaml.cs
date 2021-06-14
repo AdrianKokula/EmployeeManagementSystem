@@ -44,19 +44,21 @@ namespace EmployeeManagementSystem.Pages {
 
 		#region Handlers
 
-		private void BtnAdd_Click(object sender, RoutedEventArgs e) {
+		private void BtnAddDepartment_Click(object sender, RoutedEventArgs e) {
 
-			/*AddDepartment departmentWindow = new AddDepartment() {
+			AddDepartment departmentWindow = new AddDepartment() {
 				Owner = Window.GetWindow(this)
 			};
 
-			departmentWindow.ShowDialog();*/
+			departmentWindow.ShowDialog();
 
 			LoadData();
 
 		}
 
-		private void LvDepartments_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+		private void DgDepartments_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+
+			if (e.AddedItems.Count == 0) return;
 
 			// first selected row
 			DataRowView dataRow = (DataRowView)e.AddedItems[0];
@@ -64,6 +66,19 @@ namespace EmployeeManagementSystem.Pages {
 
 			EditDep.DepartmentID = departmentID;
 			EditDep.Visibility = Visibility.Visible;
+
+		}
+
+		private void DgDepartments_KeyDown(object sender, KeyEventArgs e) {
+
+			switch (e.Key) {
+
+				case Key.Escape:
+					DgDepartments.UnselectAll();
+					EditDep.Visibility = Visibility.Collapsed;
+					break;
+
+			}
 
 		}
 
@@ -83,7 +98,7 @@ namespace EmployeeManagementSystem.Pages {
 
 			if (!queryResult.Equals("OK")) return;
 
-			LvDepartments.ItemsSource = dataTableEmployees.DefaultView;
+			DgDepartments.ItemsSource = dataTableEmployees.DefaultView;
 
 		}
 
