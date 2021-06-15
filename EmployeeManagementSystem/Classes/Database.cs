@@ -10,7 +10,7 @@ using System.Data;
 
 namespace EmployeeManagementSystem.Classes {
 
-	public class Database {
+	public sealed class Database {
 
 		public string ConnectionString { get; set; }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EmployeeManagementSystem.Classes {
 
-	class Tools {
+	public sealed class Tools {
 
 		public static string StringFromObject(object obj) {
 

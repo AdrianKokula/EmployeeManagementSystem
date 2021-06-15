@@ -35,6 +35,7 @@ namespace EmployeeManagementSystem.Windows {
 			SpErrorEnterEmail.Visibility = Visibility.Collapsed;
 			SpErrorEnterValidEmail.Visibility = Visibility.Collapsed;
 			SpErrorEnterPassword.Visibility = Visibility.Collapsed;
+			SpErrorPasswordNotValid.Visibility = Visibility.Collapsed;
 			SpErrorConfrimPassword.Visibility = Visibility.Collapsed;
 			SpErrorPasswordDidntMatch.Visibility = Visibility.Collapsed;
 
@@ -94,21 +95,44 @@ namespace EmployeeManagementSystem.Windows {
 				SpErrorEnterPassword.Visibility = Visibility.Visible;
 				SpErrorPasswordDidntMatch.Visibility = Visibility.Collapsed;
 				SpErrorConfrimPassword.Visibility = Visibility.Collapsed;
+				SpErrorPasswordNotValid.Visibility = Visibility.Collapsed;
 				result = false;
-			} else { // check if password is confirmed
+			} else { // check if password is valid
 				SpErrorEnterPassword.Visibility = Visibility.Collapsed;
 
-				if (string.IsNullOrWhiteSpace(PbPasswordAgain.Password)) {
-					SpErrorConfrimPassword.Visibility = Visibility.Visible;
+				PasswordEvaluator passwordEvaluator = new PasswordEvaluator(PbPassword.Password);
+				if (!passwordEvaluator.IsValid) {
+					SpErrorPasswordNotValid.Visibility = Visibility.Visible;
 					result = false;
-				} else { // both passwords are entered, check password match
-					SpErrorConfrimPassword.Visibility = Visibility.Collapsed;
 
-					if (!PbPassword.Password.Equals(PbPasswordAgain.Password, StringComparison.Ordinal)) {
-						SpErrorPasswordDidntMatch.Visibility = Visibility.Visible;
+					if (!passwordEvaluator.PasswordLengthOk) {
+						TbPasswordNotValidText.Text = $" Password should contains at least {passwordEvaluator.RequiredLenght} characters.";
+					} else if (!passwordEvaluator.ContainsLowerCase) {
+						TbPasswordNotValidText.Text = $" Password should contains lowercase character.";
+					} else if (!passwordEvaluator.ContainsUpperCase) {
+						TbPasswordNotValidText.Text = $" Password should contains uppercase character.";
+					} else if (!passwordEvaluator.ContainsNumber) {
+						TbPasswordNotValidText.Text = $" Password should contains at least one number.";
+					} else if (!passwordEvaluator.ContainsSymbol) {
+						TbPasswordNotValidText.Text = $" Password should contains at least one special character.";
+					}
+
+				} else { // if valid check if password is comfirmed
+					SpErrorPasswordNotValid.Visibility = Visibility.Collapsed;
+
+					if (string.IsNullOrWhiteSpace(PbPasswordAgain.Password)) {
+						SpErrorConfrimPassword.Visibility = Visibility.Visible;
 						result = false;
-					} else {
-						SpErrorPasswordDidntMatch.Visibility = Visibility.Collapsed;
+					} else { // both passwords are entered, check password match
+						SpErrorConfrimPassword.Visibility = Visibility.Collapsed;
+
+						if (!PbPassword.Password.Equals(PbPasswordAgain.Password, StringComparison.Ordinal)) {
+							SpErrorPasswordDidntMatch.Visibility = Visibility.Visible;
+							result = false;
+						} else {
+							SpErrorPasswordDidntMatch.Visibility = Visibility.Collapsed;
+						}
+
 					}
 
 				}
@@ -145,6 +169,10 @@ SELECT @Result;";
 			if (!result.Equals("OK", StringComparison.Ordinal)) {
 				return;
 			}
+
+			// set password to empty string - security reasons
+			PbPassword.Clear();
+			PbPasswordAgain.Clear();
 
 			Close();
 		}

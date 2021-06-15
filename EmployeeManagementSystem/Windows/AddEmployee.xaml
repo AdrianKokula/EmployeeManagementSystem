@@ -7,7 +7,7 @@
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:local="clr-namespace:EmployeeManagementSystem.Windows"
 		mc:Ignorable="d" FontSize="16" WindowStartupLocation="CenterOwner" FontFamily="Helvetica" Background="AliceBlue"
-		Title="Add new employee" Height="610" Width="375" Foreground="#51507A" ResizeMode="NoResize">
+		Title="Add new employee" Height="610" Width="375" Foreground="#51507A" ResizeMode="NoResize" SizeToContent="Height">
 	<Grid>
 
 		<Grid.RowDefinitions>

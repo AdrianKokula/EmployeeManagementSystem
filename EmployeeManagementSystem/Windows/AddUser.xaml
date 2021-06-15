@@ -7,7 +7,7 @@
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:local="clr-namespace:EmployeeManagementSystem.Windows"
 		mc:Ignorable="d" FontSize="16" WindowStartupLocation="CenterOwner" FontFamily="Helvetica" Background="AliceBlue"
-		Title="Add new user" Height="520" Width="350" Foreground="#51507A" ResizeMode="NoResize">
+		Title="Add new user" Height="550" Width="410" Foreground="#51507A" ResizeMode="NoResize" SizeToContent="Height">
 	<Grid>
 
 		<Grid.RowDefinitions>
@@ -51,11 +51,16 @@
 
 			<StackPanel Margin="10 5">
 				<TextBlock Text="Password: "/>
-				<PasswordBox Name="PbPassword" Padding="10 5" BorderThickness="0"/>
+				<PasswordBox Name="PbPassword" Padding="10 5" BorderThickness="0" />
 
 				<StackPanel Name="SpErrorEnterPassword" Orientation="Horizontal" Margin="0 5 0 0">
 					<Image Source="../Resources/Exclamation.png" Height="16"/>
 					<TextBlock Text=" Enter password"/>
+				</StackPanel>
+
+				<StackPanel Name="SpErrorPasswordNotValid" Orientation="Horizontal" Margin="0 5 0 0">
+					<Image Source="../Resources/Exclamation.png" Height="16"/>
+					<TextBlock Name="TbPasswordNotValidText" Text=" Password should contains..."/>
 				</StackPanel>
 
 			</StackPanel>
