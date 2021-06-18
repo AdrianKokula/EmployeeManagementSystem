@@ -167,6 +167,7 @@ SELECT @Result;";
 
 			string result = Tools.StringFromObject(App.Database.Scalar(sqlCommand));
 			if (!result.Equals("OK", StringComparison.Ordinal)) {
+				_ = MessageBox.Show(result, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 				return;
 			}
 
@@ -174,6 +175,7 @@ SELECT @Result;";
 			PbPassword.Clear();
 			PbPasswordAgain.Clear();
 
+			DialogResult = true;
 			Close();
 		}
 

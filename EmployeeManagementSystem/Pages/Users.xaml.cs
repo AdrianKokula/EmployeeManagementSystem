@@ -50,7 +50,11 @@ namespace EmployeeManagementSystem.Pages {
 				Owner = Window.GetWindow(this)
 			};
 
-			userWindow.ShowDialog();
+			bool? dialogResult = userWindow.ShowDialog();
+			if (!dialogResult.Value) {
+				return;
+			}
+
 			LoadData();
 
 		}
@@ -95,7 +99,9 @@ namespace EmployeeManagementSystem.Pages {
 			DataTable dataTableEmployees = new DataTable();
 			string queryResult = App.Database.FillDataTable(ref dataTableEmployees, sqlCommand);
 
-			if (!queryResult.Equals("OK")) return;
+			if (!queryResult.Equals("OK", StringComparison.Ordinal)) {
+				return;
+			}
 
 			DgUsers.ItemsSource = dataTableEmployees.DefaultView;
 

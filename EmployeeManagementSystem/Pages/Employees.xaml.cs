@@ -77,7 +77,10 @@ namespace EmployeeManagementSystem.Pages {
 				Owner = Window.GetWindow(this)
 			};
 
-			employeeWindow.ShowDialog();
+			bool? dialogResult = employeeWindow.ShowDialog();
+			if (!dialogResult.Value) {
+				return;
+			}
 			
 			LoadData();
 

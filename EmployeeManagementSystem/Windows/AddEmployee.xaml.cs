@@ -38,7 +38,7 @@ namespace EmployeeManagementSystem.Windows {
 			SpErrorDateOfBirthNotValid.Visibility = Visibility.Collapsed;
 			SpErrorEnterResidence.Visibility = Visibility.Collapsed;
 
-			LoadData();
+			InitControls();
 
 		}
 
@@ -60,7 +60,7 @@ namespace EmployeeManagementSystem.Windows {
 
 		#region Private methods
 
-		private void LoadData() {
+		private void InitControls() {
 
 			string query =
 @"SELECT ID, CONCAT_WS(' ', DepartmentName + ' -', [State], City, PostalCode) AS Department
@@ -70,7 +70,9 @@ namespace EmployeeManagementSystem.Windows {
 			DataTable dataTableDepartments = new DataTable();
 
 			string result = App.Database.FillDataTable(ref dataTableDepartments, sqlCommand);
-			if (!result.Equals("OK", StringComparison.Ordinal)) return;
+			if (!result.Equals("OK", StringComparison.Ordinal)) {
+				return;
+			}
 
 			CbDepartment.ItemsSource = dataTableDepartments.AsDataView();
 			
@@ -157,8 +159,12 @@ SELECT @Result;";
 			sqlCommand.Parameters.Add("@pLoggedUser", SqlDbType.NVarChar).Value = App.LoggedUser;
 
 			string result = Tools.StringFromObject(App.Database.Scalar(sqlCommand));
-			if (!result.Equals("OK")) return;
+			if (!result.Equals("OK", StringComparison.Ordinal)) {
+				_ = MessageBox.Show(result, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+				return;
+			}
 
+			DialogResult = true;
 			Close();
 		}
 
