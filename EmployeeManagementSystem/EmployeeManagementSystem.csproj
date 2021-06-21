@@ -48,6 +48,8 @@
     <None Remove="Resources\Remove.png" />
     <None Remove="Resources\Settings.png" />
     <None Remove="Resources\Settings_white.png" />
+    <None Remove="Resources\Trash.png" />
+    <None Remove="Resources\Trash_white.png" />
     <None Remove="Resources\User.png" />
   </ItemGroup>
 
@@ -91,6 +93,8 @@
     <Resource Include="Resources\Minimize.png" />
     <Resource Include="Resources\Settings.png" />
     <Resource Include="Resources\Settings_white.png" />
+    <Resource Include="Resources\Trash.png" />
+    <Resource Include="Resources\Trash_white.png" />
     <Resource Include="Resources\User.png" />
   </ItemGroup>
 

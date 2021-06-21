@@ -1,18 +1,6 @@
 ﻿// Copyright (c) 2020 Adrián Kokuľa - adriankokula.eu; License: The MIT License (MIT)
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Data.SqlClient;
 using EmployeeManagementSystem.Classes;
 
@@ -34,7 +22,7 @@ namespace EmployeeManagementSystem {
 
 			while (!App.Database.TestConnection()) {
 				SettingsWindow settingsWindow = new SettingsWindow();
-				settingsWindow.ShowDialog();
+				_ = settingsWindow.ShowDialog();
 			}
 
 			TbEmail.Text = Properties.Settings.Default.LoginEmail;
@@ -68,7 +56,9 @@ namespace EmployeeManagementSystem {
 			string password = PbPassword.Password;
 			string userName = CheckUser(email, password);
 
-			if (string.IsNullOrWhiteSpace(userName)) return;
+			if (string.IsNullOrWhiteSpace(userName)) {
+				return;
+			}
 
 			Properties.Settings.Default.LoginEmail = (bool)CbRememberMail.IsChecked ? email : string.Empty;
 			Properties.Settings.Default.Save();

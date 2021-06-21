@@ -1,19 +1,8 @@
 ﻿// Copyright (c) 2020 Adrián Kokuľa - adriankokula.eu; License: The MIT License (MIT)
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -34,7 +23,7 @@ namespace EmployeeManagementSystem.UserControls {
 			get => _DepartmentID;
 			set {
 				_DepartmentID = value;
-				Load();
+				LoadDepartment();
 			}
 		}
 
@@ -44,6 +33,10 @@ namespace EmployeeManagementSystem.UserControls {
 
 		public EditDepartment() {
 			InitializeComponent();
+
+			// Init controls - for instance combo boxes
+			InitControls();
+
 		}
 
 		#endregion
@@ -54,15 +47,18 @@ namespace EmployeeManagementSystem.UserControls {
 			UpdateDepartment();
 		}
 
+		private void BtnDeleteRecord_Click(object sender, RoutedEventArgs e) {
+			DeleteDepartment();
+		}
+
 		#endregion
 
 		#region Methods
 
 		#region Private methods
 
-		private void Load() {
+		private void InitControls() {
 
-			// load combo box
 			string query =
 @"SELECT ID, NiceName [State]
 	FROM dbo.States;";
@@ -71,26 +67,36 @@ namespace EmployeeManagementSystem.UserControls {
 			DataTable dataTableStates = new DataTable();
 
 			string result = App.Database.FillDataTable(ref dataTableStates, sqlCommand);
-			if (!result.Equals("OK")) return;
+			if (!result.Equals("OK", StringComparison.Ordinal)) {
+				return;
+			}
 
 			CbState.ItemsSource = dataTableStates.AsDataView();
 
-			//load department
-			query =
+		}
+
+		private void LoadDepartment() {
+
+			string query =
 @"DECLARE @DepartmentID int = @pDepartmentID;
 
 SELECT [Name], StateID, City, Street, PostalCode
 	FROM dbo.Departments
 	WHERE ID = @DepartmentID;";
 
-			sqlCommand = new SqlCommand(query);
+			SqlCommand sqlCommand = new SqlCommand(query);
 			sqlCommand.Parameters.Add("@pDepartmentID", SqlDbType.Int).Value = _DepartmentID;
 
 			DataTable dataTableDepartment = new DataTable();
-			result = App.Database.FillDataTable(ref dataTableDepartment, sqlCommand);
+			string result = App.Database.FillDataTable(ref dataTableDepartment, sqlCommand);
 
-			if (!result.Equals("OK")) return;
-			if (dataTableDepartment.Rows.Count <= 0) return;
+			if (!result.Equals("OK", StringComparison.Ordinal)) {
+				return;
+			}
+
+			if (dataTableDepartment.Rows.Count <= 0) {
+				return;
+			}
 
 			DataRow row = dataTableDepartment.Rows[0];
 			TbName.Text = Tools.StringFromObject(row["Name"]);
@@ -103,19 +109,38 @@ SELECT [Name], StateID, City, Street, PostalCode
 
 		private bool ValidateFields() {
 
-			if (string.IsNullOrWhiteSpace(TbName.Text)) return false;
-			if (string.IsNullOrWhiteSpace(TbCity.Text)) return false;
-			if (string.IsNullOrWhiteSpace(TbStreet.Text)) return false;
-			if (string.IsNullOrWhiteSpace(TbPostalCode.Text)) return false;
+			if (_DepartmentID <= 0) {
+				return false;
+			}
 
-			if (Tools.IntFromObject(CbState.SelectedValue) <= 0) return false;
+			if (string.IsNullOrWhiteSpace(TbName.Text)) {
+				return false;
+			}
+
+			if (string.IsNullOrWhiteSpace(TbCity.Text)) {
+				return false;
+			}
+
+			if (string.IsNullOrWhiteSpace(TbStreet.Text)) {
+				return false;
+			}
+
+			if (string.IsNullOrWhiteSpace(TbPostalCode.Text)) {
+				return false;
+			}
+
+			if (Tools.IntFromObject(CbState.SelectedValue) <= 0) {
+				return false;
+			}
 
 			return true;
 		}
 
 		private void UpdateDepartment() {
 
-			if (!ValidateFields()) return;
+			if (!ValidateFields()) {
+				return;
+			}
 
 			string query =
 @"DECLARE @ID int = @pID;
@@ -141,7 +166,35 @@ SELECT @Result";
 			sqlCommand.Parameters.Add("@pLoggedUser", SqlDbType.NVarChar).Value = App.LoggedUser;
 
 			string result = Tools.StringFromObject(App.Database.Scalar(sqlCommand));
-			if (!result.Equals("OK")) return;
+			if (!result.Equals("OK", StringComparison.Ordinal)) {
+				_ = MessageBox.Show(result, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+				return;
+			}
+
+		}
+
+		private void DeleteDepartment() {
+
+			if (_DepartmentID <= 0) {
+				return;
+			}
+
+			string query =
+@"DECLARE @ID int = @pID;
+
+DECLARE @Result nvarchar(MAX);
+EXEC dbo.DeleteDepartment @ID, @Result OUTPUT;
+
+SELECT @Result;";
+
+			SqlCommand sqlCommand = new SqlCommand(query);
+			sqlCommand.Parameters.Add("@pID", SqlDbType.Int).Value = _DepartmentID;
+
+			string result = Tools.StringFromObject(App.Database.Scalar(sqlCommand));
+			if (!result.Equals("OK", StringComparison.Ordinal)) {
+				_ = MessageBox.Show(result, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+				return;
+			}
 
 		}
 

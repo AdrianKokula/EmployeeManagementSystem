@@ -18,10 +18,41 @@
 
 		<Border Grid.Row="0" Background="#54C1FA" CornerRadius="5">
 
-			<StackPanel Orientation="Horizontal" Margin="7">
+			<DockPanel Margin="7">
 				<Image Source="../Resources/User.png" MaxHeight="32" Margin="5 0"/>
 				<TextBlock Grid.Column="1" FontSize="20" Text="Users - edit existing" VerticalAlignment="Center" Foreground="#FAFAFA"/>
-			</StackPanel>
+
+				<Button Name="BtnDeleteRecord" HorizontalAlignment="Right" Padding="0" Cursor="Hand" Click="BtnDeleteRecord_Click">
+
+					<Button.Style>
+						<Style TargetType="{x:Type Button}">
+							<Setter Property="Template">
+								<Setter.Value>
+									<ControlTemplate TargetType="Button">
+										<Border x:Name="border"
+											Background="Transparent"
+											CornerRadius="3">
+											<Grid>
+												<ContentPresenter Margin="{TemplateBinding Padding}"
+																HorizontalAlignment="Center"
+																VerticalAlignment="Center" />
+											</Grid>
+										</Border>
+										<ControlTemplate.Triggers>
+											<Trigger Property="IsMouseOver" Value="true">
+												<Setter TargetName="border" Property="Background" Value="#FAFAFA" />
+											</Trigger>
+										</ControlTemplate.Triggers>
+									</ControlTemplate>
+								</Setter.Value>
+							</Setter>
+						</Style>
+					</Button.Style>
+
+					<Image Source="../Resources/Trash.png" MaxHeight="32"/>
+				</Button>
+
+			</DockPanel>
 
 		</Border>
 

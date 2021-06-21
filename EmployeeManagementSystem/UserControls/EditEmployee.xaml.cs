@@ -1,23 +1,11 @@
 ﻿// Copyright (c) 2020 Adrián Kokuľa - adriankokula.eu; License: The MIT License (MIT)
 
+using EmployeeManagementSystem.Classes;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Data;
 using System.Data.SqlClient;
-
-using EmployeeManagementSystem.Classes;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace EmployeeManagementSystem.UserControls {
 
@@ -34,7 +22,7 @@ namespace EmployeeManagementSystem.UserControls {
 			get => _EmployeeID;
 			set {
 				_EmployeeID = value;
-				Load();
+				LoadEmployee();
 			}
 		}
 
@@ -44,6 +32,10 @@ namespace EmployeeManagementSystem.UserControls {
 
 		public EditEmployee() {
 			InitializeComponent();
+
+			// Init controls - for instance combo boxes
+			InitControls();
+
 		}
 
 		#endregion
@@ -54,15 +46,18 @@ namespace EmployeeManagementSystem.UserControls {
 			UpdateEmployee();
 		}
 
+		private void BtnDeleteRecord_Click(object sender, RoutedEventArgs e) {
+			DeleteEmployee();
+		}
+
 		#endregion
 
 		#region Methods
 
 		#region Private methods
 
-		private void Load() {
+		private void InitControls() {
 
-			// load combo box
 			string query =
 			@"SELECT ID, CONCAT_WS(' ', DepartmentName + ' -', [State], City, PostalCode) AS Department
 	FROM dbo.DepartmentView;";
@@ -71,27 +66,37 @@ namespace EmployeeManagementSystem.UserControls {
 			DataTable dataTableDepartments = new DataTable();
 
 			string result = App.Database.FillDataTable(ref dataTableDepartments, sqlCommand);
-			if (!result.Equals("OK")) return;
+			if (!result.Equals("OK", StringComparison.Ordinal)) {
+				return;
+			}
 
 			CbDepartment.ItemsSource = dataTableDepartments.AsDataView();
 
-			// load employee
-			query =
+		}
+
+		private void LoadEmployee() {
+
+			string query =
 @"DECLARE @EmployeeID int = @pEmployeeID;
 
 SELECT FirstName, LastName, DepartmentID, DateOfBirth, PermanentResidence
 	FROM dbo.Employees
 	WHERE ID = @EmployeeID";
 
-			sqlCommand = new SqlCommand(query);
+			SqlCommand sqlCommand = new SqlCommand(query);
 			sqlCommand.Parameters.Add("@pEmployeeID", SqlDbType.Int).Value = _EmployeeID;
 
 			DataTable dataTableEmployee = new DataTable();
 
-			result = App.Database.FillDataTable(ref dataTableEmployee, sqlCommand);
+			string result = App.Database.FillDataTable(ref dataTableEmployee, sqlCommand);
 
-			if (!result.Equals("OK")) return;
-			if (dataTableEmployee.Rows.Count <= 0) return;
+			if (!result.Equals("OK", StringComparison.Ordinal)) {
+				return;
+			}
+
+			if (dataTableEmployee.Rows.Count <= 0) {
+				return;
+			}
 
 			DataRow row = dataTableEmployee.Rows[0];
 			TbFirstName.Text = Tools.StringFromObject(row["FirstName"]);
@@ -104,20 +109,38 @@ SELECT FirstName, LastName, DepartmentID, DateOfBirth, PermanentResidence
 
 		private bool ValidateFields() {
 
-			if (string.IsNullOrWhiteSpace(TbFirstName.Text)) return false;
-			if (string.IsNullOrWhiteSpace(TbLastName.Text)) return false;
-			if (string.IsNullOrWhiteSpace(TbResidence.Text)) return false;
+			if (_EmployeeID <= 0) {
+				return false;
+			}
 
-			if (Tools.IntFromObject(CbDepartment.SelectedValue) <= 0) return false;
+			if (string.IsNullOrWhiteSpace(TbFirstName.Text)) {
+				return false;
+			}
 
-			if (!DpDateOfBirth.SelectedDate.HasValue) return false;
+			if (string.IsNullOrWhiteSpace(TbLastName.Text)) {
+				return false;
+			}
+
+			if (string.IsNullOrWhiteSpace(TbResidence.Text)) {
+				return false;
+			}
+
+			if (Tools.IntFromObject(CbDepartment.SelectedValue) <= 0) {
+				return false;
+			}
+
+			if (!DpDateOfBirth.SelectedDate.HasValue) {
+				return false;
+			}
 
 			return true;
 		}
 
 		private void UpdateEmployee() {
 
-			if (!ValidateFields()) return;
+			if (!ValidateFields()) {
+				return;
+			}
 
 			string query =
 @"DECLARE @ID int = @pID;
@@ -129,8 +152,7 @@ DECLARE @PermanentResidence nvarchar(255) = @pPermanentResidence;
 DECLARE @LoggedUser nvarchar(128) = @pLoggedUser;
 
 DECLARE @Result nvarchar(MAX);
-
-EXEC dbo.UpdateEmployee @ID, @FirstName, @LastName, @DepartmentID, @DateOfBirth, @PermanentResidence, @LoggedUser, @Result OUTPUT
+EXEC dbo.UpdateEmployee @ID, @FirstName, @LastName, @DepartmentID, @DateOfBirth, @PermanentResidence, @LoggedUser, @Result OUTPUT;
 
 SELECT @Result;";
 
@@ -144,7 +166,35 @@ SELECT @Result;";
 			sqlCommand.Parameters.Add("@pLoggedUser", SqlDbType.NVarChar).Value = App.LoggedUser;
 
 			string result = Tools.StringFromObject(App.Database.Scalar(sqlCommand));
-			if (!result.Equals("OK")) return;
+			if (!result.Equals("OK", StringComparison.Ordinal)) {
+				_ = MessageBox.Show(result, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+				return;
+			}
+
+		}
+
+		private void DeleteEmployee() {
+
+			if (_EmployeeID <= 0) {
+				return;
+			}
+
+			string query =
+@"DECLARE @ID int = @pID;
+
+DECLARE @Result nvarchar(MAX);
+EXEC dbo.DeleteEmployee @ID, @Result OUTPUT;
+
+SELECT @Result;";
+
+			SqlCommand sqlCommand = new SqlCommand(query);
+			sqlCommand.Parameters.Add("@pID", SqlDbType.Int).Value = _EmployeeID;
+
+			string result = Tools.StringFromObject(App.Database.Scalar(sqlCommand));
+			if (!result.Equals("OK", StringComparison.Ordinal)) {
+				_ = MessageBox.Show(result, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+				return;
+			}
 
 		}
 

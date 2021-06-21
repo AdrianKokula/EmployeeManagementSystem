@@ -1,19 +1,8 @@
 ﻿// Copyright (c) 2020 Adrián Kokuľa - adriankokula.eu; License: The MIT License (MIT)
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -34,7 +23,7 @@ namespace EmployeeManagementSystem.UserControls {
 			get => _UserID;
 			set {
 				_UserID = value;
-				Load();
+				LoadUser();
 			}
 		}
 
@@ -54,13 +43,17 @@ namespace EmployeeManagementSystem.UserControls {
 			UpdateUser();
 		}
 
+		private void BtnDeleteRecord_Click(object sender, RoutedEventArgs e) {
+			DeleteUser();
+		}
+
 		#endregion
 
 		#region Methods
 
 		#region Private methods
 
-		private void Load() {
+		private void LoadUser() {
 
 			string query =
 @"DECLARE @UserID int = @pUserID;
@@ -76,8 +69,13 @@ SELECT [Name], Email, [Password]
 
 			string result = App.Database.FillDataTable(ref dataTableUser, sqlCommand);
 
-			if (!result.Equals("OK")) return;
-			if (dataTableUser.Rows.Count <= 0) return;
+			if (!result.Equals("OK", StringComparison.Ordinal)) {
+				return;
+			}
+
+			if (dataTableUser.Rows.Count <= 0) {
+				return;
+			}
 
 			DataRow row = dataTableUser.Rows[0];
 			TbName.Text = Tools.StringFromObject(row["Name"]);
@@ -88,16 +86,30 @@ SELECT [Name], Email, [Password]
 
 		private bool ValidateFields() {
 
-			if (string.IsNullOrWhiteSpace(TbName.Text)) return false;
-			if (string.IsNullOrWhiteSpace(TbEmail.Text)) return false;
-			if (string.IsNullOrWhiteSpace(PbPassword.Password)) return false;
+			if (_UserID <= 0) {
+				return false;
+			}
+
+			if (string.IsNullOrWhiteSpace(TbName.Text)) {
+				return false;
+			}
+
+			if (string.IsNullOrWhiteSpace(TbEmail.Text)) {
+				return false;
+			}
+
+			if (string.IsNullOrWhiteSpace(PbPassword.Password)) {
+				return false;
+			}
 
 			return true;
 		}
 
 		private void UpdateUser() {
 
-			if (!ValidateFields()) return;
+			if (!ValidateFields()) {
+				return;
+			}
 
 			string query =
 @"DECLARE @ID int = @pID;
@@ -113,13 +125,40 @@ SELECT @Result;";
 
 			SqlCommand sqlCommand = new SqlCommand(query);
 			sqlCommand.Parameters.Add("@pID", SqlDbType.Int).Value = _UserID;
-			sqlCommand.Parameters.Add("@pUserName", System.Data.SqlDbType.NVarChar).Value = TbName.Text;
-			sqlCommand.Parameters.Add("@pEmail", System.Data.SqlDbType.NVarChar).Value = TbEmail.Text;
-			sqlCommand.Parameters.Add("@pPassword", System.Data.SqlDbType.NVarChar).Value = PbPassword.Password;
-			sqlCommand.Parameters.Add("@pLoggedUser", System.Data.SqlDbType.NVarChar).Value = App.LoggedUser;
+			sqlCommand.Parameters.Add("@pUserName", SqlDbType.NVarChar).Value = TbName.Text;
+			sqlCommand.Parameters.Add("@pEmail", SqlDbType.NVarChar).Value = TbEmail.Text;
+			sqlCommand.Parameters.Add("@pPassword", SqlDbType.NVarChar).Value = PbPassword.Password;
+			sqlCommand.Parameters.Add("@pLoggedUser", SqlDbType.NVarChar).Value = App.LoggedUser;
 
 			string result = Tools.StringFromObject(App.Database.Scalar(sqlCommand));
-			if (!result.Equals("OK")) return;
+			if (!result.Equals("OK", StringComparison.Ordinal)) {
+				_ = MessageBox.Show(result, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+				return;
+			}
+		}
+
+		private void DeleteUser() {
+
+			if (_UserID <= 0) {
+				return;
+			}
+
+			string query =
+@"DECLARE @ID int = @pID;
+
+DECLARE @Result nvarchar(MAX);
+EXEC dbo.DeleteUser @ID, @Result OUTPUT;
+
+SELECT @Result;";
+
+			SqlCommand sqlCommand = new SqlCommand(query);
+			sqlCommand.Parameters.Add("@pID", SqlDbType.Int).Value = _UserID;
+
+			string result = Tools.StringFromObject(App.Database.Scalar(sqlCommand));
+			if (!result.Equals("OK", StringComparison.Ordinal)) {
+				_ = MessageBox.Show(result, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+				return;
+			}
 
 		}
 
