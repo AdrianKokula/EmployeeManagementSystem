@@ -15,7 +15,19 @@ namespace EmployeeManagementSystem.UserControls {
 	/// </summary>
 	public partial class EditDepartment : UserControl {
 
+		#region Delegates
+
+		public delegate void DeleteDepartment(int departmentID);
+
+		#endregion
+
+		#region Private fields
+
 		private int _DepartmentID;
+
+		private DeleteDepartment deleteDepartment;
+
+		#endregion
 
 		#region Properties
 
@@ -33,10 +45,6 @@ namespace EmployeeManagementSystem.UserControls {
 
 		public EditDepartment() {
 			InitializeComponent();
-
-			// Init controls - for instance combo boxes
-			InitControls();
-
 		}
 
 		#endregion
@@ -48,7 +56,7 @@ namespace EmployeeManagementSystem.UserControls {
 		}
 
 		private void BtnDeleteRecord_Click(object sender, RoutedEventArgs e) {
-			DeleteDepartment();
+			deleteDepartment(_DepartmentID);
 		}
 
 		#endregion
@@ -173,29 +181,16 @@ SELECT @Result";
 
 		}
 
-		private void DeleteDepartment() {
+		#endregion
 
-			if (_DepartmentID <= 0) {
-				return;
-			}
+		#region Public methods
 
-			string query =
-@"DECLARE @ID int = @pID;
+		public void InitUserControl(DeleteDepartment deleteDepartment) {
 
-DECLARE @Result nvarchar(MAX);
-EXEC dbo.DeleteDepartment @ID, @Result OUTPUT;
+			InitControls();
+			Visibility = Visibility.Collapsed;
 
-SELECT @Result;";
-
-			SqlCommand sqlCommand = new SqlCommand(query);
-			sqlCommand.Parameters.Add("@pID", SqlDbType.Int).Value = _DepartmentID;
-
-			string result = Tools.StringFromObject(App.Database.Scalar(sqlCommand));
-			if (!result.Equals("OK", StringComparison.Ordinal)) {
-				_ = MessageBox.Show(result, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-				return;
-			}
-
+			this.deleteDepartment = deleteDepartment;
 		}
 
 		#endregion

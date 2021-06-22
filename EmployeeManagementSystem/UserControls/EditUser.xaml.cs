@@ -15,7 +15,19 @@ namespace EmployeeManagementSystem.UserControls {
 	/// </summary>
 	public partial class EditUser : UserControl {
 
+		#region Delegates
+
+		public delegate void DeleteUser(int userID);
+
+		#endregion
+
+		#region Private fields
+
 		private int _UserID;
+
+		private DeleteUser deleteUser;
+
+		#endregion
 
 		#region Properties
 
@@ -44,7 +56,7 @@ namespace EmployeeManagementSystem.UserControls {
 		}
 
 		private void BtnDeleteRecord_Click(object sender, RoutedEventArgs e) {
-			DeleteUser();
+			deleteUser(_UserID);
 		}
 
 		#endregion
@@ -137,28 +149,14 @@ SELECT @Result;";
 			}
 		}
 
-		private void DeleteUser() {
+		#endregion
 
-			if (_UserID <= 0) {
-				return;
-			}
+		#region Public methods
 
-			string query =
-@"DECLARE @ID int = @pID;
+		public void InitUserControl(DeleteUser deleteUser) {
 
-DECLARE @Result nvarchar(MAX);
-EXEC dbo.DeleteUser @ID, @Result OUTPUT;
-
-SELECT @Result;";
-
-			SqlCommand sqlCommand = new SqlCommand(query);
-			sqlCommand.Parameters.Add("@pID", SqlDbType.Int).Value = _UserID;
-
-			string result = Tools.StringFromObject(App.Database.Scalar(sqlCommand));
-			if (!result.Equals("OK", StringComparison.Ordinal)) {
-				_ = MessageBox.Show(result, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-				return;
-			}
+			Visibility = Visibility.Collapsed;
+			this.deleteUser = deleteUser;
 
 		}
 

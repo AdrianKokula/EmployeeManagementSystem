@@ -1,25 +1,14 @@
 ﻿// Copyright (c) 2020 Adrián Kokuľa - adriankokula.eu; License: The MIT License (MIT)
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Data;
 using System.Data.SqlClient;
 
 using EmployeeManagementSystem.Classes;
 using EmployeeManagementSystem.Windows;
-using EmployeeManagementSystem.UserControls;
 
 namespace EmployeeManagementSystem.Pages {
 
@@ -36,7 +25,7 @@ namespace EmployeeManagementSystem.Pages {
 
 			LoadData();
 
-			EditDep.Visibility = Visibility.Collapsed;
+			EditDep.InitUserControl(DeleteDepartment);
 
 		}
 
@@ -61,7 +50,9 @@ namespace EmployeeManagementSystem.Pages {
 
 		private void DgDepartments_SelectionChanged(object sender, SelectionChangedEventArgs e) {
 
-			if (e.AddedItems.Count == 0) return;
+			if (e.AddedItems.Count == 0) {
+				return;
+			}
 
 			// first selected row
 			DataRowView dataRow = (DataRowView)e.AddedItems[0];
@@ -104,6 +95,33 @@ namespace EmployeeManagementSystem.Pages {
 			}
 
 			DgDepartments.ItemsSource = dataTableEmployees.DefaultView;
+
+		}
+
+		private void DeleteDepartment(int departmentID) {
+			if (departmentID <= 0) {
+				return;
+			}
+
+			string query =
+@"DECLARE @ID int = @pID;
+
+DECLARE @Result nvarchar(MAX);
+EXEC dbo.DeleteDepartment @ID, @Result OUTPUT;
+
+SELECT @Result;";
+
+			SqlCommand sqlCommand = new SqlCommand(query);
+			sqlCommand.Parameters.Add("@pID", SqlDbType.Int).Value = departmentID;
+
+			string result = Tools.StringFromObject(App.Database.Scalar(sqlCommand));
+			if (!result.Equals("OK", StringComparison.Ordinal)) {
+				_ = MessageBox.Show(result, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+				return;
+			}
+
+			EditDep.Visibility = Visibility.Collapsed;
+			LoadData();
 
 		}
 
