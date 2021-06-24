@@ -49,18 +49,28 @@ namespace EmployeeManagementSystem.Pages {
 
 		}
 
+		private void BtnRemoveRecords_Click(object sender, RoutedEventArgs e) {
+			DeleteSelectedRecords();
+		}
+
 		private void DgUsers_SelectionChanged(object sender, SelectionChangedEventArgs e) {
 
-			if (e.AddedItems.Count == 0) {
-				return;
+			switch (DgUsers.SelectedItems.Count) {
+				case 0:
+					BtnRemoveRecords.Visibility = Visibility.Collapsed;
+					EditUser.Visibility = Visibility.Collapsed;
+					break;
+
+				case 1:
+					BtnRemoveRecords.Visibility = Visibility.Visible;
+					ShowSelectedRecord();
+					break;
+
+				default:
+					BtnRemoveRecords.Visibility = Visibility.Visible;
+					EditUser.Visibility = Visibility.Collapsed;
+					break;
 			}
-
-			// first selected row
-			DataRowView dataRow = (DataRowView)e.AddedItems[0];
-			int userID = (int)dataRow["ID"];
-
-			EditUser.UserID = userID;
-			EditUser.Visibility = Visibility.Visible;
 
 		}
 
@@ -71,6 +81,10 @@ namespace EmployeeManagementSystem.Pages {
 				case Key.Escape:
 					DgUsers.UnselectAll();
 					EditUser.Visibility = Visibility.Collapsed;
+					break;
+
+				case Key.Delete:
+					DeleteSelectedRecords();
 					break;
 
 			}
@@ -99,6 +113,17 @@ namespace EmployeeManagementSystem.Pages {
 
 		}
 
+		private void DeleteSelectedRecords() {
+
+			foreach (DataRowView selectedRow in DgUsers.SelectedItems) {
+
+				int userID = (int)selectedRow["ID"];
+				DeleteUser(userID);
+
+			}
+
+		}
+
 		private void DeleteUser(int userID) {
 
 			if (userID <= 0) {
@@ -124,6 +149,21 @@ SELECT @Result;";
 
 			EditUser.Visibility = Visibility.Collapsed;
 			LoadData();
+
+		}
+
+		private void ShowSelectedRecord() {
+
+			if (DgUsers.SelectedItems.Count <= 0) {
+				return;
+			}
+
+			// first selected row
+			DataRowView selectedRow = (DataRowView)DgUsers.SelectedItems[0];
+			int userID = (int)selectedRow["ID"];
+
+			EditUser.UserID = userID;
+			EditUser.Visibility = Visibility.Visible;
 
 		}
 

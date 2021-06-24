@@ -48,18 +48,28 @@ namespace EmployeeManagementSystem.Pages {
 
 		}
 
+		private void BtnRemoveRecords_Click(object sender, RoutedEventArgs e) {
+			DeleteSelectedRecords();
+		}
+
 		private void DgDepartments_SelectionChanged(object sender, SelectionChangedEventArgs e) {
 
-			if (e.AddedItems.Count == 0) {
-				return;
+			switch (DgDepartments.SelectedItems.Count) {
+				case 0:
+					BtnRemoveRecords.Visibility = Visibility.Collapsed;
+					EditDep.Visibility = Visibility.Collapsed;
+					break;
+
+				case 1:
+					BtnRemoveRecords.Visibility = Visibility.Visible;
+					ShowSelectedRecord();
+					break;
+
+				default:
+					BtnRemoveRecords.Visibility = Visibility.Visible;
+					EditDep.Visibility = Visibility.Collapsed;
+					break;
 			}
-
-			// first selected row
-			DataRowView dataRow = (DataRowView)e.AddedItems[0];
-			int departmentID = (int)dataRow["ID"];
-
-			EditDep.DepartmentID = departmentID;
-			EditDep.Visibility = Visibility.Visible;
 
 		}
 
@@ -70,6 +80,10 @@ namespace EmployeeManagementSystem.Pages {
 				case Key.Escape:
 					DgDepartments.UnselectAll();
 					EditDep.Visibility = Visibility.Collapsed;
+					break;
+
+				case Key.Delete:
+					DeleteSelectedRecords();
 					break;
 
 			}
@@ -98,6 +112,17 @@ namespace EmployeeManagementSystem.Pages {
 
 		}
 
+		private void DeleteSelectedRecords() {
+
+			foreach (DataRowView selectedRow in DgDepartments.SelectedItems) {
+
+				int departmentID = (int)selectedRow["ID"];
+				DeleteDepartment(departmentID);
+				
+			}
+
+		}
+
 		private void DeleteDepartment(int departmentID) {
 			if (departmentID <= 0) {
 				return;
@@ -122,6 +147,21 @@ SELECT @Result;";
 
 			EditDep.Visibility = Visibility.Collapsed;
 			LoadData();
+
+		}
+
+		private void ShowSelectedRecord() {
+
+			if (DgDepartments.SelectedItems.Count <= 0) {
+				return;
+			}
+
+			// first selected row 
+			DataRowView selectedRow = (DataRowView)DgDepartments.SelectedItems[0];
+			int departmentID = (int)selectedRow["ID"];
+
+			EditDep.DepartmentID = departmentID;
+			EditDep.Visibility = Visibility.Visible;
 
 		}
 

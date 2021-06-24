@@ -37,16 +37,22 @@ namespace EmployeeManagementSystem.Pages {
 
 		private void DgEmployees_SelectionChanged(object sender, SelectionChangedEventArgs e) {
 
-			if (e.AddedItems.Count == 0) {
-				return;
+			switch (DgEmployees.SelectedItems.Count) {
+				case 0:
+					BtnRemoveRecords.Visibility = Visibility.Collapsed;
+					EditEmp.Visibility = Visibility.Collapsed;
+					break;
+
+				case 1:
+					BtnRemoveRecords.Visibility = Visibility.Visible;
+					ShowSelectedRecord();
+					break;
+
+				default:
+					BtnRemoveRecords.Visibility = Visibility.Visible;
+					EditEmp.Visibility = Visibility.Collapsed;
+					break;
 			}
-
-			// first selected row
-			DataRowView dataRow = (DataRowView)e.AddedItems[0];
-			int employeeID = (int)dataRow["ID"];
-
-			EditEmp.EmployeeID = employeeID;
-			EditEmp.Visibility = Visibility.Visible;
 
 		}
 
@@ -57,6 +63,10 @@ namespace EmployeeManagementSystem.Pages {
 				case Key.Escape:
 					DgEmployees.UnselectAll();
 					EditEmp.Visibility = Visibility.Collapsed;
+					break;
+
+				case Key.Delete:
+					DeleteSelectedRecords();
 					break;
 
 			}
@@ -78,6 +88,10 @@ namespace EmployeeManagementSystem.Pages {
 
 		}
 
+		private void BtnRemoveRecords_Click(object sender, RoutedEventArgs e) {
+			DeleteSelectedRecords();
+		}
+
 		#endregion
 
 		#region Methods
@@ -97,6 +111,17 @@ namespace EmployeeManagementSystem.Pages {
 			}
 
 			DgEmployees.ItemsSource = dataTableEmployees.DefaultView;
+
+		}
+
+		private void DeleteSelectedRecords() {
+
+			foreach (DataRowView selectedRow in DgEmployees.SelectedItems) {
+
+				int employeeID = (int)selectedRow["ID"];
+				DeleteEmployee(employeeID);
+
+			}
 
 		}
 
@@ -125,6 +150,21 @@ SELECT @Result;";
 
 			EditEmp.Visibility = Visibility.Collapsed;
 			LoadData();
+
+		}
+
+		private void ShowSelectedRecord() {
+
+			if (DgEmployees.SelectedItems.Count <= 0) {
+				return;
+			}
+
+			// first selected row 
+			DataRowView selectedRow = (DataRowView)DgEmployees.SelectedItems[0];
+			int employeeID = (int)selectedRow["ID"];
+
+			EditEmp.EmployeeID = employeeID;
+			EditEmp.Visibility = Visibility.Visible;
 
 		}
 

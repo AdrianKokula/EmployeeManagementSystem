@@ -40,7 +40,7 @@
 
 			<StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
 
-				<Button x:Name="BtnFilters" FontSize="16" Background="#54C1FA" Cursor="Hand" Margin="8 0">
+				<Button x:Name="BtnFilters" FontSize="16" Background="#54C1FA" Cursor="Hand">
 					<Button.Triggers>
 						<EventTrigger RoutedEvent="Button.Click">
 							<EventTrigger.Actions>
@@ -70,7 +70,8 @@
 				<Button x:Name="BtnAddUser"
 						FontSize="16"
 						Cursor="Hand"
-						Click="BtnAddUser_Click">
+						Click="BtnAddUser_Click"
+						Margin="8 0">
 
 					<Button.Style>
 						<Style TargetType="{x:Type Button}">
@@ -103,6 +104,43 @@
 					</StackPanel>
 				</Button>
 
+				<Button x:Name="BtnRemoveRecords"
+						FontSize="16"
+						Cursor="Hand"
+						Visibility="Collapsed"
+						Click="BtnRemoveRecords_Click">
+
+					<Button.Style>
+						<Style TargetType="{x:Type Button}">
+							<Setter Property="Template">
+								<Setter.Value>
+									<ControlTemplate TargetType="Button">
+										<Border x:Name="border"
+												Background="#F44336"
+												CornerRadius="3">
+											<Grid>
+												<ContentPresenter Margin="{TemplateBinding Padding}"
+																	HorizontalAlignment="Center"
+																	VerticalAlignment="Center" />
+											</Grid>
+										</Border>
+										<ControlTemplate.Triggers>
+											<Trigger Property="IsMouseOver" Value="true">
+												<Setter TargetName="border" Property="Background" Value="#C1342A" />
+											</Trigger>
+										</ControlTemplate.Triggers>
+									</ControlTemplate>
+								</Setter.Value>
+							</Setter>
+						</Style>
+					</Button.Style>
+
+					<StackPanel Orientation="Horizontal" Margin="10 0">
+						<Image Source="../Resources/Trash_white.png" MaxHeight="24" MaxWidth="24" />
+						<TextBlock Text="Remove" Foreground="#FFFFFF" VerticalAlignment="Center" />
+					</StackPanel>
+				</Button>
+
 			</StackPanel>
 
 		</Grid>
@@ -111,8 +149,7 @@
 
 			<DataGrid Name="DgUsers" Foreground="#51507A" CanUserAddRows="False" IsReadOnly="True" RowHeight="48" Padding="10 0" GridLinesVisibility="None"
 					  AutoGenerateColumns="False" SelectionUnit="FullRow" HeadersVisibility="Column" AlternatingRowBackground="#D4EDFA"
-					  SelectionChanged="DgUsers_SelectionChanged"
-					  KeyDown="DgUsers_KeyDown">
+					  SelectionChanged="DgUsers_SelectionChanged" KeyDown="DgUsers_KeyDown">
 
 				<DataGrid.Resources>
 					<Style TargetType="{x:Type DataGridCell}">
