@@ -1,6 +1,7 @@
 ﻿// Copyright (c) 2020 Adrián Kokuľa - adriankokula.eu; License: The MIT License (MIT)
 
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -73,7 +74,7 @@ namespace EmployeeManagementSystem.Pages {
 
 		}
 
-		private void DgDepartments_KeyDown(object sender, KeyEventArgs e) {
+		private void DgDepartments_PreviewKeyDown(object sender, KeyEventArgs e) {
 
 			switch (e.Key) {
 
@@ -114,12 +115,20 @@ namespace EmployeeManagementSystem.Pages {
 
 		private void DeleteSelectedRecords() {
 
-			foreach (DataRowView selectedRow in DgDepartments.SelectedItems) {
-
-				int departmentID = (int)selectedRow["ID"];
-				DeleteDepartment(departmentID);
-				
+			if (DgDepartments.SelectedItems.Count <= 0) {
+				return;
 			}
+
+			List<DataRowView> list = new List<DataRowView>(DgDepartments.SelectedItems.Count);
+
+			foreach (DataRowView selectedRow in DgDepartments.SelectedItems) {
+				list.Add(selectedRow);
+			}
+
+			list.ForEach(row => {
+				int departmentID = (int)row["ID"];
+				DeleteDepartment(departmentID);
+			});
 
 		}
 

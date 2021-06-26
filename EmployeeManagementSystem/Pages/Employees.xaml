@@ -151,7 +151,7 @@
 			<DataGrid Name="DgEmployees" Foreground="#51507A" CanUserAddRows="False" IsReadOnly="True" RowHeight="48" Padding="10 0" GridLinesVisibility="None"
 					  AutoGenerateColumns="False" SelectionUnit="FullRow" HeadersVisibility="Column" AlternatingRowBackground="#D1F0FF"
 					  SelectionChanged="DgEmployees_SelectionChanged"
-					  KeyDown="DgEmployees_KeyDown">
+					  PreviewKeyDown="DgEmployees_PreviewKeyDown">
 
 				<DataGrid.Resources>
 					<Style TargetType="{x:Type DataGridCell}">

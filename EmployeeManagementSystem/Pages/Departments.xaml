@@ -151,7 +151,7 @@
 			<DataGrid Name="DgDepartments" Foreground="#51507A" CanUserAddRows="False" IsReadOnly="True" RowHeight="48" Padding="10 0" GridLinesVisibility="None"
 					  AutoGenerateColumns="False" SelectionUnit="FullRow" HeadersVisibility="Column" AlternatingRowBackground="#D4EDFA"
 					  SelectionChanged="DgDepartments_SelectionChanged"
-					  KeyDown="DgDepartments_KeyDown">
+					  PreviewKeyDown="DgDepartments_PreviewKeyDown">
 
 				<DataGrid.Resources>
 					<Style TargetType="{x:Type DataGridCell}">

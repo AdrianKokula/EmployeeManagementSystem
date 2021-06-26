@@ -1,6 +1,7 @@
 ﻿// Copyright (c) 2020 Adrián Kokuľa - adriankokula.eu; License: The MIT License (MIT)
 
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -56,7 +57,7 @@ namespace EmployeeManagementSystem.Pages {
 
 		}
 
-		private void DgEmployees_KeyDown(object sender, KeyEventArgs e) {
+		private void DgEmployees_PreviewKeyDown(object sender, KeyEventArgs e) {
 
 			switch(e.Key) {
 
@@ -83,7 +84,7 @@ namespace EmployeeManagementSystem.Pages {
 			if (!dialogResult.Value) {
 				return;
 			}
-			
+
 			LoadData();
 
 		}
@@ -116,13 +117,20 @@ namespace EmployeeManagementSystem.Pages {
 
 		private void DeleteSelectedRecords() {
 
-			foreach (DataRowView selectedRow in DgEmployees.SelectedItems) {
-
-				int employeeID = (int)selectedRow["ID"];
-				DeleteEmployee(employeeID);
-
+			if (DgEmployees.SelectedItems.Count <= 0) {
+				return;
 			}
 
+			List<DataRowView> list = new List<DataRowView>(DgEmployees.SelectedItems.Count);
+
+			foreach (DataRowView selectedRow in DgEmployees.SelectedItems) {
+				list.Add(selectedRow);
+			}
+
+			list.ForEach(row => {
+				int employeeID = (int)row["ID"];
+				DeleteEmployee(employeeID);
+			});
 		}
 
 		private void DeleteEmployee(int employeeID) {
